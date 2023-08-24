@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tprs', function (Blueprint $table) {
+        Schema::create('tpos', function (Blueprint $table) {
             $table->id();
             $table->string("nota");
             $table->date("tgl");
             $table->string("bara");
             $table->string("bara1");
+            $table->float("qty");
+            $table->float("harga", 20,2);
+            $table->float("disc");
+            $table->float("ndisc", 20,2);
+            $table->float("total", 20,2);
             $table->string("nama");
             $table->string("satuan");
-            $table->float("hbeli", 20,2)->default(0);
-            $table->float("qtys");
-            $table->float("qtyo");
-            $table->float("qtyj")->default(0);
+            $table->float("zqty");
+            $table->float("zharga");
+            $table->string("zsatuan");
             $table->timestamps();
         });
     }
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tprs');
+        Schema::dropIfExists('tpos');
     }
 };

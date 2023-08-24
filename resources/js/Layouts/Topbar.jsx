@@ -305,7 +305,7 @@ export default function Topbar({ title, auth }) {
                     <a className="btn btn-ghost normal-case text-xl">{title}</a>
                 </div>
                 <div className="flex-none gap-2">
-                    <h1 className="lg:block hidden">Hi, {auth.name}</h1>
+                    <h1 className="lg:block hidden text-[7pt]">Hi, {auth.name}</h1>
                     <div className="dropdown dropdown-end">
                         <label
                             tabIndex={0}

@@ -64,6 +64,10 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get("/transaksi/pembelian/pr/show/{nota}", [TransaksiController::class, "purchaseRequestShow"])->name("transaksi.pembelian.pr.show");
 
     Route::get("/transaksi/pembelian/po", [TransaksiController::class, "purchaseOrder"])->name("transaksi.pembelian.po");
+    Route::get("/transaksi/pembelian/po/tambah", [TransaksiController::class, "purchaseOrderAdd"])->name("transaksi.pembelian.po.add");
+    Route::post("/transaksi/pembelian/po/tambah", [TransaksiController::class, "purchaseOrderStore"])->name("transaksi.pembelian.po.store");
+    Route::get("/transaksi/pembelian/po/show/{nota}", [TransaksiController::class, "purchaseOrderShow"])->name("transaksi.pembelian.po.show");
+
     Route::get("/transaksi/pembelian/beli", [TransaksiController::class, "pembelian"])->name("transaksi.pembelian.beli");
     Route::get("/transaksi/pembelian/retur", [TransaksiController::class, "retur"])->name("transaksi.pembelian.retur");
 });

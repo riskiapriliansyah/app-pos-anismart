@@ -20,4 +20,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get("getStock", [ApiController::class, "getStock"])->name("api.getStock");
+Route::get("getStockByBara", [ApiController::class, "getStockByBara"])->name("api.getStockByBara");
 Route::get("getSupplier", [ApiController::class, "getSupplier"])->name("api.getSupplier");
+Route::get("getPrSearch", [ApiController::class, "getPrSearch"])->name("api.getPrSearch");
+Route::get("getPr", [ApiController::class, "getPurchaseRequest"])->name("api.getPr");
+Route::get("getPrOpen", [ApiController::class, "getPurchaseRequestOpen"])->name("api.getPrOpen");

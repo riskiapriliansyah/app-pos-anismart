@@ -9,10 +9,10 @@ import { useEffect, useState } from "react";
 import { AiFillEye, AiFillPrinter, AiOutlineSearch } from "react-icons/ai";
 import Swal from "sweetalert2";
 
-export default function PrPage(props) {
+export default function PoPage(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [nota, setNota] = useState("");
-    const [dataPr, setDataPr] = useState([]);
+    const [dataPo, setDataPo] = useState([]);
 
     const getPrSearch = async (e) => {
         if (e.key === "Enter") {
@@ -23,7 +23,7 @@ export default function PrPage(props) {
             await axios
                 .get(route("api.getPrSearch"), data)
                 .then((res) => {
-                    setDataPr(res.data.data);
+                    setDataPo(res.data.data);
                 })
                 .catch((err) => {
                     if (err.response.status === 404) {
@@ -35,27 +35,27 @@ export default function PrPage(props) {
     };
 
     useEffect(() => {
-        setDataPr(props.datas);
+        setDataPo(props.datas);
     }, []);
 
     return (
         <>
             {isLoading && <Loading />}
-            <MasterAdmin title={"Purchase Request"}>
+            <MasterAdmin title={"Purchase Order"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <Link
-                            href="/transaksi/pembelian/pr/tambah"
+                            href="/transaksi/pembelian/po/tambah"
                             className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-xs"
                         >
-                            Buat PR
+                            Buat PO
                         </Link>
                         <div className="overflow-x-auto">
                             <div className="form-group">
                                 <input
                                     type="text"
                                     className="input input-bordered input-sm w-full text-xs my-2"
-                                    placeholder="Search by NO PR"
+                                    placeholder="Search by Nota PO"
                                     value={nota}
                                     onKeyPress={(e) => getPrSearch(e)}
                                 />
@@ -64,48 +64,36 @@ export default function PrPage(props) {
                                 <thead className="bg-sky-800 text-gray-100 text-[7pt]">
                                     <tr>
                                         <th>Tanggal</th>
-                                        <th>No. PR</th>
+                                        <th>Nota PO</th>
                                         <th>Supplier</th>
-                                        <th>Status</th>
-                                        <th>PO</th>
+                                        <th>Pembelian</th>
+                                        <th>Nota PR</th>
+                                        <th>Dibuat Oleh</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {dataPr.data?.map((d, index) => (
+                                    {dataPo.data?.map((d, index) => (
                                         <tr key={index}>
                                             <td>{d.tgl}</td>
                                             <td>{d.nota}</td>
                                             <td>{d.supplier.nama}</td>
                                             <td>
-                                                {d.status === "0" && (
+                                                {d.status_beli === "0" && (
                                                     <div className="badge badge-secondary bg-rose-700 badge-sm text-[7pt]">
-                                                        Di Tolak
+                                                       Belum
                                                     </div>
                                                 )}
-                                                {d.status === "1" && (
+                                                {d.status_beli === "1" && (
                                                     <div className="badge badge-ghost bg-yellow-400 text-gray-800 font-semibold badge-sm text-[7pt]">
-                                                        Pengajuan
-                                                    </div>
-                                                )}
-                                                {d.status === "2" && (
-                                                    <div className="badge badge-ghost bg-green-400 text-gray-800 font-semibold badge-sm text-[7pt]">
-                                                        ACC
-                                                    </div>
-                                                )}
-                                            </td>
-                                            <td>
-                                                {d.status_po === "0" && (
-                                                    <div className="badge badge-secondary bg-rose-700 badge-sm text-[7pt]">
-                                                        Belum
-                                                    </div>
-                                                )}
-                                                {d.status_po === "1" && (
-                                                    <div className="badge badge-ghost bg-green-400 text-gray-800 font-semibold badge-sm text-[7pt]">
                                                         Ada
                                                     </div>
                                                 )}
                                             </td>
+                                            <td>
+                                                {d.nota_pr}
+                                            </td>
+                                            <td>{d.user.name}</td>
                                             <td>
                                                 <div className="flex flex-row gap-1">
                                                     <Link
