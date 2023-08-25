@@ -12,7 +12,7 @@ export default function PrShowPage(props) {
     return (
         <>
             {isLoading && <Loading />}
-            <MasterAdmin title={"Tambah Purchase Request"}>
+            <MasterAdmin title={"Show PR"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <div className="grid grid-cols-3 gap-2">

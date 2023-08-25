@@ -9,55 +9,35 @@ import { useEffect, useState } from "react";
 import { AiFillEye, AiFillPrinter, AiOutlineSearch } from "react-icons/ai";
 import Swal from "sweetalert2";
 
-export default function PoPage(props) {
+export default function BeliPage(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [nota, setNota] = useState("");
-    const [dataPo, setDataPo] = useState([]);
-
-    const getPrSearch = async (e) => {
-        if (e.key === "Enter") {
-            setIsLoading(true);
-            const data = {
-                nota: nota,
-            };
-            await axios
-                .get(route("api.getPrSearch"), data)
-                .then((res) => {
-                    setDataPo(res.data.data);
-                })
-                .catch((err) => {
-                    if (err.response.status === 404) {
-                        Swal.fire("Gagal", err.response.data.message, "error");
-                    }
-                });
-            setIsLoading(false);
-        }
-    };
+    const [dataBeli, setDataBeli] = useState([]);
 
     useEffect(() => {
-        setDataPo(props.datas);
+        setDataBeli(props.datas);
     }, []);
 
     return (
         <>
             {isLoading && <Loading />}
-            <MasterAdmin title={"Purchase Order"}>
+            <MasterAdmin title={"Pembelian"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <Link
-                            href="/transaksi/pembelian/po/tambah"
+                            href="/transaksi/pembelian/beli/tambah"
                             className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-xs"
                         >
-                            Buat PO
+                            Buat Pembelian
                         </Link>
                         <div className="overflow-x-auto">
                             <div className="form-group">
                                 <input
                                     type="text"
                                     className="input input-bordered input-sm w-full text-xs my-2"
-                                    placeholder="Search by Nota PO"
+                                    placeholder="Search by Nota Beli"
                                     value={nota}
-                                    onKeyPress={(e) => getPrSearch(e)}
+                                    // onKeyPress={(e) => getPrSearch(e)}
                                 />
                             </div>
                             <table className="table table-xs">
@@ -65,21 +45,20 @@ export default function PoPage(props) {
                                     <tr>
                                         <th>Tanggal</th>
                                         <th>Nilai</th>
+                                        <th>Nota</th>
                                         <th>Nota PO</th>
                                         <th>Supplier</th>
-                                        <th>Pembelian</th>
-                                        <th>Nota PR</th>
                                         <th>Dibuat Oleh</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {dataPo.data?.map((d, index) => (
+                                    {dataBeli.data?.map((d, index) => (
                                         <tr key={index}>
-                                            <td className="text-[7pt]">{d.tgl}</td>
-                                            <td className="text-[7pt]">Rp. {d.netto.toLocaleString("id")}</td>
-                                            <td className="text-[7pt]">{d.nota}</td>
-                                            <td className="text-[7pt]">{d.supplier.nama}</td>
+                                            <td>{d.tgl}</td>
+                                            <td>{d.netto}</td>
+                                            <td>{d.nota}</td>
+                                            <td>{d.supplier.nama}</td>
                                             <td>
                                                 {d.status_beli === "0" && (
                                                     <div className="badge badge-secondary bg-rose-700 badge-sm text-[7pt]">
@@ -92,10 +71,10 @@ export default function PoPage(props) {
                                                     </div>
                                                 )}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td>
                                                 {d.nota_pr}
                                             </td>
-                                            <td className="text-[7pt]">{d.user.name}</td>
+                                            <td>{d.user.name}</td>
                                             <td>
                                                 <div className="flex flex-row gap-1">
                                                     <Link

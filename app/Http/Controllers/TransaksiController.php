@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beli;
 use App\Models\Po;
 use App\Models\Pr;
 use App\Models\Sisj;
@@ -90,8 +91,8 @@ class TransaksiController extends BaseController
 
     public function purchaseOrderShow($nota)
     {
-        $data = Pr::where("nota", $nota)->with(['supplier', 'tpr'])->first();
-        return Inertia::render("Backend/Transaksi/Pembelian/Pr/Show", [
+        $data = Po::where("nota", $nota)->with(['supplier', 'tpo'])->first();
+        return Inertia::render("Backend/Transaksi/Pembelian/Po/Show", [
             "data" => $data,
         ]);
     }
@@ -102,6 +103,92 @@ class TransaksiController extends BaseController
     }
 
     public function purchaseOrderStore(Request $request)
+    {
+        $header = $request->header;
+        $body = $request->body;
+        try {
+            DB::beginTransaction();
+            $sisj = Sisj::first();
+            $po = new Po;
+            $po->nota = "PO-" . date("Ymd") . "-" . $sisj->po + 1;
+            $po->tgl = $header['tgl'];
+            $po->etd = $header['tgl'];
+            $po->kode = $header['kode'];
+            $po->ket = $header['ket'];
+            $po->nilai = $header['nilai'];
+            $po->disc = $header['disc'];
+            $po->ndisc = $header['ndisc'];
+            $po->pph = $header['pph'];
+            $po->npph = $header['npph'];
+            $po->netto = $header['netto'];
+            $po->nota_pr = $header['nota_pr'];
+            $po->status_beli = 0;
+            $po->audit = 0;
+            $po->created_by = Auth::user()->userid;
+            $po->save();
+
+            foreach ($body as $b) {
+                $tpo = new Tpo;
+                $tpo->nota = $po->nota;
+                $tpo->tgl = $po->tgl;
+                $tpo->bara = $b['bara'];
+                $tpo->bara1 = $b['bara1'];
+                $tpo->qty = $b['qty'];
+                $tpo->harga = $b['hbeli'];
+                $tpo->disc = $b['disc'];
+                $tpo->ndisc = $b['ndisc'];
+                $tpo->total = $b['total'];
+                $tpo->nama = $b['nama'];
+                $tpo->satuan = $b['satuan'];
+                $tpo->zqty = $b['qty'];
+                $tpo->zharga = $b['hbeli'];
+                $tpo->zsatuan = $b['satuan'];
+                $tpo->save();
+            }
+            
+            $sisj->po = $sisj->po + 1;
+            $sisj->save();
+
+            $pr = Pr::where("nota", $header['nota_pr'])->first();
+            $pr->status_po = 1;
+            $pr->save();
+            
+            DB::commit();
+
+            $data = [
+                "po" => $po,
+                "tpo" => $tpo,
+            ];
+
+            return $this->sendResponse($data, "data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("Data gagal disimpan", $ex->getMessage());
+        }
+    }
+
+    public function pembelian()
+    {
+        $datas = Beli::with(['supplier', "user"])->latest()->paginate(10);
+        return Inertia::render("Backend/Transaksi/Pembelian/Beli/Index", [
+            "datas" => $datas,
+        ]);
+    }
+
+    public function pembelianShow($nota)
+    {
+        $data = Po::where("nota", $nota)->with(['supplier', 'tpo'])->first();
+        return Inertia::render("Backend/Transaksi/Pembelian/Beli/Show", [
+            "data" => $data,
+        ]);
+    }
+
+    public function pembelianAdd()
+    {
+        return Inertia::render("Backend/Transaksi/Pembelian/Beli/Add");
+    }
+
+    public function pembelianStore(Request $request)
     {
         $header = $request->header;
         $body = $request->body;
