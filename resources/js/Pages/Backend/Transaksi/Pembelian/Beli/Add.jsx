@@ -30,16 +30,22 @@ export default function BeliAddPage(props) {
     const [namaSupp, setNamaSupp] = useState("");
     const [ket, setKet] = useState("");
     const [barcode, setBarcode] = useState("");
-    const [notaPr, setNotaPr] = useState("");
-    const [notaPrSearch, setNotaPrsearch] = useState("");
-    const [dataPr, setDataPr] = useState([]);
+    const [notaPoSearch, setNotaPosearch] = useState("");
+    const [nota, setNota] = useState("");
+    const [notaPo, setNotaPo] = useState("");
+    const [dataPo, setDataPo] = useState([]);
     const [subTotal, setSubTotal] = useState(0);
     const [disc, setDisc] = useState(0);
     const [ndisc, setNdisc] = useState(0);
     const [ppn, setPpn] = useState(0);
     const [nppn, setNppn] = useState(0);
     const [total, setTotal] = useState(0);
-
+    const [lok, setLok] = useState("");
+    const [namaGudang, setNamaGudang] = useState("");
+    const [dataGudang, setDataGudang] = useState([]);
+    const [tglBeli, settglBeli] = useState(tanggal);
+    const [tglJatuh, setTglJatuh] = useState(tanggal);
+    const [status, setStatus] = useState(0);
     window.onkeypress = function (event) {
         if (event.keyCode === 115) {
             hitungTotalFooter();
@@ -105,14 +111,14 @@ export default function BeliAddPage(props) {
             });
     };
 
-    const getPr = async () => {
+    const getPoOpen = async (x) => {
         const data = {
-            kode: "",
+            kode: x,
         };
         await axios
-            .get(route("api.getPrOpen", data))
+            .get(route("api.getPoOpen", data))
             .then((res) => {
-                setDataPr(res.data.data);
+                setDataPo(res.data.data);
             })
             .catch((err) => {
                 if (err.response.status === 404) {
@@ -121,14 +127,11 @@ export default function BeliAddPage(props) {
             });
     };
 
-    const getPrSearch = async (x) => {
-        const data = {
-            kode: x,
-        };
+    const getGudang = async () => {
         await axios
-            .get(route("api.getPrOpen", data))
+            .get(route("api.getGudang"))
             .then((res) => {
-                setDataPr(res.data.data);
+                setDataGudang(res.data.data);
             })
             .catch((err) => {
                 if (err.response.status === 404) {
@@ -218,7 +221,7 @@ export default function BeliAddPage(props) {
         }
     };
 
-    const addDataTbFromPr = (data) => {
+    const addDataTbFromPo = (data) => {
         setDataTb([]);
         setSubTotal(0);
         setNdisc(0);
@@ -234,11 +237,11 @@ export default function BeliAddPage(props) {
                     bara1: d.bara1,
                     nama: d.nama,
                     satuan: d.satuan,
-                    qty: d.qtyj,
-                    hbeli: d.hbeli,
-                    disc: 0,
-                    ndisc: 0,
-                    total: d.qtyj * d.hbeli,
+                    qty: d.qty,
+                    hbeli: d.harga,
+                    disc: d.disc,
+                    ndisc: d.ndisc,
+                    total: d.qty * d.harga,
                 },
             ]);
         });
@@ -255,7 +258,7 @@ export default function BeliAddPage(props) {
         let subTotal = dataTb[i].hbeli * dataTb[i].qty;
         let yndisc = (dataTb[i].disc / 100) * subTotal;
         dataTb[i].total = subTotal - yndisc;
-        dataTb[i].ndisc = yndisc
+        dataTb[i].ndisc = yndisc;
         let xSubTotal = 0;
         let xNdisc = 0;
         let xNppn = 0;
@@ -301,8 +304,11 @@ export default function BeliAddPage(props) {
 
     const storeData = async () => {
         const header = {
-            nota_pr: notaPr,
-            tgl: tanggal,
+            nota: nota,
+            nota_po: notaPo,
+            tglBeli: tglBeli,
+            tglJatuh: tglJatuh,
+            lok: lok,
             kode: kodeSupp,
             ket: ket,
             nilai: subTotal,
@@ -311,16 +317,20 @@ export default function BeliAddPage(props) {
             pph: ppn,
             npph: nppn,
             netto: total,
+            lunas: status,
+            bayar: status === 1 ? subTotal : 0,
+            tgll: status === 1 ? tanggal : "",
+            tunai: "F",
         };
         const data = {
             header: header,
             body: dataTb,
         };
         await axios
-            .post(route("transaksi.pembelian.po.store"), data)
+            .post(route("transaksi.pembelian.beli.store"), data)
             .then((res) => {
-                Swal.fire("Sukses", "PO Berhasil dibuat", "success");
-                router.get(route("transaksi.pembelian.po"));
+                Swal.fire("Sukses", "Pembelian Berhasil dibuat", "success");
+                router.get(route("transaksi.pembelian.beli"));
             })
             .catch((err) => {
                 if (err.response.status === 404) {
@@ -346,8 +356,8 @@ export default function BeliAddPage(props) {
                                 <input
                                     type="text"
                                     className="input input-bordered input-xs text-xs w-full"
-                                    value={"BARU"}
-                                    readOnly
+                                    value={nota}
+                                    onChange={(e) => setNota(e.target.value)}
                                 />
                             </div>
                             <div className="form-group">
@@ -361,16 +371,14 @@ export default function BeliAddPage(props) {
                                     <input
                                         type="text"
                                         className="input input-bordered input-xs text-xs w-full"
-                                        value={notaPr}
-                                        onChange={(e) => {
-                                            setNotaPr(e.target.value);
-                                        }}
+                                        value={namaGudang}
+                                        readOnly
                                     />
                                     <button
                                         className="btn btn-warning btn-xs btn-square"
                                         onClick={() => {
-                                            window.my_modal_1_pr.showModal();
-                                            getPr();
+                                            window.my_modal_1_gudang.showModal();
+                                            getGudang();
                                         }}
                                     >
                                         <AiOutlineSearch />
@@ -388,16 +396,16 @@ export default function BeliAddPage(props) {
                                     <input
                                         type="text"
                                         className="input input-bordered input-xs text-xs w-full"
-                                        value={notaPr}
+                                        value={notaPo}
                                         onChange={(e) => {
-                                            setNotaPr(e.target.value);
+                                            setNotaPo(e.target.value);
                                         }}
                                     />
                                     <button
                                         className="btn btn-warning btn-xs btn-square"
                                         onClick={() => {
-                                            window.my_modal_1_pr.showModal();
-                                            getPr();
+                                            window.my_modal_1_po.showModal();
+                                            getPoOpen();
                                         }}
                                     >
                                         <AiOutlineSearch />
@@ -439,8 +447,11 @@ export default function BeliAddPage(props) {
                                 <input
                                     type="date"
                                     className="input input-bordered input-xs text-xs w-full"
-                                    value={tanggal}
-                                    readOnly
+                                    value={tglBeli}
+                                    onChange={(e) => {
+                                        settglBeli(e.target.value);
+                                    }}
+                                    max={tanggal}
                                 />
                             </div>
                             <div className="form-group">
@@ -453,12 +464,15 @@ export default function BeliAddPage(props) {
                                 <input
                                     type="date"
                                     className="input input-bordered input-xs text-xs w-full"
-                                    value={tanggal}
-                                    readOnly
+                                    value={tglJatuh}
+                                    onChange={(e) => {
+                                        setTglJatuh(e.target.value);
+                                    }}
+                                    min={tanggal}
                                 />
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 gap-2">
+                        <div className="grid grid-cols-2 gap-2">
                             <div className="form-group">
                                 <label
                                     htmlFor=""
@@ -472,6 +486,23 @@ export default function BeliAddPage(props) {
                                     value={ket}
                                     onChange={(e) => setKet(e.target.value)}
                                 />
+                            </div>
+                            <div className="form-group">
+                                <label
+                                    htmlFor=""
+                                    className="label label-text text-[7pt] -mb-2.5"
+                                >
+                                    Status
+                                </label>
+                                <select
+                                    className="select select-bordered select-xs text-[7pt] w-full"
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                >
+                                    <option value="">Pilih</option>
+                                    <option value="0">Belum Lunas</option>
+                                    <option value="1">Langsung Lunas</option>
+                                </select>
                             </div>
                         </div>
                         <div className="flex flex-row items-center">
@@ -792,23 +823,23 @@ export default function BeliAddPage(props) {
                     </form>
                 </dialog>
 
-                <dialog id="my_modal_1_pr" className="modal">
+                <dialog id="my_modal_1_po" className="modal">
                     <form
                         method="dialog"
                         className="modal-box"
                         id="journal-scroll"
                     >
-                        <h3 className="font-bold text-sm">Purchase Request</h3>
+                        <h3 className="font-bold text-sm">Purchase Order</h3>
                         <div className="py-4">
                             <div className="my-2 items-center flex flex-row gap-2">
                                 <input
                                     type="text"
                                     className="input input-bordered input-xs text-xs w-full"
-                                    value={notaPrSearch}
+                                    value={notaPoSearch}
                                     onChange={(e) => {
-                                        setNotaPrsearch(e.target.value);
+                                        setNotaPosearch(e.target.value);
                                         if (e.target.value.length >= 3) {
-                                            getPrSearch(e.target.value);
+                                            getPoOpen(e.target.value);
                                         }
                                     }}
                                 />
@@ -824,7 +855,7 @@ export default function BeliAddPage(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {dataPr?.data?.map((d, index) => (
+                                    {dataPo?.data?.map((d, index) => (
                                         <tr>
                                             <td>{index + 1}</td>
                                             <td>{d.nota}</td>
@@ -834,12 +865,58 @@ export default function BeliAddPage(props) {
                                                 <button
                                                     className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
                                                     onClick={() => {
-                                                        setNotaPr(d.nota);
-                                                        addDataTbFromPr(d.tpr);
+                                                        setNotaPo(d.nota);
+                                                        addDataTbFromPo(d.tpo);
                                                         setKodeSupp(d.kode);
                                                         setNamaSupp(
                                                             d.supplier.nama
                                                         );
+                                                    }}
+                                                >
+                                                    Pilih
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="modal-action">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">Close</button>
+                        </div>
+                    </form>
+                </dialog>
+
+                <dialog id="my_modal_1_gudang" className="modal">
+                    <form
+                        method="dialog"
+                        className="modal-box"
+                        id="journal-scroll"
+                    >
+                        <h3 className="font-bold text-sm">Gudang</h3>
+                        <div className="py-4">
+                            <table className="table table-xs">
+                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Lok</th>
+                                        <th>Gudang</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {dataGudang?.map((d, index) => (
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{d.lok}</td>
+                                            <td>{d.ket}</td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
+                                                    onClick={() => {
+                                                        setLok(d.lok);
+                                                        setNamaGudang(d.ket);
                                                     }}
                                                 >
                                                     Pilih

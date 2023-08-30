@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gudang;
+use App\Models\Po;
 use App\Models\Pr;
 use App\Models\Stock;
 use App\Models\Supp;
@@ -51,6 +53,17 @@ class ApiController extends BaseController
     public function getPurchaseRequestOpen(Request $request) {
         $datas = Pr::where("nota", "LIKE", "%{$request->kode}%")->where("status_po", "0")->where("status", "2")->with(['supplier', 'tpr'])->latest()->paginate(10);
         return $this->sendResponse($datas, "data pr");
+    }
+
+    public function getPurchaseOrderOpen(Request $request) {
+        $datas = Po::where("nota", "LIKE", "%{$request->kode}%")->where("status_beli", "0")->with(['supplier', 'tpo'])->latest()->paginate(10);
+        return $this->sendResponse($datas, "data pr");
+    }
+
+    public function getGudang()
+    {
+        $datas = Gudang::get();
+        return $this->sendResponse($datas, "data gudang");
     }
 
 }
