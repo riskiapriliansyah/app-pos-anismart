@@ -342,7 +342,7 @@ export default function BeliAddPage(props) {
     return (
         <>
             {isLoading && <Loading />}
-            <MasterAdmin title={"Tambah PO"}>
+            <MasterAdmin title={"Tambah Pembelian"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <div className="grid grid-cols-3 gap-2">

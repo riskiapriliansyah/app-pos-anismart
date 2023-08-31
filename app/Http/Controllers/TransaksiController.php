@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beli;
+use App\Models\Kbara;
 use App\Models\Po;
 use App\Models\Pr;
 use App\Models\Sisj;
@@ -233,6 +234,19 @@ class TransaksiController extends BaseController
                 $tbeli->zharga = $b['hbeli'];
                 $tbeli->zsatuan = $b['satuan'];
                 $tbeli->save();
+
+                $kbara = new Kbara;
+                $kbara->nota = $beli->nota;
+                $kbara->tgl = $beli->tgl;
+                $kbara->bara = $tbeli->bara;
+                $kbara->bara1 = $tbeli->bara1;
+                $kbara->qty = $tbeli->qty;
+                $kbara->lok = $beli->lok;
+                $kbara->tipe = "B";
+                $kbara->kode = $beli->kode;
+                $kbara->zqty = $tbeli->zqty;
+                $kbara->sat = $tbeli->sat;
+                $kbara->save();
             }
 
             $po = Po::where("nota", $header['nota_po'])->first();
