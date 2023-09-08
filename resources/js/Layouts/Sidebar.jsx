@@ -395,7 +395,7 @@ export default function Sidebar(props) {
                             >
                                 <li>
                                     <Link
-                                        href="/admin/media/gallery"
+                                        href="/transaksi/penjualan/penjualan-nota"
                                         className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Penjualan Nota
@@ -407,14 +407,6 @@ export default function Sidebar(props) {
                                         className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Penjualan
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                    >
-                                        Update Penjualan Nota
                                     </Link>
                                 </li>
                             </ul>

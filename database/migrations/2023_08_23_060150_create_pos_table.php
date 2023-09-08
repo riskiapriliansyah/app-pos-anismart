@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pos', function (Blueprint $table) {
             $table->id();
-            $table->string('nota');
+            $table->string('nota')->unique();
             $table->date("tgl");
             $table->date("etd");
             $table->string('kode', 20);

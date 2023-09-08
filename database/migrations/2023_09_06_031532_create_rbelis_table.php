@@ -11,16 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prs', function (Blueprint $table) {
+        Schema::create('rbelis', function (Blueprint $table) {
             $table->id();
             $table->string("nota")->unique();
             $table->date("tgl");
-            $table->string("kode");
+            $table->string("kode",20);
+            $table->string("lok", 20);
             $table->string("ket")->default("-");
-            $table->string("created_by");
-            $table->string("approved_by")->nullable();
-            $table->string("status",1);
-            $table->string("status_po", 1);
+            $table->float("nilai", 20,2);
+            $table->float("disc");
+            $table->float("ndisc", 20,2);
+            $table->float("pph");
+            $table->float("npph", 20, 2);
+            $table->float("netto", 20,2);
+            $table->string("notar");
+            $table->string("created_by", 50);
             $table->timestamps();
         });
     }
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prs');
+        Schema::dropIfExists('rbelis');
     }
 };

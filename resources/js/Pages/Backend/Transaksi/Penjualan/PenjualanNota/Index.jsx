@@ -9,26 +9,26 @@ import { useEffect, useState } from "react";
 import { AiFillEye, AiFillPrinter, AiOutlineSearch } from "react-icons/ai";
 import Swal from "sweetalert2";
 
-export default function BeliPage(props) {
+export default function PenjualanNotaPage(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [nota, setNota] = useState("");
-    const [dataBeli, setDataBeli] = useState([]);
+    const [dataPenjualanNota, setDataPenjualanNota] = useState([]);
 
     useEffect(() => {
-        setDataBeli(props.datas);
+        setDataPenjualanNota(props.datas);
     }, []);
 
     return (
         <>
             {isLoading && <Loading />}
-            <MasterAdmin title={"Pembelian"}>
+            <MasterAdmin title={"Penjualan Nota"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <Link
-                            href="/transaksi/pembelian/beli/tambah"
+                            href="/transaksi/penjualan/penjualan-nota/tambah"
                             className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-xs"
                         >
-                            Buat Pembelian
+                            Buat Penjualan Nota
                         </Link>
                         <div className="overflow-x-auto">
                             <div className="form-group">
@@ -53,7 +53,7 @@ export default function BeliPage(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {dataBeli.data?.map((d, index) => (
+                                    {dataPenjualanNota.data?.map((d, index) => (
                                         <tr key={index}>
                                             <td>{d.tgl}</td>
                                             <td>{d.netto}</td>

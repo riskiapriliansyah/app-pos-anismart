@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('belis', function (Blueprint $table) {
+        Schema::create('gjuals', function (Blueprint $table) {
             $table->id();
             $table->string("nota")->unique();
             $table->date("tgl");
@@ -25,11 +25,12 @@ return new class extends Migration
             $table->float("pph");
             $table->float("npph", 20,2);
             $table->float("netto",20,2);
+            $table->float("aver",20,2);
             $table->float("bayar", 20,2)->default(0);
             $table->string("lunas", 1)->default(0);
-            $table->string("nota_po");
             $table->date("tgll")->nullable();
-            $table->string("tunai", 1);
+            $table->float("jbayar", 20,2);
+            $table->float("jkembali", 20,2);
             $table->string("created_by");
             $table->timestamps();
         });
@@ -40,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('belis');
+        Schema::dropIfExists('gjuals');
     }
 };

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("kode");
             $table->float("zqty");
             $table->string('sat');
+            $table->float("ntag");
             $table->timestamps();
         });
     }

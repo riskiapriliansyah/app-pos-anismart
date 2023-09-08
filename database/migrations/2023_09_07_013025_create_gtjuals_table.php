@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbelis', function (Blueprint $table) {
+        Schema::create('gtjuals', function (Blueprint $table) {
             $table->id();
             $table->string("nota");
             $table->date("tgl");
@@ -21,6 +21,8 @@ return new class extends Migration
             $table->float("harga", 20,2);
             $table->float('disc');
             $table->float("ndisc", 20,2);
+            $table->float('disc1');
+            $table->float("ndisc1", 20,2);
             $table->float("total", 20,2);
             $table->string("nama");
             $table->string("satuan");
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbelis');
+        Schema::dropIfExists('gtjuals');
     }
 };

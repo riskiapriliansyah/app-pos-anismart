@@ -73,5 +73,13 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::post("/transaksi/pembelian/beli/tambah", [TransaksiController::class, "pembelianStore"])->name("transaksi.pembelian.beli.store");
     Route::get("/transaksi/pembelian/beli/show/{nota}", [TransaksiController::class, "pembelianShow"])->name("transaksi.pembelian.beli.show");
 
-    Route::get("/transaksi/pembelian/retur", [TransaksiController::class, "retur"])->name("transaksi.pembelian.retur");
+    Route::get("/transaksi/pembelian/retur", [TransaksiController::class, "returPembelian"])->name("transaksi.pembelian.returPembelian");
+    Route::get("/transaksi/pembelian/retur/tambah", [TransaksiController::class, "returPembelianAdd"])->name("transaksi.pembelian.retur.add");
+    Route::post("/transaksi/pembelian/retur/tambah", [TransaksiController::class, "returPembelianStore"])->name("transaksi.pembelian.retur.store");
+    Route::get("/transaksi/pembelian/retur/show/{nota}", [TransaksiController::class, "returPembelianShow"])->name("transaksi.pembelian.retur.show");
+
+    Route::get("/transaksi/penjualan/penjualan-nota", [TransaksiController::class, "penjualanNota"])->name("transaksi.penjualan.penjualanNota");
+    Route::get("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaAdd"])->name("transaksi.penjualan.penjualanNota.add");
+    Route::post("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaStore"])->name("transaksi.penjualan.penjualanNota.store");
+    Route::get("/transaksi/penjualan/penjualan-nota/show/{nota}", [TransaksiController::class, "penjualanNotaShow"])->name("transaksi.penjualan.penjualanNota.show");
 });
