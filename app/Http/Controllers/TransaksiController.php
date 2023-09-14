@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beli;
+use App\Models\Gjual;
+use App\Models\Gtjual;
 use App\Models\Kbara;
 use App\Models\Po;
 use App\Models\Pr;
@@ -12,6 +14,7 @@ use App\Models\Sisj;
 use App\Models\Tbeli;
 use App\Models\Tpo;
 use App\Models\Tpr;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -367,7 +370,7 @@ class TransaksiController extends BaseController
 
     public function penjualanNota()
     {
-        $datas = Rbeli::with(['supplier', "user"])->latest()->paginate(10);
+        $datas = Gjual::with(['cust', "user"])->latest()->paginate(10);
         return Inertia::render("Backend/Transaksi/Penjualan/PenjualanNota/Index", [
             "datas" => $datas,
         ]);
@@ -394,63 +397,71 @@ class TransaksiController extends BaseController
             DB::beginTransaction();
             $sisj = Sisj::first();
 
-            $rbeli = new Rbeli;
-            $rbeli->nota = "RB-" . date("Ymd") . "-" . $sisj->rbeli + 1;;
-            $rbeli->tgl = $header['tgl'];
-            $rbeli->kode = $header['kode'];
-            $rbeli->lok = $header['lok'];
-            $rbeli->ket = $header['ket'];
-            $rbeli->nilai = $header['nilai'];
-            $rbeli->disc = $header['disc'];
-            $rbeli->ndisc = $header['ndisc'];
-            $rbeli->pph = $header['pph'];
-            $rbeli->npph = $header['npph'];
-            $rbeli->netto = $header['netto'];
-            $rbeli->notar = $header['notar'];
-            $rbeli->created_by = Auth::user()->userid;
-            $rbeli->save();
+            $gjual = new Gjual;
+            $gjual->nota = "FJ-" . date("Ymd") . "-" . $sisj->gjual + 1;;
+            $gjual->tgl = $header['tgl'];
+            $gjual->jatuh = $header['tglJatuh'];
+            $gjual->kode = $header['kode'];
+            $gjual->lok = $header['lok'];
+            $gjual->ket = $header['ket'];
+            $gjual->nilai = $header['nilai'];
+            $gjual->disc = $header['disc'];
+            $gjual->ndisc = $header['ndisc'];
+            $gjual->pph = $header['pph'];
+            $gjual->npph = $header['npph'];
+            $gjual->netto = $header['netto'];
+            $gjual->aver = 0;
+            $gjual->bayar = 0;
+            $gjual->lunas = $header['lunas'];
+            $gjual->tgll = $header['tgll'];
+            $gjual->jbayar = $header['jbayar'];
+            $gjual->jkembali = $header['jkembali'];
+            $gjual->created_by = Auth::user()->userid;
+            $gjual->save();
 
             foreach ($body as $b) {
-                $rtbeli = new Rtbeli;
-                $rtbeli->nota = $rbeli->nota;
-                $rtbeli->tgl = $rbeli->tgl;
-                $rtbeli->bara = $b['bara'];
-                $rtbeli->bara1 = $b['bara1'];
-                $rtbeli->qty = $b['qty'];
-                $rtbeli->harga = $b['hbeli'];
-                $rtbeli->disc = $b['disc'];
-                $rtbeli->ndisc = $b['ndisc'];
-                $rtbeli->total = $b['total'];
-                $rtbeli->nama = $b['nama'];
-                $rtbeli->satuan = $b['satuan'];
-                $rtbeli->zqty = $b['qty'];
-                $rtbeli->zharga = $b['hbeli'];
-                $rtbeli->zsatuan = $b['satuan'];
-                $rtbeli->save();
+                $gtjual = new Gtjual;
+                $gtjual->nota = $gjual->nota;
+                $gtjual->tgl = $gjual->tgl;
+                $gtjual->bara = $b['bara'];
+                $gtjual->bara1 = $b['bara1'];
+                $gtjual->qty = $b['qty'];
+                $gtjual->harga = $b['hjual'];
+                $gtjual->disc = $b['disc'];
+                $gtjual->ndisc = $b['ndisc'];
+                $gtjual->disc1 = $b['disc1'];
+                $gtjual->ndisc1 = $b['ndisc1'];
+                $gtjual->total = $b['total'];
+                $gtjual->nama = $b['nama'];
+                $gtjual->satuan = $b['satuan'];
+                $gtjual->zqty = $b['qty'];
+                $gtjual->zharga = $b['hjual'];
+                $gtjual->zsatuan = $b['satuan'];
+                $gtjual->save();
 
                 $kbara = new Kbara;
-                $kbara->nota = $rbeli->nota;
-                $kbara->tgl = $rbeli->tgl;
-                $kbara->bara = $rtbeli->bara;
-                $kbara->bara1 = $rtbeli->bara1;
-                $kbara->qty = $rtbeli->qty;
-                $kbara->lok = $rbeli->lok;
-                $kbara->tipe = "R";
-                $kbara->kode = $rbeli->kode;
-                $kbara->zqty = $rtbeli->zqty;
-                $kbara->sat = $rtbeli->satuan;
-                $kbara->ntag = $rtbeli->zqty * -1;
+                $kbara->nota = $gjual->nota;
+                $kbara->tgl = $gjual->tgl;
+                $kbara->bara = $gtjual->bara;
+                $kbara->bara1 = $gtjual->bara1;
+                $kbara->qty = $gtjual->qty;
+                $kbara->lok = $gjual->lok;
+                $kbara->tipe = "J";
+                $kbara->kode = $gjual->kode;
+                $kbara->zqty = $gtjual->zqty;
+                $kbara->sat = $gtjual->satuan;
+                $kbara->ntag = $gtjual->zqty * -1;
                 $kbara->save();
             }
 
-            $sisj->rbeli = $sisj->rbeli + 1;
+            $sisj->gjual = $sisj->gjual + 1;
             $sisj->save();
             
             DB::commit();
 
             $data = [
-                "rbeli" => $rbeli,
-                "rtbeli" => $rtbeli,
+                "gjual" => $gjual,
+                "gtjual" => $gtjual,
             ];
 
             return $this->sendResponse($data, "data berhasil disimpan");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cust;
 use App\Models\Gudang;
 use App\Models\Po;
 use App\Models\Pr;
@@ -41,6 +42,18 @@ class ApiController extends BaseController
         }
         if ($request->searchBy == "nama") {
             $datas = Supp::where("nama", "LIKE", "%{$request->kode}%")->take(10)->get();
+            return $this->sendResponse($datas, "data supplier");
+        }
+    }
+
+    public function getCust(Request $request)
+    {
+        if ($request->searchBy == "*") {
+            $datas = Cust::take(10)->get();
+            return $this->sendResponse($datas, "data supplier");
+        }
+        if ($request->searchBy == "nama") {
+            $datas = Cust::where("nama", "LIKE", "%{$request->kode}%")->take(10)->get();
             return $this->sendResponse($datas, "data supplier");
         }
     }

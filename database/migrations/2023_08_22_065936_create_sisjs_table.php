@@ -31,6 +31,7 @@ return new class extends Migration
             $table->float("beli");
             $table->float("rbeli");
             $table->float("tr");
+            $table->float("gjual");
             $table->timestamps();
         });
     }

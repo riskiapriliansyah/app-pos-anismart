@@ -35,7 +35,7 @@ export default function PenjualanNotaPage(props) {
                                 <input
                                     type="text"
                                     className="input input-bordered input-sm w-full text-xs my-2"
-                                    placeholder="Search by Nota Beli"
+                                    placeholder="Search by Nota"
                                     value={nota}
                                     // onKeyPress={(e) => getPrSearch(e)}
                                 />
@@ -46,8 +46,7 @@ export default function PenjualanNotaPage(props) {
                                         <th>Tanggal</th>
                                         <th>Nilai</th>
                                         <th>Nota</th>
-                                        <th>Nota PO</th>
-                                        <th>Supplier</th>
+                                        <th>Cust</th>
                                         <th>Dibuat Oleh</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -58,8 +57,7 @@ export default function PenjualanNotaPage(props) {
                                             <td>{d.tgl}</td>
                                             <td>{d.netto}</td>
                                             <td>{d.nota}</td>
-                                            <td>{d.nota_po}</td>
-                                            <td>{d.supplier.nama}</td>
+                                            <td>{d.cust.nama}</td>
                                             <td>{d.user.name}</td>
                                             <td>
                                                 <div className="flex flex-row gap-1">
@@ -69,13 +67,13 @@ export default function PenjualanNotaPage(props) {
                                                             d.nota
                                                         )}
                                                         className="btn btn-primary bg-blue-700 text-base-100 btn-xs btn-square"
-                                                        title="Show PR"
+                                                        title="Show Penjualan Nota"
                                                     >
                                                         <AiFillEye />
                                                     </Link>
                                                     <button
                                                         className="btn btn-accent bg-green-700 text-base-100 btn-xs btn-square"
-                                                        title="Print PR"
+                                                        title="Print Penjualan Nota"
                                                     >
                                                         <AiFillPrinter />
                                                     </button>
