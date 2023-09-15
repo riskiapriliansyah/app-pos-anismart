@@ -129,6 +129,7 @@ export default function PrAddPage(props) {
     const xForceRender = () => {
         setForceRender(!forceRender);
     };
+
     const addDataTb = (data) => {
         const found = dataTb.find((element) => element.bara1 === data.bara1);
         if (found) {

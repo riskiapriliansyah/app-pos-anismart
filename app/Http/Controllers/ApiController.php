@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cust;
 use App\Models\Gudang;
+use App\Models\Kbara;
 use App\Models\Po;
 use App\Models\Pr;
 use App\Models\Stock;
@@ -57,18 +58,21 @@ class ApiController extends BaseController
             return $this->sendResponse($datas, "data supplier");
         }
     }
-    
-    public function getPrSearch(Request $request) {
+
+    public function getPrSearch(Request $request)
+    {
         $datas = Pr::where("nota", "LIKE", "%{$request->kode}%")->with(['supplier', 'tpr'])->latest()->paginate(10);
         return $this->sendResponse($datas, "data pr");
     }
 
-    public function getPurchaseRequestOpen(Request $request) {
+    public function getPurchaseRequestOpen(Request $request)
+    {
         $datas = Pr::where("nota", "LIKE", "%{$request->kode}%")->where("status_po", "0")->where("status", "2")->with(['supplier', 'tpr'])->latest()->paginate(10);
         return $this->sendResponse($datas, "data pr");
     }
 
-    public function getPurchaseOrderOpen(Request $request) {
+    public function getPurchaseOrderOpen(Request $request)
+    {
         $datas = Po::where("nota", "LIKE", "%{$request->kode}%")->where("status_beli", "0")->with(['supplier', 'tpo'])->latest()->paginate(10);
         return $this->sendResponse($datas, "data pr");
     }
@@ -79,4 +83,55 @@ class ApiController extends BaseController
         return $this->sendResponse($datas, "data gudang");
     }
 
+    public function getKartuStock(Request $request)
+    {
+        $saldoAwal = Kbara::where("lok", $request->lok)->where("bara", $request->bara)->where('tgl', "<", $request->tglAwal)->sum("ntag");
+        $kbara = Kbara::where("lok", $request->lok)->where("bara", $request->bara)->whereBetween('tgl', [$request->tglAwal, $request->tglAkhir])->orderBy("tgl", 'ASC')->get();
+        $awal = 0;
+        $x = 0;
+        if (count($kbara) > 0) {
+            foreach ($kbara as $key => $kb) {
+                $x = $key;
+                $xAwal = 0;
+                if ($x - 1 < 0) {
+                    if ($kb->ntag < 0) {
+                        $awal = $saldoAwal - $kbara[$key]->zqty;
+                    } else {
+                        $awal = $saldoAwal + $kbara[$key]->zqty;
+                    }
+                } else {
+                    if ($kb->ntag < 0) {
+                        $awal = $awal - $kbara[$key]->zqty;
+                    } else {
+                        $awal = $awal + $kbara[$key]->zqty;
+                    }
+                    $xAwal = $awal;
+                }
+                $xkbara[] = [
+                    "tgl" => $kb->tgl,
+                    "nota" => $kb->nota,
+                    "bara" => $kb->bara,
+                    "qty" => $kb->qty,
+                    "lok" => $kb->lok,
+                    "tipe" => $kb->tipe,
+                    "kode" => $kb->kode,
+                    "zqty" => $kb->zqty,
+                    "sat" => $kb->sat,
+                    "ntag" => $kb->ntag,
+                    "saldo" => $awal,
+                ];
+            }
+            $data = [
+                "saldoAwal" => $saldoAwal,
+                "kbara" => $xkbara
+            ];
+        } else {
+            $xkbara = [];
+            $data = [
+                "saldoAwal" => $saldoAwal,
+                "kbara" => $xkbara
+            ];
+        }
+        return $this->sendResponse($data, 'kartu Stock');
+    }
 }

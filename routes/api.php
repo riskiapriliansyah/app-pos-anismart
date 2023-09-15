@@ -28,3 +28,4 @@ Route::get("getPrSearch", [ApiController::class, "getPrSearch"])->name("api.getP
 Route::get("getPr", [ApiController::class, "getPurchaseRequest"])->name("api.getPr");
 Route::get("getPrOpen", [ApiController::class, "getPurchaseRequestOpen"])->name("api.getPrOpen");
 Route::get("getPoOpen", [ApiController::class, "getPurchaseOrderOpen"])->name("api.getPoOpen");
+Route::get("getKartuStock", [ApiController::class, 'getKartuStock'])->name('api.getKartuStock');

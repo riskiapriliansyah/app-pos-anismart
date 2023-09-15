@@ -90,6 +90,53 @@ class TransaksiController extends BaseController
         }
     }
 
+    public function purchaseRequestApproved(Request $request)
+    {
+        $header = $request->header;
+        $body = $request->body;
+        try {
+            DB::beginTransaction();
+            $pr = Pr::where("nota", $header['nota'])->first();
+            $pr->status = "2";
+            $pr->approved_by = Auth::user()->userid;
+            $pr->save();
+
+            foreach ($body as $b) {
+                $tpr = Tpr::where("nota", $header['nota'])->where("bara", $b['bara'])->first();
+                $tpr->qtyj = $b['qtyj'];
+                $tpr->save();
+            }
+
+            DB::commit();
+
+            $data = [
+                "pr" => $pr,
+                "tpr" => $tpr,
+            ];
+
+            return $this->sendResponse($data, "data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("", $ex->getMessage());
+        }
+    }
+
+    public function purchaseRequestApprove()
+    {
+        $datas = Pr::where("status", "1")->with(['supplier'])->latest()->paginate(10);
+        return Inertia::render("Backend/Transaksi/Pembelian/Pr/Approve", [
+            "datas" => $datas,
+        ]);
+    }
+
+    public function purchaseRequestApproveShow($nota)
+    {
+        $data = Pr::where("status", "1")->where("nota", $nota)->with(['supplier', 'tpr'])->first();
+        return Inertia::render("Backend/Transaksi/Pembelian/Pr/ApproveShow", [
+            "data" => $data,
+        ]);
+    }
+
     public function purchaseOrder()
     {
         $datas = Po::with(['supplier', "user"])->latest()->paginate(10);
@@ -100,7 +147,9 @@ class TransaksiController extends BaseController
 
     public function purchaseOrderShow($nota)
     {
-        $data = Po::where("nota", $nota)->with(['supplier' => function($q){$q->with(['area_supp']);}, 'tpo'])->first();
+        $data = Po::where("nota", $nota)->with(['supplier' => function ($q) {
+            $q->with(['area_supp']);
+        }, 'tpo'])->first();
         return Inertia::render("Backend/Transaksi/Pembelian/Po/Show", [
             "data" => $data,
         ]);
@@ -186,7 +235,9 @@ class TransaksiController extends BaseController
 
     public function pembelianShow($nota)
     {
-        $data = Beli::where("nota", $nota)->with(['supplier' => function($q){$q->with(['area_supp']);}, 'tbeli'])->first();
+        $data = Beli::where("nota", $nota)->with(['supplier' => function ($q) {
+            $q->with(['area_supp']);
+        }, 'tbeli'])->first();
         return Inertia::render("Backend/Transaksi/Pembelian/Beli/Show", [
             "data" => $data,
         ]);

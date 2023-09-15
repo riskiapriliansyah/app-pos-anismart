@@ -19,7 +19,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get("/", function() {
+Route::get("/", function () {
     return Inertia::render("Login");
 });
 
@@ -27,10 +27,17 @@ Route::get("/login", [AuthController::class, 'login'])->name("login");
 Route::post("/postLogin", [AuthController::class, 'postLogin'])->name("postLogin");
 Route::get("/logout", [AuthController::class, 'logout'])->name("logout");
 
-Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
+Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
+    // =============================Transaksi===============
+    Route::get("/transaksi/pembelian/pr/approve", [TransaksiController::class, "purchaseRequestApprove"])->name("transaksi.pembelian.pr.approve");
+    Route::post("/transaksi/pembelian/pr/approved", [TransaksiController::class, "purchaseRequestApproved"])->name("transaksi.pembelian.pr.approved");
+    Route::get("/transaksi/pembelian/pr/approve/{nota}", [TransaksiController::class, "purchaseRequestApproveShow"])->name("transaksi.pembelian.pr.approve.show");
+});
+
+Route::group(['middleware' => ['auth', 'checkRole:super_admin,admin']], function () {
     Route::get("/admin/dashboard", [BackendController::class, "dashboard"])->name("admin.dashboard");
 
-// =====================FILE====================================================
+    // =====================FILE====================================================
     Route::get("/dep", [BackendController::class, 'dep'])->name('dep');
     Route::post("/dep", [BackendController::class, 'storeDep'])->name('dep.store');
     Route::post("/dep/update", [BackendController::class, 'updateDep'])->name('dep.update');
@@ -57,7 +64,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get("/formula-paket", [BackendController::class, 'formulaPaket'])->name('formulaPaket');
     Route::get("/best-buy", [BackendController::class, 'bestBuy'])->name('bestBuy');
 
-// =============================Transaksi===============
+    // =============================Transaksi===============
     Route::get("/transaksi/pembelian/pr", [TransaksiController::class, "purchaseRequest"])->name("transaksi.pembelian.pr");
     Route::get("/transaksi/pembelian/pr/tambah", [TransaksiController::class, "purchaseRequestAdd"])->name("transaksi.pembelian.pr.add");
     Route::post("/transaksi/pembelian/pr/tambah", [TransaksiController::class, "purchaseRequestStore"])->name("transaksi.pembelian.pr.store");

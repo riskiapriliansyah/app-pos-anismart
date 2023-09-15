@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string("nama");
             $table->string("satuan");
             $table->float("zqty");
-            $table->float("zharga");
+            $table->float("zharga", 20,2);
             $table->string("zsatuan");
             $table->timestamps();
         });

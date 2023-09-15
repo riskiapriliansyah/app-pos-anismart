@@ -29,7 +29,7 @@ class AuthController extends BaseController
     {
         return Inertia::render("Login");
     }
-    
+
     public function postLogin(Request $request)
     {
         $time = Carbon::now(+8);
@@ -38,6 +38,10 @@ class AuthController extends BaseController
                 return $this->sendError("", "Akun anda tidak aktif");
             } else {
                 if (auth()->user()->role == 'admin') {
+                    $this->addLog(auth()->user()->id, auth()->user()->name, $time, $time);
+                    return redirect()->route("admin.dashboard");
+                };
+                if (auth()->user()->role == 'super_admin') {
                     $this->addLog(auth()->user()->id, auth()->user()->name, $time, $time);
                     return redirect()->route("admin.dashboard");
                 };
