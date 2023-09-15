@@ -2,21 +2,26 @@ import AddModal from "@/Components/AddModal";
 import Loading from "@/Components/Loading";
 import Modal from "@/Components/Modal";
 import Pagination from "@/Components/Pagination";
+import { NotaPoToPrint } from "@/Components/Print/NotaPo";
 import MasterAdmin from "@/Layouts/MasterAdmin";
 import { Link, router } from "@inertiajs/react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AiFillPrinter, AiOutlineSearch } from "react-icons/ai";
 import { BiTrash } from "react-icons/bi";
+import ReactToPrint from "react-to-print";
 import Swal from "sweetalert2";
 
 export default function PoShowPage(props) {
     const [isLoading, setIsLoading] = useState(false);
-
+    const componentRef = useRef();
     return (
         <>
             {isLoading && <Loading />}
             <MasterAdmin title={"Show PO"}>
+                <div className="hidden">
+                    <NotaPoToPrint ref={componentRef} data={props.data} />
+                </div>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <div className="grid grid-cols-3 gap-2">
@@ -97,10 +102,22 @@ export default function PoShowPage(props) {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-row items-center">
-                            <button className="btn btn-primary btn-sm  btn-square text-gray-100">
-                                <AiFillPrinter />
-                            </button>
+                        <div className="flex flex-row items-center gap-1">
+                            <ReactToPrint
+                                trigger={() => (
+                                    <button className="btn btn-primary btn-sm btn-square text-gray-100">
+                                        <AiFillPrinter />
+                                    </button>
+                                )}
+                                content={() => componentRef.current}
+                                documentTitle={props.data.nota}
+                            />
+                            <Link
+                                href={route("transaksi.pembelian.po")}
+                                className="btn btn-ghost border-black btn-sm text-gray-800"
+                            >
+                                Kembali
+                            </Link>
                         </div>
 
                         <div className="overflow-x-auto">
@@ -164,7 +181,10 @@ export default function PoShowPage(props) {
                                             />
                                         </td>
                                         <td colSpan={2}>
-                                            Rp. {props.data.ndisc.toLocaleString("id")}
+                                            Rp.{" "}
+                                            {props.data.ndisc.toLocaleString(
+                                                "id"
+                                            )}
                                         </td>
                                     </tr>
                                     <tr>
@@ -178,7 +198,10 @@ export default function PoShowPage(props) {
                                             />
                                         </td>
                                         <td colSpan={2}>
-                                            Rp. {props.data.npph.toLocaleString("id")}
+                                            Rp.{" "}
+                                            {props.data.npph.toLocaleString(
+                                                "id"
+                                            )}
                                         </td>
                                     </tr>
                                     <tr>
@@ -186,7 +209,10 @@ export default function PoShowPage(props) {
                                             Total:
                                         </td>
                                         <td colSpan={2}>
-                                            Rp. {props.data.netto.toLocaleString("id")}
+                                            Rp.{" "}
+                                            {props.data.netto.toLocaleString(
+                                                "id"
+                                            )}
                                         </td>
                                     </tr>
                                 </tbody>

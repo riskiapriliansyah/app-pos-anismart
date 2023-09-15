@@ -1,18 +1,24 @@
 import Loading from "@/Components/Loading";
+import { NotaPrToPrint } from "@/Components/Print/NotaPr";
 import MasterAdmin from "@/Layouts/MasterAdmin";
 import { Link, router } from "@inertiajs/react";
 import axios from "axios";
-import { useState } from "react";
+import React from "react";
+import { useRef, useState } from "react";
 import { AiFillPrinter } from "react-icons/ai";
+import ReactToPrint from "react-to-print";
 import Swal from "sweetalert2";
 
 export default function PrShowPage(props) {
     const [isLoading, setIsLoading] = useState(false);
-
+    const componentRef = useRef();
     return (
         <>
             {isLoading && <Loading />}
             <MasterAdmin title={"Show PR"}>
+                <div className="hidden">
+                    <NotaPrToPrint ref={componentRef} data={props.data}/>
+                </div>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <div className="grid grid-cols-3 gap-2">
@@ -100,10 +106,19 @@ export default function PrShowPage(props) {
                                 )}
                             </div>
                         </div>
-                        <div className="flex flex-row items-center">
-                            <button className="btn btn-primary btn-sm  btn-square text-gray-100">
-                                <AiFillPrinter />
-                            </button>
+                        <div className="flex flex-row items-center gap-1">
+                            <ReactToPrint
+                                trigger={() => (
+                                    <button className="btn btn-primary btn-sm btn-square text-gray-100">
+                                        <AiFillPrinter />
+                                    </button>
+                                )}
+                                content={() => componentRef.current}
+                                documentTitle={props.data.nota}
+                            />
+                            <Link href={route('transaksi.pembelian.pr')} className="btn btn-ghost border-black btn-sm text-gray-800">
+                                Kembali
+                            </Link>
                         </div>
 
                         <div className="overflow-x-auto">

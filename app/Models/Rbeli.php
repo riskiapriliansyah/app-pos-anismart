@@ -9,9 +9,9 @@ class Rbeli extends Model
 {
     use HasFactory;
 
-    public function tbeli()
+    public function rtbeli()
     {
-        return $this->hasMany(Tbeli::class, "nota", "nota");
+        return $this->hasMany(Rtbeli::class, "nota", "nota");
     }
 
     public function supplier()

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Supp extends Model
 {
     use HasFactory;
+
+    public function area_supp()
+    {
+        return $this->belongsTo(Area::class, "area", "area");
+    }
+
 }

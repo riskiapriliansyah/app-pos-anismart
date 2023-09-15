@@ -65,20 +65,14 @@ export default function BeliPage(props) {
                                                 <div className="flex flex-row gap-1">
                                                     <Link
                                                         href={route(
-                                                            "transaksi.pembelian.po.show",
+                                                            "transaksi.pembelian.beli.show",
                                                             d.nota
                                                         )}
                                                         className="btn btn-primary bg-blue-700 text-base-100 btn-xs btn-square"
-                                                        title="Show PR"
+                                                        title="Show"
                                                     >
                                                         <AiFillEye />
                                                     </Link>
-                                                    <button
-                                                        className="btn btn-accent bg-green-700 text-base-100 btn-xs btn-square"
-                                                        title="Print PR"
-                                                    >
-                                                        <AiFillPrinter />
-                                                    </button>
                                                     {d.status_beli === "0" && (
                                                             <Link
                                                                 href=""

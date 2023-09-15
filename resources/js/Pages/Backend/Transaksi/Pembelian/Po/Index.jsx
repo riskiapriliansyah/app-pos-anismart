@@ -76,14 +76,23 @@ export default function PoPage(props) {
                                 <tbody>
                                     {dataPo.data?.map((d, index) => (
                                         <tr key={index}>
-                                            <td className="text-[7pt]">{d.tgl}</td>
-                                            <td className="text-[7pt]">Rp. {d.netto.toLocaleString("id")}</td>
-                                            <td className="text-[7pt]">{d.nota}</td>
-                                            <td className="text-[7pt]">{d.supplier.nama}</td>
+                                            <td className="text-[7pt]">
+                                                {d.tgl}
+                                            </td>
+                                            <td className="text-[7pt]">
+                                                Rp.{" "}
+                                                {d.netto.toLocaleString("id")}
+                                            </td>
+                                            <td className="text-[7pt]">
+                                                {d.nota}
+                                            </td>
+                                            <td className="text-[7pt]">
+                                                {d.supplier.nama}
+                                            </td>
                                             <td>
                                                 {d.status_beli === "0" && (
                                                     <div className="badge badge-secondary bg-rose-700 badge-sm text-[7pt]">
-                                                       Belum
+                                                        Belum
                                                     </div>
                                                 )}
                                                 {d.status_beli === "1" && (
@@ -95,7 +104,9 @@ export default function PoPage(props) {
                                             <td className="text-[7pt]">
                                                 {d.nota_pr}
                                             </td>
-                                            <td className="text-[7pt]">{d.user.name}</td>
+                                            <td className="text-[7pt]">
+                                                {d.user.name}
+                                            </td>
                                             <td>
                                                 <div className="flex flex-row gap-1">
                                                     <Link
@@ -108,20 +119,14 @@ export default function PoPage(props) {
                                                     >
                                                         <AiFillEye />
                                                     </Link>
-                                                    <button
-                                                        className="btn btn-accent bg-green-700 text-base-100 btn-xs btn-square"
-                                                        title="Print PR"
-                                                    >
-                                                        <AiFillPrinter />
-                                                    </button>
                                                     {d.status_beli === "0" && (
-                                                            <Link
-                                                                href=""
-                                                                className="btn btn-warning btn-xs text-[7pt]"
-                                                            >
-                                                                Buat Beli
-                                                            </Link>
-                                                        )}
+                                                        <Link
+                                                            href=""
+                                                            className="btn btn-warning btn-xs text-[7pt]"
+                                                        >
+                                                            Buat Beli
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

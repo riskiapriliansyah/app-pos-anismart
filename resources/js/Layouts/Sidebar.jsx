@@ -553,7 +553,7 @@ export default function Sidebar(props) {
         <>
             <div className="h-screen bg-gradient-to-r from-base-200 via-base-100 to-base-200 w-0 lg:w-64 py-7 fixed left-0">
                 <div className="flex flex-col items-center h-3/4">
-                    <img src="/assets/logo-2-pinter.png" alt="" width={100} />
+                    <img src="/assets/logo-apollo.png" alt="" width={150} />
                     {role === "admin" ? <AdminBar /> : ""}
                 </div>
             </div>

@@ -1,0 +1,30 @@
+  @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;600;700&display=swap');
+
+@media all {
+    .page-break {
+        display: none;
+      }
+  }
+  
+  @media print {
+    html,
+    body {
+      height: initial!important;
+      overflow: initial!important; 
+      -webkit-print-color-adjust: exact;
+      font-family: 'Inconsolata', monospace;
+    }
+  }
+  
+  @media print {
+    .page-break {
+        margin-top: 1 rem;
+        display: block;
+        page-break-before: auto;
+      }
+  }
+  
+  @page {
+    /* size: 210mm 148mm; */
+    size: 148mm 210mm;
+  }

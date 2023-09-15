@@ -46,7 +46,7 @@ export default function ReturBeliPage(props) {
                                         <th>Tanggal</th>
                                         <th>Nilai</th>
                                         <th>Nota</th>
-                                        <th>Nota PO</th>
+                                        <th>Nota faktur</th>
                                         <th>Supplier</th>
                                         <th>Dibuat Oleh</th>
                                         <th>Aksi</th>
@@ -56,37 +56,31 @@ export default function ReturBeliPage(props) {
                                     {dataReturBeli.data?.map((d, index) => (
                                         <tr key={index}>
                                             <td>{d.tgl}</td>
-                                            <td>{d.netto}</td>
+                                            <td>{d.netto.toLocaleString("id")}</td>
                                             <td>{d.nota}</td>
-                                            <td>{d.nota_po}</td>
+                                            <td>{d.notar}</td>
                                             <td>{d.supplier.nama}</td>
                                             <td>{d.user.name}</td>
                                             <td>
                                                 <div className="flex flex-row gap-1">
                                                     <Link
                                                         href={route(
-                                                            "transaksi.pembelian.po.show",
+                                                            "transaksi.pembelian.retur.show",
                                                             d.nota
                                                         )}
                                                         className="btn btn-primary bg-blue-700 text-base-100 btn-xs btn-square"
-                                                        title="Show PR"
+                                                        title="Show"
                                                     >
                                                         <AiFillEye />
                                                     </Link>
-                                                    <button
-                                                        className="btn btn-accent bg-green-700 text-base-100 btn-xs btn-square"
-                                                        title="Print PR"
-                                                    >
-                                                        <AiFillPrinter />
-                                                    </button>
                                                     {d.status_beli === "0" && (
-                                                            <Link
-                                                                href=""
-                                                                className="btn btn-warning btn-xs text-[7pt]"
-                                                            >
-                                                                Buat Beli
-                                                            </Link>
-                                                        )}
+                                                        <Link
+                                                            href=""
+                                                            className="btn btn-warning btn-xs text-[7pt]"
+                                                        >
+                                                            Buat Beli
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

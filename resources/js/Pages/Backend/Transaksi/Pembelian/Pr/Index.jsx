@@ -118,12 +118,6 @@ export default function PrPage(props) {
                                                     >
                                                         <AiFillEye />
                                                     </Link>
-                                                    <button
-                                                        className="btn btn-accent bg-green-700 text-base-100 btn-xs btn-square"
-                                                        title="Print PR"
-                                                    >
-                                                        <AiFillPrinter />
-                                                    </button>
                                                     {d.status_po === "0" &&
                                                         d.status === "2" && (
                                                             <Link

@@ -33,7 +33,9 @@ class TransaksiController extends BaseController
 
     public function purchaseRequestShow($nota)
     {
-        $data = Pr::where("nota", $nota)->with(['supplier', 'tpr'])->first();
+        $data = Pr::where("nota", $nota)->with(['supplier' => function ($q) {
+            $q->with(['area_supp']);
+        }, 'tpr'])->first();
         return Inertia::render("Backend/Transaksi/Pembelian/Pr/Show", [
             "data" => $data,
         ]);
@@ -98,7 +100,7 @@ class TransaksiController extends BaseController
 
     public function purchaseOrderShow($nota)
     {
-        $data = Po::where("nota", $nota)->with(['supplier', 'tpo'])->first();
+        $data = Po::where("nota", $nota)->with(['supplier' => function($q){$q->with(['area_supp']);}, 'tpo'])->first();
         return Inertia::render("Backend/Transaksi/Pembelian/Po/Show", [
             "data" => $data,
         ]);
@@ -152,14 +154,14 @@ class TransaksiController extends BaseController
                 $tpo->zsatuan = $b['satuan'];
                 $tpo->save();
             }
-            
+
             $sisj->po = $sisj->po + 1;
             $sisj->save();
 
             $pr = Pr::where("nota", $header['nota_pr'])->first();
             $pr->status_po = 1;
             $pr->save();
-            
+
             DB::commit();
 
             $data = [
@@ -184,7 +186,7 @@ class TransaksiController extends BaseController
 
     public function pembelianShow($nota)
     {
-        $data = Po::where("nota", $nota)->with(['supplier', 'tpo'])->first();
+        $data = Beli::where("nota", $nota)->with(['supplier' => function($q){$q->with(['area_supp']);}, 'tbeli'])->first();
         return Inertia::render("Backend/Transaksi/Pembelian/Beli/Show", [
             "data" => $data,
         ]);
@@ -258,7 +260,7 @@ class TransaksiController extends BaseController
             $po = Po::where("nota", $header['nota_po'])->first();
             $po->status_beli = 1;
             $po->save();
-            
+
             DB::commit();
 
             $data = [
@@ -353,7 +355,7 @@ class TransaksiController extends BaseController
 
             $sisj->rbeli = $sisj->rbeli + 1;
             $sisj->save();
-            
+
             DB::commit();
 
             $data = [
@@ -378,7 +380,7 @@ class TransaksiController extends BaseController
 
     public function penjualanNotaShow($nota)
     {
-        $data = Rbeli::where("nota", $nota)->with(['supplier', 'rtbeli'])->first();
+        $data = Gjual::where("nota", $nota)->with(['cust', 'gtjual', 'user'])->first();
         return Inertia::render("Backend/Transaksi/Penjualan/PenjualanNota/Show", [
             "data" => $data,
         ]);
@@ -456,7 +458,7 @@ class TransaksiController extends BaseController
 
             $sisj->gjual = $sisj->gjual + 1;
             $sisj->save();
-            
+
             DB::commit();
 
             $data = [
