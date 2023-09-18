@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\ApiTransaksiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::get("getSisj", [ApiController::class, "getSisj"])->name("api.getSisj");
 Route::get("getGudang", [ApiController::class, "getGudang"])->name("api.getGudang");
 Route::get("getStock", [ApiController::class, "getStock"])->name("api.getStock");
 Route::get("getStockByBara", [ApiController::class, "getStockByBara"])->name("api.getStockByBara");
@@ -29,3 +31,6 @@ Route::get("getPr", [ApiController::class, "getPurchaseRequest"])->name("api.get
 Route::get("getPrOpen", [ApiController::class, "getPurchaseRequestOpen"])->name("api.getPrOpen");
 Route::get("getPoOpen", [ApiController::class, "getPurchaseOrderOpen"])->name("api.getPoOpen");
 Route::get("getKartuStock", [ApiController::class, 'getKartuStock'])->name('api.getKartuStock');
+
+// ============Transaksi API
+Route::get("getNotaBaru", [ApiTransaksiController::class, "getNotaBaru"])->name("api.getNotaBaru");

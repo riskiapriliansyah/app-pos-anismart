@@ -7,12 +7,18 @@ use App\Models\Gudang;
 use App\Models\Kbara;
 use App\Models\Po;
 use App\Models\Pr;
+use App\Models\Sisj;
 use App\Models\Stock;
 use App\Models\Supp;
 use Illuminate\Http\Request;
 
 class ApiController extends BaseController
 {
+    public function getSisj()
+    {
+        $data = Sisj::first();
+        return $this->sendResponse($data, "data sisj");
+    }
     public function getStock(Request $request)
     {
         if ($request->searchBy == "*") {
@@ -50,11 +56,11 @@ class ApiController extends BaseController
     public function getCust(Request $request)
     {
         if ($request->searchBy == "*") {
-            $datas = Cust::take(10)->get();
+            $datas = Cust::take(10)->orderBy("kode", "ASC")->get();
             return $this->sendResponse($datas, "data supplier");
         }
         if ($request->searchBy == "nama") {
-            $datas = Cust::where("nama", "LIKE", "%{$request->kode}%")->take(10)->get();
+            $datas = Cust::where("nama", "LIKE", "%{$request->kode}%")->orderBy("kode", "ASC")->take(10)->get();
             return $this->sendResponse($datas, "data supplier");
         }
     }

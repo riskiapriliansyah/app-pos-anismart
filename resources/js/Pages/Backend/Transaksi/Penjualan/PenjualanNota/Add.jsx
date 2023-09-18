@@ -46,8 +46,8 @@ export default function PenjualanNotaAddPage(props) {
     const [tglBeli, settglBeli] = useState(tanggal);
     const [tglJatuh, setTglJatuh] = useState(tanggal);
     const [status, setStatus] = useState(0);
-    const [jbayar, setJbayar] = useState(0)
-    const [jkembali, setJkembali] = useState(0)
+    const [jbayar, setJbayar] = useState(0);
+    const [jkembali, setJkembali] = useState(0);
     window.onkeypress = function (event) {
         if (event.keyCode === 115) {
             hitungTotalFooter();
@@ -270,8 +270,8 @@ export default function PenjualanNotaAddPage(props) {
                 setNdisc(Math.round(xNdisc));
                 setNppn(Math.round(xNppn));
                 setTotal(Math.round(xSubTotal - xNdisc + xNppn));
-                let xTotal = Math.round(xSubTotal - xNdisc + xNppn)
-                setJkembali(xTotal - jbayar)
+                let xTotal = Math.round(xSubTotal - xNdisc + xNppn);
+                setJkembali(xTotal - jbayar);
             });
         } else {
             setSubTotal(0);
@@ -280,8 +280,8 @@ export default function PenjualanNotaAddPage(props) {
             setNppn(0);
             setPpn(0);
             setTotal(0);
-            setJbayar(0)
-            setJkembali(0)
+            setJbayar(0);
+            setJkembali(0);
         }
 
         xForceRender();
@@ -397,6 +397,8 @@ export default function PenjualanNotaAddPage(props) {
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-2">
                             <div className="form-group">
                                 <label
                                     htmlFor=""
@@ -431,8 +433,6 @@ export default function PenjualanNotaAddPage(props) {
                                     min={tanggal}
                                 />
                             </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
                             <div className="form-group">
                                 <label
                                     htmlFor=""

@@ -48,6 +48,7 @@ export default function PenjualanNotaPage(props) {
                                         <th>Nota</th>
                                         <th>Cust</th>
                                         <th>Dibuat Oleh</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -59,6 +60,11 @@ export default function PenjualanNotaPage(props) {
                                             <td>{d.nota}</td>
                                             <td>{d.cust.nama}</td>
                                             <td>{d.user.name}</td>
+                                            <td>
+                                                {d.lunas === "0" &&
+                                                    "Belum Lunas"}
+                                                {d.lunas === "1" && "Lunas"}
+                                            </td>
                                             <td>
                                                 <div className="flex flex-row gap-1">
                                                     <Link
@@ -72,13 +78,13 @@ export default function PenjualanNotaPage(props) {
                                                         <AiFillEye />
                                                     </Link>
                                                     {d.status_beli === "0" && (
-                                                            <Link
-                                                                href=""
-                                                                className="btn btn-warning btn-xs text-[7pt]"
-                                                            >
-                                                                Buat Beli
-                                                            </Link>
-                                                        )}
+                                                        <Link
+                                                            href=""
+                                                            className="btn btn-warning btn-xs text-[7pt]"
+                                                        >
+                                                            Buat Beli
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

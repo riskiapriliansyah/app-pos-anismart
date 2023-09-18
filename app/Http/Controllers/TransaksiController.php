@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beli;
+use App\Models\Cust;
 use App\Models\Gjual;
 use App\Models\Gtjual;
 use App\Models\Kbara;
@@ -466,11 +467,15 @@ class TransaksiController extends BaseController
             $gjual->aver = 0;
             $gjual->bayar = 0;
             $gjual->lunas = $header['lunas'];
-            $gjual->tgll = $header['tgll'];
+            $gjual->tgll = $header['lunas'] == "1" ? Carbon::now(+8) : null;
             $gjual->jbayar = $header['jbayar'];
-            $gjual->jkembali = $header['jkembali'];
+            $gjual->jkembali = $header['lunas'] == "1" ? 0 : $header['jkembali'];
             $gjual->created_by = Auth::user()->userid;
             $gjual->save();
+
+            $cust = Cust::where("kode", $header['kode'])->first();
+            $cust->masuk = $cust->masuk + $header['netto'];
+            $cust->save();
 
             foreach ($body as $b) {
                 $gtjual = new Gtjual;
