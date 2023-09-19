@@ -53,7 +53,7 @@ class AuthController extends BaseController
 
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
         return to_route("login");
     }
 }

@@ -27,14 +27,14 @@ Route::get("/login", [AuthController::class, 'login'])->name("login");
 Route::post("/postLogin", [AuthController::class, 'postLogin'])->name("postLogin");
 Route::get("/logout", [AuthController::class, 'logout'])->name("logout");
 
-Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
+Route::group(['middleware' => ['auth:web', 'checkRole:super_admin']], function () {
     // =============================Transaksi===============
     Route::get("/transaksi/pembelian/pr/approve", [TransaksiController::class, "purchaseRequestApprove"])->name("transaksi.pembelian.pr.approve");
     Route::post("/transaksi/pembelian/pr/approved", [TransaksiController::class, "purchaseRequestApproved"])->name("transaksi.pembelian.pr.approved");
     Route::get("/transaksi/pembelian/pr/approve/{nota}", [TransaksiController::class, "purchaseRequestApproveShow"])->name("transaksi.pembelian.pr.approve.show");
 });
 
-Route::group(['middleware' => ['auth', 'checkRole:super_admin,admin']], function () {
+Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], function () {
     Route::get("/admin/dashboard", [BackendController::class, "dashboard"])->name("admin.dashboard");
 
     // =====================FILE====================================================
