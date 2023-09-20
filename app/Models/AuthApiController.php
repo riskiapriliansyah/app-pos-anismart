@@ -22,11 +22,9 @@ class AuthApiController extends Model
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function login()
     {
-        return $request->all();
         $credentials = request(['userid', 'password']);
-        return $credentials;
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
