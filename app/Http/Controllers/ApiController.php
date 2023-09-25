@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cust;
+use App\Models\Gjual;
 use App\Models\Gudang;
 use App\Models\Kbara;
 use App\Models\Po;
@@ -81,6 +82,12 @@ class ApiController extends BaseController
     {
         $datas = Po::where("nota", "LIKE", "%{$request->kode}%")->where("status_beli", "0")->with(['supplier', 'tpo'])->latest()->paginate(10);
         return $this->sendResponse($datas, "data pr");
+    }
+
+    public function getPenjualan(Request $request)
+    {
+        $datas = Gjual::where("nota", "LIKE", "%{$request->kode}%")->with(['cust'])->latest()->paginate(10);
+        return $this->sendResponse($datas, "data penjualan");
     }
 
     public function getGudang()

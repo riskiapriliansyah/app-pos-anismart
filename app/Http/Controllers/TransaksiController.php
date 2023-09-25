@@ -7,12 +7,16 @@ use App\Models\Cust;
 use App\Models\Gjual;
 use App\Models\Gtjual;
 use App\Models\Kbara;
+use App\Models\Pindah;
 use App\Models\Po;
 use App\Models\Pr;
 use App\Models\Rbeli;
+use App\Models\Rjl;
 use App\Models\Rtbeli;
+use App\Models\Rtjl;
 use App\Models\Sisj;
 use App\Models\Tbeli;
+use App\Models\Tpindah;
 use App\Models\Tpo;
 use App\Models\Tpr;
 use Carbon\Carbon;
@@ -520,6 +524,205 @@ class TransaksiController extends BaseController
             $data = [
                 "gjual" => $gjual,
                 "gtjual" => $gtjual,
+            ];
+
+            return $this->sendResponse($data, "data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("Data gagal disimpan", $ex->getMessage());
+        }
+    }
+
+    public function returPenjualanNota()
+    {
+        $datas = Rjl::with(['cust', "user"])->latest()->paginate(10);
+        return Inertia::render("Backend/Transaksi/Penjualan/ReturPenjualan/Index", [
+            "datas" => $datas,
+        ]);
+    }
+
+    public function returPenjualanNotaShow($nota)
+    {
+        $data = Rjl::where("nota", $nota)->with(['cust', 'rtjl', 'user'])->first();
+        return Inertia::render("Backend/Transaksi/Penjualan/ReturPenjualan/Show", [
+            "data" => $data,
+        ]);
+    }
+
+    public function returPenjualanNotaAdd()
+    {
+        return Inertia::render("Backend/Transaksi/Penjualan/ReturPenjualan/Add");
+    }
+
+    public function returPenjualanNotaStore(Request $request)
+    {
+        $header = $request->header;
+        $body = $request->body;
+        try {
+            DB::beginTransaction();
+            $sisj = Sisj::first();
+
+            $rbeli = new Rjl;
+            $rbeli->nota = "RB-" . date("Ymd") . "-" . $sisj->rbeli + 1;;
+            $rbeli->tgl = $header['tgl'];
+            $rbeli->kode = $header['kode'];
+            $rbeli->lok = $header['lok'];
+            $rbeli->ket = $header['ket'];
+            $rbeli->nilai = $header['nilai'];
+            $rbeli->disc = $header['disc'];
+            $rbeli->ndisc = $header['ndisc'];
+            $rbeli->pph = $header['pph'];
+            $rbeli->npph = $header['npph'];
+            $rbeli->netto = $header['netto'];
+            $rbeli->notar = $header['notar'];
+            $rbeli->created_by = Auth::user()->userid;
+            $rbeli->save();
+
+            foreach ($body as $b) {
+                $rtbeli = new Rtjl;
+                $rtbeli->nota = $rbeli->nota;
+                $rtbeli->tgl = $rbeli->tgl;
+                $rtbeli->bara = $b['bara'];
+                $rtbeli->bara1 = $b['bara1'];
+                $rtbeli->qty = $b['qty'];
+                $rtbeli->harga = $b['hbeli'];
+                $rtbeli->disc = $b['disc'];
+                $rtbeli->ndisc = $b['ndisc'];
+                $rtbeli->total = $b['total'];
+                $rtbeli->nama = $b['nama'];
+                $rtbeli->satuan = $b['satuan'];
+                $rtbeli->zqty = $b['qty'];
+                $rtbeli->zharga = $b['hbeli'];
+                $rtbeli->zsatuan = $b['satuan'];
+                $rtbeli->save();
+
+                $kbara = new Kbara;
+                $kbara->nota = $rbeli->nota;
+                $kbara->tgl = $rbeli->tgl;
+                $kbara->bara = $rtbeli->bara;
+                $kbara->bara1 = $rtbeli->bara1;
+                $kbara->qty = $rtbeli->qty;
+                $kbara->lok = $rbeli->lok;
+                $kbara->tipe = "C";
+                $kbara->kode = $rbeli->kode;
+                $kbara->zqty = $rtbeli->zqty;
+                $kbara->sat = $rtbeli->satuan;
+                $kbara->ntag = $rtbeli->zqty * 1;
+                $kbara->save();
+            }
+
+            $sisj->rbeli = $sisj->rbeli + 1;
+            $sisj->save();
+
+            DB::commit();
+
+            $data = [
+                "rbeli" => $rbeli,
+                "rtbeli" => $rtbeli,
+            ];
+
+            return $this->sendResponse($data, "data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("Data gagal disimpan", $ex->getMessage());
+        }
+    }
+
+    public function transferBarang()
+    {
+        $datas = Pindah::with(['dari_toko', 'ke_toko', "user"])->latest()->paginate(10);
+        return Inertia::render("Backend/Transaksi/TransferBarang/Index", [
+            "datas" => $datas,
+        ]);
+    }
+
+    public function transferBarangShow($nota)
+    {
+        $data = Pindah::where("nota", $nota)->with(['dari_toko', 'ke_toko', 'tpindah', 'user'])->first();
+        return Inertia::render("Backend/Transaksi/TransferBarang/Show", [
+            "data" => $data,
+        ]);
+    }
+
+    public function transferBarangAdd()
+    {
+        return Inertia::render("Backend/Transaksi/TransferBarang/Add");
+    }
+
+    public function transferBarangStore(Request $request)
+    {
+        $header = $request->header;
+        $body = $request->body;
+        try {
+            DB::beginTransaction();
+            $sisj = Sisj::first();
+
+            $pindah = new Pindah;
+            $pindah->nota = "TR-" . date("Ymd") . "-" . $sisj->tr + 1;;
+            $pindah->tgl = $header['tgl'];
+            $pindah->dari = $header['dari'];
+            $pindah->ke = $header['ke'];
+            $pindah->ket = $header['ket'];
+            $pindah->nilai = $header['nilai'];
+            $pindah->created_by = Auth::user()->userid;
+            $pindah->save();
+
+            foreach ($body as $b) {
+                $tpindah = new Tpindah;
+                $tpindah->nota = $pindah->nota;
+                $tpindah->tgl = $pindah->tgl;
+                $tpindah->bara = $b['bara'];
+                $tpindah->bara1 = $b['bara1'];
+                $tpindah->qty = $b['qty'];
+                $tpindah->harga = $b['hbeli'];
+                $tpindah->nama = $b['nama'];
+                $tpindah->satuan = $b['satuan'];
+                $tpindah->zqty = $b['qty'];
+                $tpindah->zharga = $b['hbeli'];
+                $tpindah->zsatuan = $b['satuan'];
+                $tpindah->save();
+
+                if($pindah->dari){
+                    $kbara = new Kbara;
+                    $kbara->nota = $pindah->nota;
+                    $kbara->tgl = $pindah->tgl;
+                    $kbara->bara = $tpindah->bara;
+                    $kbara->bara1 = $tpindah->bara1;
+                    $kbara->qty = $tpindah->qty;
+                    $kbara->lok = $pindah->dari;
+                    $kbara->tipe = "O";
+                    $kbara->kode = "Stock Out";
+                    $kbara->zqty = $tpindah->zqty;
+                    $kbara->sat = $tpindah->satuan;
+                    $kbara->ntag = $tpindah->zqty * -1;
+                    $kbara->save();
+                }
+
+                if($pindah->ke){
+                    $kbara = new Kbara;
+                    $kbara->nota = $pindah->nota;
+                    $kbara->tgl = $pindah->tgl;
+                    $kbara->bara = $tpindah->bara;
+                    $kbara->bara1 = $tpindah->bara1;
+                    $kbara->qty = $tpindah->qty;
+                    $kbara->lok = $pindah->ke;
+                    $kbara->tipe = "I";
+                    $kbara->kode = "Stock In";
+                    $kbara->zqty = $tpindah->zqty;
+                    $kbara->sat = $tpindah->satuan;
+                    $kbara->ntag = $tpindah->zqty * 1;
+                    $kbara->save();
+                }
+            }
+
+            $sisj->tr = $sisj->tr + 1;
+            $sisj->save();
+
+            DB::commit();
+
+            $data = [
+                "pindah" => $pindah,
+                "tpindah" => $tpindah,
             ];
 
             return $this->sendResponse($data, "data berhasil disimpan");

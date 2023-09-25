@@ -12,10 +12,13 @@ export default function Sidebar(props) {
         const [openSubMenuTransaksi, setOpenSubMenuTransaksi] = useState(true);
         const [openSubMenuPembelian, setOpenSubMenuPembelian] = useState(true);
         const [openSubMenuLainLain, setOpenSubMenuLainLain] = useState(true);
-        const [openSubMenuPelunasanHutang, setOpenSubMenuPelunasanHutang] = useState(true);
+        const [openSubMenuPelunasanHutang, setOpenSubMenuPelunasanHutang] =
+            useState(true);
         const [openSubMenuPenjualan, setOpenSubMenuPenjualan] = useState(true);
-        const [openSubMenuPembayaranPiutang, setOpenSubMenuPembayaranPiutang] = useState(true);
-        const [openSubMenuPenyesuaianStock, setOpenSubMenuPenyesuaianStock] = useState(true);
+        const [openSubMenuPembayaranPiutang, setOpenSubMenuPembayaranPiutang] =
+            useState(true);
+        const [openSubMenuPenyesuaianStock, setOpenSubMenuPenyesuaianStock] =
+            useState(true);
         return (
             <ul
                 className="space-y-2 pt-7 h-92 w-full hidden lg:block overflow-x-auto"
@@ -59,8 +62,9 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${openSubMenuWebsite ? "hidden" : ""
-                            } duration-300 space-y-2 bg-base-100`}
+                        className={`${
+                            openSubMenuWebsite ? "hidden" : ""
+                        } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <Link
@@ -157,7 +161,9 @@ export default function Sidebar(props) {
                         }
                     >
                         <BsDatabase size={20} />
-                        <span className="flex-1 ml-3 text-left ">Transaksi</span>
+                        <span className="flex-1 ml-3 text-left ">
+                            Transaksi
+                        </span>
                         <svg
                             className="w-4 h-4"
                             fill="currentColor"
@@ -173,8 +179,9 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${openSubMenuTransaksi ? "hidden" : ""
-                            } duration-300 space-y-2 bg-base-100`}
+                        className={`${
+                            openSubMenuTransaksi ? "hidden" : ""
+                        } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <button
@@ -183,7 +190,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPembelian(!openSubMenuPembelian)
+                                    setOpenSubMenuPembelian(
+                                        !openSubMenuPembelian
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -204,8 +213,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPembelian ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPembelian ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -269,8 +279,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuLainLain ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuLainLain ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -297,7 +308,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPelunasanHutang(!openSubMenuPelunasanHutang)
+                                    setOpenSubMenuPelunasanHutang(
+                                        !openSubMenuPelunasanHutang
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -318,8 +331,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPelunasanHutang ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPelunasanHutang ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -363,7 +377,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPenjualan(!openSubMenuPenjualan)
+                                    setOpenSubMenuPenjualan(
+                                        !openSubMenuPenjualan
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -384,8 +400,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPenjualan ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPenjualan ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -397,7 +414,9 @@ export default function Sidebar(props) {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/admin/media/document"
+                                        href={route(
+                                            "transaksi.penjualan.returPenjualanNota"
+                                        )}
                                         className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Penjualan
@@ -412,7 +431,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPembayaranPiutang(!openSubMenuPembayaranPiutang)
+                                    setOpenSubMenuPembayaranPiutang(
+                                        !openSubMenuPembayaranPiutang
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -433,8 +454,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPembayaranPiutang ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPembayaranPiutang ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -473,7 +495,7 @@ export default function Sidebar(props) {
                         <div className="divider"></div>
                         <li>
                             <Link
-                                href="/area"
+                                href={route('transaksi.penjualan.transferBarang')}
                                 className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Transfer Barang
@@ -486,7 +508,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPenyesuaianStock(!openSubMenuPenyesuaianStock)
+                                    setOpenSubMenuPenyesuaianStock(
+                                        !openSubMenuPenyesuaianStock
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -507,8 +531,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPenyesuaianStock ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPenyesuaianStock ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -547,10 +572,13 @@ export default function Sidebar(props) {
         const [openSubMenuTransaksi, setOpenSubMenuTransaksi] = useState(true);
         const [openSubMenuPembelian, setOpenSubMenuPembelian] = useState(true);
         const [openSubMenuLainLain, setOpenSubMenuLainLain] = useState(true);
-        const [openSubMenuPelunasanHutang, setOpenSubMenuPelunasanHutang] = useState(true);
+        const [openSubMenuPelunasanHutang, setOpenSubMenuPelunasanHutang] =
+            useState(true);
         const [openSubMenuPenjualan, setOpenSubMenuPenjualan] = useState(true);
-        const [openSubMenuPembayaranPiutang, setOpenSubMenuPembayaranPiutang] = useState(true);
-        const [openSubMenuPenyesuaianStock, setOpenSubMenuPenyesuaianStock] = useState(true);
+        const [openSubMenuPembayaranPiutang, setOpenSubMenuPembayaranPiutang] =
+            useState(true);
+        const [openSubMenuPenyesuaianStock, setOpenSubMenuPenyesuaianStock] =
+            useState(true);
         return (
             <ul
                 className="space-y-2 pt-7 h-92 w-full hidden lg:block overflow-x-auto"
@@ -594,8 +622,9 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${openSubMenuWebsite ? "hidden" : ""
-                            } duration-300 space-y-2 bg-base-100`}
+                        className={`${
+                            openSubMenuWebsite ? "hidden" : ""
+                        } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <Link
@@ -692,7 +721,9 @@ export default function Sidebar(props) {
                         }
                     >
                         <BsDatabase size={20} />
-                        <span className="flex-1 ml-3 text-left ">Transaksi</span>
+                        <span className="flex-1 ml-3 text-left ">
+                            Transaksi
+                        </span>
                         <svg
                             className="w-4 h-4"
                             fill="currentColor"
@@ -708,8 +739,9 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${openSubMenuTransaksi ? "hidden" : ""
-                            } duration-300 space-y-2 bg-base-100`}
+                        className={`${
+                            openSubMenuTransaksi ? "hidden" : ""
+                        } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <button
@@ -718,7 +750,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPembelian(!openSubMenuPembelian)
+                                    setOpenSubMenuPembelian(
+                                        !openSubMenuPembelian
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -739,8 +773,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPembelian ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPembelian ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -812,8 +847,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuLainLain ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuLainLain ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -840,7 +876,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPelunasanHutang(!openSubMenuPelunasanHutang)
+                                    setOpenSubMenuPelunasanHutang(
+                                        !openSubMenuPelunasanHutang
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -861,8 +899,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPelunasanHutang ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPelunasanHutang ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -906,7 +945,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPenjualan(!openSubMenuPenjualan)
+                                    setOpenSubMenuPenjualan(
+                                        !openSubMenuPenjualan
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -927,8 +968,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPenjualan ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPenjualan ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -940,7 +982,9 @@ export default function Sidebar(props) {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/admin/media/document"
+                                        href={route(
+                                            "transaksi.penjualan.returPenjualanNota"
+                                        )}
                                         className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Penjualan
@@ -955,7 +999,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPembayaranPiutang(!openSubMenuPembayaranPiutang)
+                                    setOpenSubMenuPembayaranPiutang(
+                                        !openSubMenuPembayaranPiutang
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -976,8 +1022,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPembayaranPiutang ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPembayaranPiutang ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -1016,7 +1063,7 @@ export default function Sidebar(props) {
                         <div className="divider"></div>
                         <li>
                             <Link
-                                href="/area"
+                                href= {route('transaksi.penjualan.transferBarang')}
                                 className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Transfer Barang
@@ -1029,7 +1076,9 @@ export default function Sidebar(props) {
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
-                                    setOpenSubMenuPenyesuaianStock(!openSubMenuPenyesuaianStock)
+                                    setOpenSubMenuPenyesuaianStock(
+                                        !openSubMenuPenyesuaianStock
+                                    )
                                 }
                             >
                                 <span className="flex-1 ml-3 text-left ">
@@ -1050,8 +1099,9 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${openSubMenuPenyesuaianStock ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
+                                className={`${
+                                    openSubMenuPenyesuaianStock ? "hidden" : ""
+                                } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -1083,7 +1133,7 @@ export default function Sidebar(props) {
                 </li>
             </ul>
         );
-    }
+    };
     return (
         <>
             <div className="h-screen bg-gradient-to-r from-base-200 via-base-100 to-base-200 w-0 lg:w-64 py-7 fixed left-0">

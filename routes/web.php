@@ -89,4 +89,14 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaAdd"])->name("transaksi.penjualan.penjualanNota.add");
     Route::post("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaStore"])->name("transaksi.penjualan.penjualanNota.store");
     Route::get("/transaksi/penjualan/penjualan-nota/show/{nota}", [TransaksiController::class, "penjualanNotaShow"])->name("transaksi.penjualan.penjualanNota.show");
+
+    Route::get("/transaksi/penjualan/retur-penjualan", [TransaksiController::class, "returPenjualanNota"])->name("transaksi.penjualan.returPenjualanNota");
+    Route::get("/transaksi/penjualan/retur-penjualan/tambah", [TransaksiController::class, "returPenjualanNotaAdd"])->name("transaksi.penjualan.returPenjualanNota.add");
+    Route::post("/transaksi/penjualan/retur-penjualan/tambah", [TransaksiController::class, "returPenjualanNotaStore"])->name("transaksi.penjualan.returPenjualanNota.store");
+    Route::get("/transaksi/penjualan/retur-penjualan/show/{nota}", [TransaksiController::class, "returPenjualanNotaShow"])->name("transaksi.penjualan.returPenjualanNota.show");
+
+    Route::get("/transaksi/transfer-barang", [TransaksiController::class, "transferBarang"])->name("transaksi.penjualan.transferBarang");
+    Route::get("/transaksi/transfer-barang/tambah", [TransaksiController::class, "transferBarangAdd"])->name("transaksi.penjualan.transferBarang.add");
+    Route::post("/transaksi/transfer-barang/tambah", [TransaksiController::class, "transferBarangStore"])->name("transaksi.penjualan.transferBarang.store");
+    Route::get("/transaksi/transfer-barang/show/{nota}", [TransaksiController::class, "transferBarangShow"])->name("transaksi.penjualan.transferBarang.show");
 });

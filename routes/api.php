@@ -31,12 +31,13 @@ Route::get("getPrSearch", [ApiController::class, "getPrSearch"])->name("api.getP
 Route::get("getPr", [ApiController::class, "getPurchaseRequest"])->name("api.getPr");
 Route::get("getPrOpen", [ApiController::class, "getPurchaseRequestOpen"])->name("api.getPrOpen");
 Route::get("getPoOpen", [ApiController::class, "getPurchaseOrderOpen"])->name("api.getPoOpen");
+Route::get("getPenjualan", [ApiController::class, "getPenjualan"])->name("api.getPenjualan");
 Route::get("getKartuStock", [ApiController::class, 'getKartuStock'])->name('api.getKartuStock');
 
 // ============Transaksi API
 Route::get("getNotaBaru", [ApiTransaksiController::class, "getNotaBaru"])->name("api.getNotaBaru");
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+Route::group(['middleware' => 'auth:api', 'prefix' => 'auth'], function ($router) {
     Route::post('login', [AuthApiController::class, "login"]);
     Route::post('logout', [AuthApiController::class, "logout"]);
     Route::post('refresh', [AuthApiController::class, "refresh"]);

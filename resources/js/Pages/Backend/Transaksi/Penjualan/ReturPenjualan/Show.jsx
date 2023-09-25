@@ -12,7 +12,7 @@ import { BiTrash } from "react-icons/bi";
 import ReactToPrint from "react-to-print";
 import Swal from "sweetalert2";
 
-export default function ReturBeliShowPage(props) {
+export default function ReturPenjualanShowPage(props) {
     const [isLoading, setIsLoading] = useState(false);
     const componentRef = useRef();
     return (
@@ -20,7 +20,7 @@ export default function ReturBeliShowPage(props) {
             {isLoading && <Loading />}
             <MasterAdmin title={"Show Retur Pembelian"}>
                 <div className="hidden">
-                    <NotaReturToPrint ref={componentRef} data={props.data} />
+                    {/* <NotaReturToPrint ref={componentRef} data={props.data} /> */}
                 </div>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
@@ -82,7 +82,7 @@ export default function ReturBeliShowPage(props) {
                                     <input
                                         type="text"
                                         className="input input-bordered input-xs text-xs w-full"
-                                        value={props.data.supplier.nama}
+                                        value={props.data.cust.nama}
                                         readOnly
                                     />
                                 </div>
@@ -117,7 +117,7 @@ export default function ReturBeliShowPage(props) {
                             </div>
                         </div>
                         <div className="flex flex-row items-center gap-1">
-                            <ReactToPrint
+                            {/* <ReactToPrint
                                 trigger={() => (
                                     <button className="btn btn-primary btn-sm btn-square text-gray-100">
                                         <AiFillPrinter />
@@ -125,7 +125,7 @@ export default function ReturBeliShowPage(props) {
                                 )}
                                 content={() => componentRef.current}
                                 documentTitle={props.data.nota}
-                            />
+                            /> */}
                             <Link
                                 href={route("transaksi.pembelian.returPembelian")}
                                 className="btn btn-ghost border-black btn-sm text-gray-800"
@@ -148,7 +148,7 @@ export default function ReturBeliShowPage(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {props.data.rtbeli.map((d, index) => (
+                                    {props.data.rtjl.map((d, index) => (
                                         <tr>
                                             <td className="text-[7pt]">
                                                 {d.bara1}
