@@ -38,7 +38,7 @@ export default function Sidebar(props) {
                 <li>
                     <button
                         type="button"
-                        className="flex items-center p-2 px-4 w-full text-xs text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 w-full text-xs text-gray-600 group hover:bg-gray-700 hover:text-gray-200"
                         aria-controls="dropdown-example"
                         data-collapse-toggle="dropdown-example"
                         onClick={() =>
@@ -64,7 +64,7 @@ export default function Sidebar(props) {
                         id="dropdown-example"
                         className={`${
                             openSubMenuWebsite ? "hidden" : ""
-                        } duration-300 space-y-2 bg-base-100`}
+                        } transition duration-200 ease-in-out space-y-2 bg-base-100`}
                     >
                         <li>
                             <Link
@@ -1134,6 +1134,7 @@ export default function Sidebar(props) {
             </ul>
         );
     };
+
     return (
         <>
             <div className="h-screen bg-gradient-to-r from-base-200 via-base-100 to-base-200 w-0 lg:w-64 py-7 fixed left-0">

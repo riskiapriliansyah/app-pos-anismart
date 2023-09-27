@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('deps', function (Blueprint $table) {
             $table->id();
+            $table->string("div", 10)->nullable();
             $table->string("kode", 10);
             $table->string("ket");
             $table->timestamps();
