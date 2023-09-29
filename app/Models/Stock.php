@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     use HasFactory;
+
+    public function tsatuan()
+    {
+        return $this->hasMany(Tsatuan::class, "bara", "bara");
+    }
 }

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Dep;
+use App\Models\Div;
 use App\Models\Gudang;
 use App\Models\Satuan;
 use App\Models\Sdep;
+use App\Models\Stock;
+use App\Models\Supp;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -221,10 +224,24 @@ class BackendController extends BaseController
 
     public function masterStock()
     {
-        $datas = Sdep::paginate(10);
+        $div = Div::orderBy("kode", "ASC")->get();
+        $dep = Dep::orderBy("kode", "ASC")->get();
+        $sdep = Sdep::orderBy("kode", "ASC")->get();
+        $satuan = Satuan::all();
+        $supp = Supp::all();
         return Inertia::render("Backend/Xfile/MasterStock", [
-            "datas" => $datas
+            "div" => $div,
+            "dep" => $dep,
+            "sdep" => $sdep,
+            "satuan" => $satuan,
+            "supp" => $supp,
         ]);
+    }
+    
+    public function getStockByBara(Request $request)
+    {
+        $data = Stock::where("bara", $request->bara)->with(['tsatuan'])->first();
+        return $this->sendResponse($data, "data stock");
     }
 
     public function supplier()
