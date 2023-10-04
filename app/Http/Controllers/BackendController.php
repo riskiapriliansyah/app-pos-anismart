@@ -240,7 +240,7 @@ class BackendController extends BaseController
     
     public function getStockByBara(Request $request)
     {
-        $data = Stock::where("bara", $request->bara)->with(['tsatuan'])->first();
+        $data = Stock::where("bara", $request->bara)->with(['tsatuan', 'tbara' => function($q){$q->with(['gudang']);}])->first();
         return $this->sendResponse($data, "data stock");
     }
 

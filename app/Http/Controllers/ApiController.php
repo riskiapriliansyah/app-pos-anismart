@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cust;
+use App\Models\Dep;
 use App\Models\Gjual;
 use App\Models\Gudang;
 use App\Models\Kbara;
@@ -20,6 +21,13 @@ class ApiController extends BaseController
         $data = Sisj::first();
         return $this->sendResponse($data, "data sisj");
     }
+
+    public function getDepByDiv(Request $request)
+    {
+        $datas = Dep::where("div", $request->div)->get();
+        return $this->sendResponse($datas, "Data dep");
+    }
+
     public function getStock(Request $request)
     {
         if ($request->searchBy == "*") {
@@ -32,6 +40,10 @@ class ApiController extends BaseController
         }
         if ($request->searchBy == "bara1") {
             $datas = Stock::where("bara1", "LIKE", "%{$request->kode}%")->take(10)->get();
+            return $this->sendResponse($datas, "data stock");
+        }
+        if ($request->searchBy == "bara") {
+            $datas = Stock::where("bara", "LIKE", "%{$request->kode}%")->take(10)->get();
             return $this->sendResponse($datas, "data stock");
         }
     }

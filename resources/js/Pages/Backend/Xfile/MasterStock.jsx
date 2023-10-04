@@ -12,11 +12,12 @@ function classNames(...classes) {
 
 export default function MasterStockPage(props) {
     const [isLoading, setIsLoading] = useState(false);
+    const [isEnabled, setIsEnabled] = useState(true);
     const [aktif, setAktif] = useState(false);
     const [bkp, setBkp] = useState(false);
     const [kodeSearch, setKodeSearch] = useState("");
     const [dataStock, setDataStock] = useState([]);
-    const [searchBy, setSearchBy] = useState("bara1");
+    const [searchBy, setSearchBy] = useState("bara");
     const [dataForm, setDataForm] = useState({
         bara: "",
         bara1: "",
@@ -46,8 +47,10 @@ export default function MasterStockPage(props) {
         dbest1: "",
         hbest: "",
     });
-    
-    const [tsatuan, setTsatuan] = useState([])
+
+    const [tsatuan, setTsatuan] = useState([]);
+    const [tbara, setTbara] = useState([]);
+    const [deps, setDeps] = useState([]);
 
     let [categories] = useState({
         "Harga dan Promo": [
@@ -143,39 +146,58 @@ export default function MasterStockPage(props) {
         await axios
             .get(route("getStockByBara", data))
             .then((res) => {
-                dataForm.bara = res.data.data.bara
-                dataForm.bara1 = res.data.data.bara1
-                dataForm.nama = res.data.data.nama
-                dataForm.div = res.data.data.div
-                dataForm.dep = res.data.data.dep
-                dataForm.sdep = res.data.data.sdep
-                dataForm.satuan = res.data.data.satuan
-                dataForm.kode = res.data.data.kode
-                dataForm.hbeli = res.data.data.hbeli
-                dataForm.haver = res.data.data.haver
-                dataForm.hjual = res.data.data.hjual
-                dataForm.margin = res.data.data.margin
-                dataForm.hjualg = res.data.data.hjualg
-                dataForm.marging = res.data.data.marging
-                dataForm.hjualm = res.data.data.hjualm
-                dataForm.marginm = res.data.data.marginm
-                dataForm.hjualk1 = res.data.data.hjualk1
-                dataForm.hjualk2 = res.data.data.hjualk2
-                dataForm.best1 = res.data.data.best1
-                dataForm.best2 = res.data.data.best2
-                dataForm.dbest = res.data.data.dbest
-                dataForm.hbest = res.data.data.hbest
-                setTsatuan(res.data.data.tsatuan)
-                res.data.data.aktif === "T" ? setAktif(true) : setAktif(false)
-                res.data.data.ltax === "T" ? setBkp(true) : setBkp(false)
+                dataForm.bara = res.data.data.bara;
+                dataForm.bara1 = res.data.data.bara1;
+                dataForm.nama = res.data.data.nama;
+                dataForm.div = res.data.data.div;
+                dataForm.dep = res.data.data.dep;
+                dataForm.sdep = res.data.data.sdep;
+                dataForm.satuan = res.data.data.satuan;
+                dataForm.kode = res.data.data.kode;
+                dataForm.hbeli = res.data.data.hbeli;
+                dataForm.haver = res.data.data.haver;
+                dataForm.hjual = res.data.data.hjual;
+                dataForm.margin = res.data.data.margin;
+                dataForm.hjualg = res.data.data.hjualg;
+                dataForm.marging = res.data.data.marging;
+                dataForm.hjualm = res.data.data.hjualm;
+                dataForm.marginm = res.data.data.marginm;
+                dataForm.hjualk1 = res.data.data.hjualk1;
+                dataForm.hjualk2 = res.data.data.hjualk2;
+                dataForm.best1 = res.data.data.best1;
+                dataForm.best2 = res.data.data.best2;
+                dataForm.dbest = res.data.data.dbest;
+                dataForm.hbest = res.data.data.hbest;
+                setTsatuan(res.data.data.tsatuan);
+                setTbara(res.data.data.tbara);
+                res.data.data.aktif === "T" ? setAktif(true) : setAktif(false);
+                res.data.data.ltax === "T" ? setBkp(true) : setBkp(false);
                 // setDataForm(dataForm)
-                xForceRender()
+                xForceRender();
             })
             .catch((err) => {
                 if (err.response.status === 404) {
                     Swal.fire("Gagal", err.response.data.message, "error");
                 }
             });
+    };
+
+    const getDepByDiv = async (div) => {
+        setIsLoading(true);
+        const data = {
+            div: div,
+        };
+        await axios
+            .get(route("api.getDepByDiv", data))
+            .then((res) => {
+                setDeps(res.data.data);
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+        setIsLoading(false);
     };
 
     const [forceRender, setForceRender] = useState(false);
@@ -190,34 +212,60 @@ export default function MasterStockPage(props) {
                 <div className="overflow-x-auto">
                     <div className="card bg-base-100 mb-2">
                         <div className="card-body">
+                            <div className="flex flex-row gap-1">
+                                <button className="btn btn-primary btn-sm">
+                                    Baru
+                                </button>
+                                <button className="btn btn-error btn-sm">
+                                    Batal
+                                </button>
+                            </div>
                             <div className="grid grid-cols-2 gap-1">
                                 <div className="grid grid-cols-2 gap-2">
                                     <button
                                         className="btn btn-ghost btn-xs"
                                         onClick={() => {
                                             window.my_modal_1_stock.showModal();
+                                            setSearchBy("bara");
                                             getStock();
                                         }}
                                     >
                                         Kode Stock
                                     </button>
                                     <input
+                                        disabled={isEnabled}
                                         type="text"
                                         className="input input-bordered input-xs"
                                         value={dataForm.bara}
                                     />
-                                    <button className="btn btn-ghost btn-xs">
+                                    <button
+                                        className="btn btn-ghost btn-xs"
+                                        onClick={() => {
+                                            window.my_modal_1_stock.showModal();
+                                            setSearchBy("bara1");
+                                            getStock();
+                                        }}
+                                    >
                                         Barcode
                                     </button>
                                     <input
+                                        disabled={isEnabled}
                                         type="text"
                                         className="input input-bordered input-xs"
                                         value={dataForm.bara1}
                                     />
-                                    <button className="btn btn-ghost btn-xs">
+                                    <button
+                                        className="btn btn-ghost btn-xs"
+                                        onClick={() => {
+                                            window.my_modal_1_stock.showModal();
+                                            setSearchBy("nama");
+                                            getStock();
+                                        }}
+                                    >
                                         Nama Barang
                                     </button>
                                     <input
+                                        disabled={isEnabled}
                                         type="text"
                                         className="input input-bordered input-xs"
                                         value={dataForm.nama}
@@ -229,10 +277,15 @@ export default function MasterStockPage(props) {
                                         type="text"
                                         className="select select-bordered select-xs"
                                         value={dataForm.div}
+                                        onChange={(e) =>
+                                            getDepByDiv(e.target.value)
+                                        }
                                     >
                                         <option value="">Pilih</option>
-                                        {props.div.map((d,index) => (
-                                            <option value={d.kode}>{d.ket}</option>
+                                        {props.div.map((d, index) => (
+                                            <option value={d.kode}>
+                                                {d.ket}
+                                            </option>
                                         ))}
                                     </select>
                                     <button className="btn btn-ghost btn-xs">
@@ -244,8 +297,10 @@ export default function MasterStockPage(props) {
                                         value={dataForm.dep}
                                     >
                                         <option value="">Pilih</option>
-                                        {props.dep.map((d,index) => (
-                                            <option value={d.kode}>{d.ket}</option>
+                                        {deps.map((d, index) => (
+                                            <option value={d.kode}>
+                                                {d.ket}
+                                            </option>
                                         ))}
                                     </select>
                                     <button className="btn btn-ghost btn-xs">
@@ -257,8 +312,10 @@ export default function MasterStockPage(props) {
                                         value={dataForm.sdep}
                                     >
                                         <option value="">Pilih</option>
-                                        {props.sdep.map((d,index) => (
-                                            <option value={d.kode}>{d.ket}</option>
+                                        {props.sdep.map((d, index) => (
+                                            <option value={d.kode}>
+                                                {d.ket}
+                                            </option>
                                         ))}
                                     </select>
                                     <button className="btn btn-ghost btn-xs">
@@ -285,8 +342,10 @@ export default function MasterStockPage(props) {
                                         value={dataForm.kode}
                                     >
                                         <option value="">Pilih</option>
-                                        {props.supp.map((d,index) => (
-                                            <option value={d.kode}>{d.nama}</option>
+                                        {props.supp.map((d, index) => (
+                                            <option value={d.kode}>
+                                                {d.nama}
+                                            </option>
                                         ))}
                                     </select>
                                 </div>
@@ -400,9 +459,14 @@ export default function MasterStockPage(props) {
                                                                     Harga Beli
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.hbeli}
+                                                                    value={
+                                                                        dataForm.hbeli
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -410,9 +474,14 @@ export default function MasterStockPage(props) {
                                                                     Harga Pokok
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.haver}
+                                                                    value={
+                                                                        dataForm.haver
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -421,9 +490,14 @@ export default function MasterStockPage(props) {
                                                                     Eceran
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.margin}
+                                                                    value={
+                                                                        dataForm.margin
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -432,9 +506,14 @@ export default function MasterStockPage(props) {
                                                                     Eceran
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.hjual}
+                                                                    value={
+                                                                        dataForm.hjual
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -443,9 +522,14 @@ export default function MasterStockPage(props) {
                                                                     Grosir
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.marging}
+                                                                    value={
+                                                                        dataForm.marging
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -454,9 +538,14 @@ export default function MasterStockPage(props) {
                                                                     Grosir
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.hjualg}
+                                                                    value={
+                                                                        dataForm.hjualg
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -465,9 +554,14 @@ export default function MasterStockPage(props) {
                                                                     Anggota
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.marginm}
+                                                                    value={
+                                                                        dataForm.marginm
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -476,9 +570,14 @@ export default function MasterStockPage(props) {
                                                                     Anggota
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.hjualm}
+                                                                    value={
+                                                                        dataForm.hjualm
+                                                                    }
                                                                 />
                                                             </div>
                                                         </div>
@@ -489,9 +588,14 @@ export default function MasterStockPage(props) {
                                                                     #1
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.hjualk1}
+                                                                    value={
+                                                                        dataForm.hjualk1
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -500,9 +604,14 @@ export default function MasterStockPage(props) {
                                                                     #2
                                                                 </label>
                                                                 <input
+                                                                    disabled={
+                                                                        isEnabled
+                                                                    }
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
-                                                                    value={dataForm.hjualk2}
+                                                                    value={
+                                                                        dataForm.hjualk2
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -517,7 +626,10 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="date"
                                                                                 className="input input-bordered input-xs text-7pt"
-                                                                                value={dataForm.best1}
+                                                                                value={
+                                                                                    dataForm.best1
+                                                                                }
+                                                                                readOnly
                                                                             />
                                                                             <span>
                                                                                 s/d
@@ -525,7 +637,10 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="date"
                                                                                 className="input input-bordered input-xs text-7pt"
-                                                                                value={dataForm.best2}
+                                                                                value={
+                                                                                    dataForm.best2
+                                                                                }
+                                                                                readOnly
                                                                             />
                                                                         </div>
                                                                         <div className="flex flex-row items-center gap-3 mt-3">
@@ -538,7 +653,10 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="text"
                                                                                 className="input input-bordered input-xs text-8pt"
-                                                                                value={dataForm.dbest}
+                                                                                value={
+                                                                                    dataForm.dbest
+                                                                                }
+                                                                                readOnly
                                                                             />
                                                                         </div>
                                                                         <div className="flex flex-row items-center gap-3">
@@ -553,7 +671,10 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="text"
                                                                                 className="input input-bordered input-xs text-8pt"
-                                                                                value={dataForm.hbest}
+                                                                                value={
+                                                                                    dataForm.hbest
+                                                                                }
+                                                                                readOnly
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -589,17 +710,42 @@ export default function MasterStockPage(props) {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        TOKO
-                                                                        APOLLO
-                                                                        P.BATUR
-                                                                    </td>
-                                                                    <td>0</td>
-                                                                    <td>4</td>
-                                                                    <td>4</td>
-                                                                    <td>0</td>
-                                                                </tr>
+                                                                {tbara.map(
+                                                                    (
+                                                                        d,
+                                                                        index
+                                                                    ) => (
+                                                                        <tr>
+                                                                            <td>
+                                                                                {
+                                                                                    d
+                                                                                        .gudang
+                                                                                        .ket
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.awal
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.masuk
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.keluar
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.saldo
+                                                                                }
+                                                                            </td>
+                                                                        </tr>
+                                                                    )
+                                                                )}
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -767,18 +913,55 @@ export default function MasterStockPage(props) {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {tsatuan.map((d,index) => (
-                                                                    <tr>
-                                                                        <td>{d.bara1}</td>
-                                                                        <td>{d.satuan}</td>
-                                                                        <td>{d.qty}</td>
-                                                                        <td>{d.hjual}</td>
-                                                                        <td>{d.hjualg}</td>
-                                                                        <td>{d.hjualm}</td>
-                                                                        <td>{d.hjualk1}</td>
-                                                                        <td>{d.hjualk2}</td>
-                                                                    </tr>
-                                                                ))}
+                                                                {tsatuan.map(
+                                                                    (
+                                                                        d,
+                                                                        index
+                                                                    ) => (
+                                                                        <tr>
+                                                                            <td>
+                                                                                {
+                                                                                    d.bara1
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.satuan
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.qty
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.hjual
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.hjualg
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.hjualm
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.hjualk1
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                {
+                                                                                    d.hjualk2
+                                                                                }
+                                                                            </td>
+                                                                        </tr>
+                                                                    )
+                                                                )}
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -808,6 +991,7 @@ export default function MasterStockPage(props) {
                                         setSearchBy(e.target.value)
                                     }
                                 >
+                                    <option value="bara">Kode Stock</option>
                                     <option value="bara1">Barcode</option>
                                     <option value="nama">Nama</option>
                                 </select>
@@ -843,7 +1027,9 @@ export default function MasterStockPage(props) {
                                             <td>
                                                 <button
                                                     className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
-                                                    onClick={() => getStockByBara(d.bara)}
+                                                    onClick={() =>
+                                                        getStockByBara(d.bara)
+                                                    }
                                                 >
                                                     Pilih
                                                 </button>

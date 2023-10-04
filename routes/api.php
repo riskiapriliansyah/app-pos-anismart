@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("getSisj", [ApiController::class, "getSisj"])->name("api.getSisj");
 Route::get("getGudang", [ApiController::class, "getGudang"])->name("api.getGudang");
+Route::get("getDepByDiv", [ApiController::class, "getDepByDiv"])->name("api.getDepByDiv");
 Route::get("getStock", [ApiController::class, "getStock"])->name("api.getStock");
 Route::get("getStockByBara", [ApiController::class, "getStockByBara"])->name("api.getStockByBara");
 Route::get("getSupplier", [ApiController::class, "getSupplier"])->name("api.getSupplier");
