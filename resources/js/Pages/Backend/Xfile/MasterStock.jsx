@@ -32,7 +32,7 @@ export default function MasterStockPage(props) {
         kodeSupp: "",
         supplier: "",
         hbeli: "",
-        aver: "",
+        haver: "",
         margin: "",
         hjual: "",
         marging: "",
@@ -172,7 +172,6 @@ export default function MasterStockPage(props) {
                 setTbara(res.data.data.tbara);
                 res.data.data.aktif === "T" ? setAktif(true) : setAktif(false);
                 res.data.data.ltax === "T" ? setBkp(true) : setBkp(false);
-                // setDataForm(dataForm)
                 xForceRender();
             })
             .catch((err) => {
@@ -205,6 +204,81 @@ export default function MasterStockPage(props) {
         setForceRender(!forceRender);
     };
 
+    const inputHandle = (e) => {
+        dataForm[e.target.name] = e.target.value
+        xForceRender()
+    }
+
+    const baru = () => {
+        setDataForm({
+            bara: "",
+            bara1: "",
+            nama: "",
+            div: "",
+            ndiv: "",
+            dep: "",
+            ndep: "",
+            sdep: "",
+            nsdep: "",
+            satuan: "",
+            kodeSupp: "",
+            supplier: "",
+            hbeli: "",
+            haver: "",
+            margin: "",
+            hjual: "",
+            marging: "",
+            hjualg: "",
+            marginm: "",
+            hjualm: "",
+            hjualk1: "",
+            hjualk2: "",
+            best1: "",
+            best2: "",
+            dbest: "",
+            dbest1: "",
+            hbest: "",
+        });
+        setTsatuan([]);
+        setTbara([]);
+        setIsEnabled(false);
+    };
+
+    const batal = () => {
+        setDataForm({
+            bara: "",
+            bara1: "",
+            nama: "",
+            div: "",
+            ndiv: "",
+            dep: "",
+            ndep: "",
+            sdep: "",
+            nsdep: "",
+            satuan: "",
+            kode: "",
+            supplier: "",
+            hbeli: "",
+            haver: "",
+            margin: "",
+            hjual: "",
+            marging: "",
+            hjualg: "",
+            marginm: "",
+            hjualm: "",
+            hjualk1: "",
+            hjualk2: "",
+            best1: "",
+            best2: "",
+            dbest: "",
+            dbest1: "",
+            hbest: "",
+        });
+        setTsatuan([]);
+        setTbara([]);
+        setIsEnabled(true);
+    };
+
     return (
         <>
             {isLoading && <Loading />}
@@ -213,12 +287,26 @@ export default function MasterStockPage(props) {
                     <div className="card bg-base-100 mb-2">
                         <div className="card-body">
                             <div className="flex flex-row gap-1">
-                                <button className="btn btn-primary btn-sm">
+                                <button
+                                    className="btn btn-primary btn-sm"
+                                    onClick={baru}
+                                >
                                     Baru
                                 </button>
-                                <button className="btn btn-error btn-sm">
+                                <button
+                                    className="btn btn-error btn-sm"
+                                    onClick={() => batal()}
+                                >
                                     Batal
                                 </button>
+                                {dataForm.bara && (
+                                    <button
+                                        className="btn btn-warning btn-sm"
+                                        onClick={() => setIsEnabled(false)}
+                                    >
+                                        Edit
+                                    </button>
+                                )}
                             </div>
                             <div className="grid grid-cols-2 gap-1">
                                 <div className="grid grid-cols-2 gap-2">
@@ -235,8 +323,10 @@ export default function MasterStockPage(props) {
                                     <input
                                         disabled={isEnabled}
                                         type="text"
+                                        name="bara"
                                         className="input input-bordered input-xs"
                                         value={dataForm.bara}
+                                        onChange={(e) => inputHandle(e) }
                                     />
                                     <button
                                         className="btn btn-ghost btn-xs"
@@ -251,6 +341,7 @@ export default function MasterStockPage(props) {
                                     <input
                                         disabled={isEnabled}
                                         type="text"
+                                        name="bara1"
                                         className="input input-bordered input-xs"
                                         value={dataForm.bara1}
                                     />
@@ -267,6 +358,7 @@ export default function MasterStockPage(props) {
                                     <input
                                         disabled={isEnabled}
                                         type="text"
+                                        name="nama"
                                         className="input input-bordered input-xs"
                                         value={dataForm.nama}
                                     />
@@ -277,6 +369,7 @@ export default function MasterStockPage(props) {
                                         type="text"
                                         className="select select-bordered select-xs"
                                         value={dataForm.div}
+                                        name="div"
                                         onChange={(e) =>
                                             getDepByDiv(e.target.value)
                                         }
@@ -293,6 +386,7 @@ export default function MasterStockPage(props) {
                                     </button>
                                     <select
                                         type="text"
+                                        name="dep"
                                         className="select select-bordered select-xs"
                                         value={dataForm.dep}
                                     >
@@ -309,6 +403,7 @@ export default function MasterStockPage(props) {
                                     <select
                                         type="text"
                                         className="select select-bordered select-xs"
+                                        name="sdep"
                                         value={dataForm.sdep}
                                     >
                                         <option value="">Pilih</option>
@@ -324,6 +419,7 @@ export default function MasterStockPage(props) {
                                     <select
                                         type="text"
                                         className="select select-bordered select-xs"
+                                        name="satuan"
                                         value={dataForm.satuan}
                                     >
                                         <option value="">Pilih</option>
@@ -339,6 +435,7 @@ export default function MasterStockPage(props) {
                                     <select
                                         type="text"
                                         className="select select-bordered select-xs"
+                                        name="kode"
                                         value={dataForm.kode}
                                     >
                                         <option value="">Pilih</option>
@@ -463,6 +560,7 @@ export default function MasterStockPage(props) {
                                                                         isEnabled
                                                                     }
                                                                     type="text"
+                                                                    name="hbeli"
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.hbeli
@@ -477,6 +575,7 @@ export default function MasterStockPage(props) {
                                                                     disabled={
                                                                         isEnabled
                                                                     }
+                                                                    name="haver"
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
                                                                     value={
@@ -494,6 +593,7 @@ export default function MasterStockPage(props) {
                                                                         isEnabled
                                                                     }
                                                                     type="text"
+                                                                    name="margin"
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.margin
@@ -509,6 +609,7 @@ export default function MasterStockPage(props) {
                                                                     disabled={
                                                                         isEnabled
                                                                     }
+                                                                    name="hjual"
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
                                                                     value={
@@ -525,6 +626,7 @@ export default function MasterStockPage(props) {
                                                                     disabled={
                                                                         isEnabled
                                                                     }
+                                                                    name="marging"
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
                                                                     value={
@@ -541,6 +643,7 @@ export default function MasterStockPage(props) {
                                                                     disabled={
                                                                         isEnabled
                                                                     }
+                                                                    name="hjualg"
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
                                                                     value={
@@ -558,6 +661,7 @@ export default function MasterStockPage(props) {
                                                                         isEnabled
                                                                     }
                                                                     type="text"
+                                                                    name="marginm"
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.marginm
@@ -573,6 +677,7 @@ export default function MasterStockPage(props) {
                                                                     disabled={
                                                                         isEnabled
                                                                     }
+                                                                    name="hjualm"
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
                                                                     value={
@@ -592,6 +697,7 @@ export default function MasterStockPage(props) {
                                                                         isEnabled
                                                                     }
                                                                     type="text"
+                                                                    name="hjualk1"
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.hjualk1
@@ -607,6 +713,7 @@ export default function MasterStockPage(props) {
                                                                     disabled={
                                                                         isEnabled
                                                                     }
+                                                                    name="hjualk2"
                                                                     type="text"
                                                                     className="input input-bordered input-xs"
                                                                     value={
@@ -626,6 +733,7 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="date"
                                                                                 className="input input-bordered input-xs text-7pt"
+                                                                                name="best1"
                                                                                 value={
                                                                                     dataForm.best1
                                                                                 }
@@ -637,6 +745,7 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="date"
                                                                                 className="input input-bordered input-xs text-7pt"
+                                                                                name="best2"
                                                                                 value={
                                                                                     dataForm.best2
                                                                                 }
@@ -653,6 +762,7 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="text"
                                                                                 className="input input-bordered input-xs text-8pt"
+                                                                                name="dbest"
                                                                                 value={
                                                                                     dataForm.dbest
                                                                                 }
@@ -671,6 +781,7 @@ export default function MasterStockPage(props) {
                                                                             <input
                                                                                 type="text"
                                                                                 className="input input-bordered input-xs text-8pt"
+                                                                                name="hbest"
                                                                                 value={
                                                                                     dataForm.hbest
                                                                                 }
