@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Dep extends Model
 {
     use HasFactory;
+
+    public function div()
+    {
+        return $this->belongsTo(Div::class, 'div', 'kode');
+    }
 }

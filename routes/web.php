@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::post("/satuan/update", [BackendController::class, 'updateSatuan'])->name('satuan.update');
 
     Route::get("/master-stock", [BackendController::class, 'masterStock'])->name('masterStock');
+    Route::post("/master-stock", [BackendController::class, 'storeStock'])->name('masterStock.store');
     Route::get("/getStockByBara", [BackendController::class, 'getStockByBara'])->name('getStockByBara');
     Route::get("/supplier", [BackendController::class, 'supplier'])->name('supplier');
     Route::get("/langganan", [BackendController::class, 'langganan'])->name('langganan');

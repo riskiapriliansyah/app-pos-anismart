@@ -27,7 +27,7 @@ export default function Sidebar(props) {
                 <li>
                     <Link
                         href="/admin/dashboard"
-                        className="flex items-center p-2 px-4 text-xs text-gray-600 hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 text-md text-gray-600 hover:bg-gray-700 hover:text-gray-200"
                     >
                         <AiOutlineHome size={20} />
                         <span className="flex-1 ml-3 whitespace-nowrap">
@@ -38,7 +38,7 @@ export default function Sidebar(props) {
                 <li>
                     <button
                         type="button"
-                        className="flex items-center p-2 px-4 w-full text-xs text-gray-600 group hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 w-full text-md text-gray-600 group hover:bg-gray-700 hover:text-gray-200"
                         aria-controls="dropdown-example"
                         data-collapse-toggle="dropdown-example"
                         onClick={() =>
@@ -69,7 +69,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/dep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Departemen
                             </Link>
@@ -77,7 +77,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/sdep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Sub Departemen
                             </Link>
@@ -85,7 +85,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/area"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Area
                             </Link>
@@ -93,7 +93,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/gudang"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Gudang
                             </Link>
@@ -101,7 +101,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/satuan"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Satuan
                             </Link>
@@ -110,7 +110,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/master-stock"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Master Stock
                             </Link>
@@ -118,7 +118,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/supplier"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Supplier
                             </Link>
@@ -126,7 +126,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/langganan"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Langganan
                             </Link>
@@ -135,7 +135,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/formula-paket"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Formula Paket
                             </Link>
@@ -143,7 +143,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/best-buy"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Best Buy
                             </Link>
@@ -153,7 +153,7 @@ export default function Sidebar(props) {
                 <li>
                     <button
                         type="button"
-                        className="flex items-center p-2 px-4 w-full text-xs text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 w-full text-md text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
                         aria-controls="dropdown-example"
                         data-collapse-toggle="dropdown-example"
                         onClick={() =>
@@ -186,7 +186,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -220,7 +220,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/pr"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Purchase Request (PR)
                                     </Link>
@@ -228,7 +228,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/po"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Purchase Order (PO)
                                     </Link>
@@ -236,7 +236,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/beli"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Pembelian
                                     </Link>
@@ -244,7 +244,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/retur"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Pembelian
                                     </Link>
@@ -254,7 +254,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -286,7 +286,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Kredit Nota
                                     </Link>
@@ -294,7 +294,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Debet Nota
                                     </Link>
@@ -304,7 +304,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -338,7 +338,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Tanpa Faktur
                                     </Link>
@@ -346,7 +346,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Banyak Faktur
                                     </Link>
@@ -354,7 +354,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Seluruh Faktur
                                     </Link>
@@ -364,7 +364,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/dep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Giro Keluar
                             </Link>
@@ -373,7 +373,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -407,7 +407,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/penjualan/penjualan-nota"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Penjualan Nota
                                     </Link>
@@ -417,7 +417,7 @@ export default function Sidebar(props) {
                                         href={route(
                                             "transaksi.penjualan.returPenjualanNota"
                                         )}
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Penjualan
                                     </Link>
@@ -427,7 +427,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -461,7 +461,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Tanpa Faktur
                                     </Link>
@@ -469,7 +469,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Banyak Faktur
                                     </Link>
@@ -477,7 +477,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Seluruh Faktur
                                     </Link>
@@ -487,7 +487,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/sdep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Giro Masuk
                             </Link>
@@ -496,7 +496,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href={route('transaksi.penjualan.transferBarang')}
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Transfer Barang
                             </Link>
@@ -504,7 +504,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -538,7 +538,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Sampling Opname
                                     </Link>
@@ -546,7 +546,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Total Opname
                                     </Link>
@@ -556,7 +556,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/gudang"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Paket
                             </Link>
@@ -587,7 +587,7 @@ export default function Sidebar(props) {
                 <li>
                     <Link
                         href="/admin/dashboard"
-                        className="flex items-center p-2 px-4 text-xs text-gray-600 hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 text-md text-gray-600 hover:bg-gray-700 hover:text-gray-200"
                     >
                         <AiOutlineHome size={20} />
                         <span className="flex-1 ml-3 whitespace-nowrap">
@@ -598,7 +598,7 @@ export default function Sidebar(props) {
                 <li>
                     <button
                         type="button"
-                        className="flex items-center p-2 px-4 w-full text-xs text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 w-full text-md text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
                         aria-controls="dropdown-example"
                         data-collapse-toggle="dropdown-example"
                         onClick={() =>
@@ -629,7 +629,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/dep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Departemen
                             </Link>
@@ -637,7 +637,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/sdep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Sub Departemen
                             </Link>
@@ -645,7 +645,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/area"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Area
                             </Link>
@@ -653,7 +653,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/gudang"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Gudang
                             </Link>
@@ -661,7 +661,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/satuan"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Satuan
                             </Link>
@@ -670,7 +670,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/master-stock"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Master Stock
                             </Link>
@@ -678,7 +678,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/supplier"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Supplier
                             </Link>
@@ -686,7 +686,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/langganan"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Langganan
                             </Link>
@@ -695,7 +695,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/formula-paket"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Formula Paket
                             </Link>
@@ -703,7 +703,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/best-buy"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Best Buy
                             </Link>
@@ -713,7 +713,7 @@ export default function Sidebar(props) {
                 <li>
                     <button
                         type="button"
-                        className="flex items-center p-2 px-4 w-full text-xs text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
+                        className="flex items-center p-2 px-4 w-full text-md text-gray-600 transition duration-75 group hover:bg-gray-700 hover:text-gray-200"
                         aria-controls="dropdown-example"
                         data-collapse-toggle="dropdown-example"
                         onClick={() =>
@@ -746,7 +746,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -780,7 +780,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/pr/approve"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Approve Purchase Request (PR)
                                     </Link>
@@ -788,7 +788,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/pr"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Purchase Request (PR)
                                     </Link>
@@ -796,7 +796,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/po"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Purchase Order (PO)
                                     </Link>
@@ -804,7 +804,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/beli"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Pembelian
                                     </Link>
@@ -812,7 +812,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/retur"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Pembelian
                                     </Link>
@@ -822,7 +822,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -854,7 +854,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Kredit Nota
                                     </Link>
@@ -862,7 +862,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Debet Nota
                                     </Link>
@@ -872,7 +872,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -906,7 +906,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Tanpa Faktur
                                     </Link>
@@ -914,7 +914,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Banyak Faktur
                                     </Link>
@@ -922,7 +922,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Seluruh Faktur
                                     </Link>
@@ -932,7 +932,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/dep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Giro Keluar
                             </Link>
@@ -941,7 +941,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -975,7 +975,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/transaksi/penjualan/penjualan-nota"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Penjualan Nota
                                     </Link>
@@ -985,7 +985,7 @@ export default function Sidebar(props) {
                                         href={route(
                                             "transaksi.penjualan.returPenjualanNota"
                                         )}
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Retur Penjualan
                                     </Link>
@@ -995,7 +995,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -1029,7 +1029,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Tanpa Faktur
                                     </Link>
@@ -1037,7 +1037,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Banyak Faktur
                                     </Link>
@@ -1045,7 +1045,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Seluruh Faktur
                                     </Link>
@@ -1055,7 +1055,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/sdep"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Giro Masuk
                             </Link>
@@ -1064,7 +1064,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href= {route('transaksi.penjualan.transferBarang')}
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Transfer Barang
                             </Link>
@@ -1072,7 +1072,7 @@ export default function Sidebar(props) {
                         <li>
                             <button
                                 type="button"
-                                className="flex items-center p-2 pl-11  w-full text-[7pt] text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                 aria-controls="dropdown-example"
                                 data-collapse-toggle="dropdown-example"
                                 onClick={() =>
@@ -1106,7 +1106,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Sampling Opname
                                     </Link>
@@ -1114,7 +1114,7 @@ export default function Sidebar(props) {
                                 <li>
                                     <Link
                                         href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-[7pt] text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Total Opname
                                     </Link>
@@ -1124,7 +1124,7 @@ export default function Sidebar(props) {
                         <li>
                             <Link
                                 href="/gudang"
-                                className="flex items-center p-2 pl-14 w-full text-[7pt] text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
+                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Paket
                             </Link>

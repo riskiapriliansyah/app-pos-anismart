@@ -9,6 +9,7 @@ use App\Models\Gudang;
 use App\Models\Kbara;
 use App\Models\Po;
 use App\Models\Pr;
+use App\Models\Sdep;
 use App\Models\Sisj;
 use App\Models\Stock;
 use App\Models\Supp;
@@ -26,6 +27,12 @@ class ApiController extends BaseController
     {
         $datas = Dep::where("div", $request->div)->get();
         return $this->sendResponse($datas, "Data dep");
+    }
+
+    public function getSdepByDep(Request $request)
+    {
+        $datas = Sdep::where("dep", $request->dep)->get();
+        return $this->sendResponse($datas, "Data sdep");
     }
 
     public function getStock(Request $request)

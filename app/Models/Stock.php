@@ -13,9 +13,14 @@ class Stock extends Model
     {
         return $this->hasMany(Tsatuan::class, "bara", "bara");
     }
-    
+
     public function tbara()
     {
         return $this->hasMany(Tbara::class, 'bara', 'bara');
+    }
+
+    public function dep()
+    {
+        return $this->belongsTo(Dep::class, 'dep', 'kode');
     }
 }

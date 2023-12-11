@@ -51,6 +51,7 @@ export default function MasterStockPage(props) {
     const [tsatuan, setTsatuan] = useState([]);
     const [tbara, setTbara] = useState([]);
     const [deps, setDeps] = useState([]);
+    const [sdeps, setSdeps] = useState([]);
 
     let [categories] = useState({
         "Harga dan Promo": [
@@ -149,8 +150,10 @@ export default function MasterStockPage(props) {
                 dataForm.bara = res.data.data.bara;
                 dataForm.bara1 = res.data.data.bara1;
                 dataForm.nama = res.data.data.nama;
-                dataForm.div = res.data.data.div;
-                dataForm.dep = res.data.data.dep;
+                dataForm.div = res.data.data.dep.div.kode;
+                getDepByDiv(res.data.data.dep.div.kode)
+                dataForm.dep = res.data.data.dep.kode;
+                getSdepByDep(res.data.data.dep.kode)
                 dataForm.sdep = res.data.data.sdep;
                 dataForm.satuan = res.data.data.satuan;
                 dataForm.kode = res.data.data.kode;
@@ -168,6 +171,8 @@ export default function MasterStockPage(props) {
                 dataForm.best2 = res.data.data.best2;
                 dataForm.dbest = res.data.data.dbest;
                 dataForm.hbest = res.data.data.hbest;
+                res.data.data.aktif === "T" ? setAktif(true) : setAktif(false)
+                res.data.data.ltax === "T" ? setBkp(true) : setBkp(false)
                 setTsatuan(res.data.data.tsatuan);
                 setTbara(res.data.data.tbara);
                 res.data.data.aktif === "T" ? setAktif(true) : setAktif(false);
@@ -199,12 +204,57 @@ export default function MasterStockPage(props) {
         setIsLoading(false);
     };
 
+    const getSdepByDep = async (dep) => {
+        setIsLoading(true);
+        const data = {
+            dep: dep,
+        };
+        await axios
+            .get(route("api.getSdepByDep", data))
+            .then((res) => {
+                setSdeps(res.data.data);
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+        setIsLoading(false);
+    };
+
     const [forceRender, setForceRender] = useState(false);
     const xForceRender = () => {
         setForceRender(!forceRender);
     };
 
     const inputHandle = (e) => {
+        if (e.target.name === "margin") {
+            let hbeli = dataForm.hbeli
+            dataForm.hjual = parseFloat(e.target.value / 100 * hbeli) + parseFloat(hbeli)
+        }
+        if (e.target.name === "hjual") {
+            let hbeli = dataForm.hbeli
+            let selisih = e.target.value - hbeli
+            dataForm.margin = parseFloat(selisih / hbeli) * 100
+        }
+        if (e.target.name === "marging") {
+            let hbeli = dataForm.hbeli
+            dataForm.hjualg = parseFloat(e.target.value / 100 * hbeli) + parseFloat(hbeli)
+        }
+        if (e.target.name === "hjualg") {
+            let hbeli = dataForm.hbeli
+            let selisih = e.target.value - hbeli
+            dataForm.marging = parseFloat(selisih / hbeli) * 100
+        }
+        if (e.target.name === "marginm") {
+            let hbeli = dataForm.hbeli
+            dataForm.hjualm = parseFloat(e.target.value / 100 * hbeli) + parseFloat(hbeli)
+        }
+        if (e.target.name === "hjualm") {
+            let hbeli = dataForm.hbeli
+            let selisih = e.target.value - hbeli
+            dataForm.marginm = parseFloat(selisih / hbeli) * 100
+        }
         dataForm[e.target.name] = e.target.value
         xForceRender()
     }
@@ -279,6 +329,37 @@ export default function MasterStockPage(props) {
         setIsEnabled(true);
     };
 
+    const storeStock = async () => {
+        const data = {
+            bara: dataForm.bara,
+            bara1: dataForm.bara1,
+            nama: dataForm.nama,
+            dep: dataForm.dep,
+            sdep: dataForm.sdep,
+            satuan: dataForm.satuan,
+            kode: dataForm.kode,
+            hbeli: dataForm.hbeli,
+            haver: dataForm.haver,
+            hjual: dataForm.hjual,
+            margin: dataForm.margin,
+            hjualg: dataForm.hjualg,
+            marging: dataForm.marging,
+            hjualm: dataForm.hjualm,
+            marginm: dataForm.marginm,
+            aktif: aktif,
+            hjualk1: dataForm.hjualk1,
+            hjualk2: dataForm.hjualk2,
+            ltax: bkp,
+        }
+        await axios.post(route("masterStock.store"), data).then((res) => {
+            Swal.fire("Berhasil disimpan", err.response.data.message, "success");
+        }).catch((err) => {
+            if (err.response.status === 404) {
+                Swal.fire("Gagal", err.response.data.message, "error");
+            }
+        })
+    }
+
     return (
         <>
             {isLoading && <Loading />}
@@ -300,12 +381,24 @@ export default function MasterStockPage(props) {
                                     Batal
                                 </button>
                                 {dataForm.bara && (
-                                    <button
-                                        className="btn btn-warning btn-sm"
-                                        onClick={() => setIsEnabled(false)}
-                                    >
-                                        Edit
-                                    </button>
+                                    <>
+                                        <button
+                                            className="btn btn-warning btn-sm"
+                                            onClick={() => setIsEnabled(false)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="btn btn-accent btn-sm"
+                                            onClick={() => {
+                                                setIsEnabled(false);
+                                                storeStock()
+                                            }}
+                                        >
+                                            Simpan
+                                        </button>
+
+                                    </>
                                 )}
                             </div>
                             <div className="grid grid-cols-2 gap-1">
@@ -326,7 +419,7 @@ export default function MasterStockPage(props) {
                                         name="bara"
                                         className="input input-bordered input-xs"
                                         value={dataForm.bara}
-                                        onChange={(e) => inputHandle(e) }
+                                        onChange={(e) => inputHandle(e)}
                                     />
                                     <button
                                         className="btn btn-ghost btn-xs"
@@ -344,6 +437,7 @@ export default function MasterStockPage(props) {
                                         name="bara1"
                                         className="input input-bordered input-xs"
                                         value={dataForm.bara1}
+                                        onChange={(e) => inputHandle(e)}
                                     />
                                     <button
                                         className="btn btn-ghost btn-xs"
@@ -361,6 +455,7 @@ export default function MasterStockPage(props) {
                                         name="nama"
                                         className="input input-bordered input-xs"
                                         value={dataForm.nama}
+                                        onChange={(e) => inputHandle(e)}
                                     />
                                     <button className="btn btn-ghost btn-xs">
                                         Divisi
@@ -370,9 +465,12 @@ export default function MasterStockPage(props) {
                                         className="select select-bordered select-xs"
                                         value={dataForm.div}
                                         name="div"
-                                        onChange={(e) =>
-                                            getDepByDiv(e.target.value)
+                                        onChange={(e) => {
+                                            getDepByDiv(e.target.value);
+                                            inputHandle(e)
                                         }
+                                        }
+
                                     >
                                         <option value="">Pilih</option>
                                         {props.div.map((d, index) => (
@@ -389,6 +487,11 @@ export default function MasterStockPage(props) {
                                         name="dep"
                                         className="select select-bordered select-xs"
                                         value={dataForm.dep}
+                                        onChange={(e) => {
+                                            getSdepByDep(e.target.value);
+                                            inputHandle(e)
+                                        }
+                                        }
                                     >
                                         <option value="">Pilih</option>
                                         {deps.map((d, index) => (
@@ -405,9 +508,13 @@ export default function MasterStockPage(props) {
                                         className="select select-bordered select-xs"
                                         name="sdep"
                                         value={dataForm.sdep}
+                                        onChange={(e) => {
+                                            inputHandle(e)
+                                        }
+                                        }
                                     >
                                         <option value="">Pilih</option>
-                                        {props.sdep.map((d, index) => (
+                                        {sdeps.map((d, index) => (
                                             <option value={d.kode}>
                                                 {d.ket}
                                             </option>
@@ -421,6 +528,10 @@ export default function MasterStockPage(props) {
                                         className="select select-bordered select-xs"
                                         name="satuan"
                                         value={dataForm.satuan}
+                                        onChange={(e) => {
+                                            inputHandle(e)
+                                        }
+                                        }
                                     >
                                         <option value="">Pilih</option>
                                         {props.satuan.map((d, index) => (
@@ -437,6 +548,10 @@ export default function MasterStockPage(props) {
                                         className="select select-bordered select-xs"
                                         name="kode"
                                         value={dataForm.kode}
+                                        onChange={(e) => {
+                                            inputHandle(e)
+                                        }
+                                        }
                                     >
                                         <option value="">Pilih</option>
                                         {props.supp.map((d, index) => (
@@ -457,11 +572,10 @@ export default function MasterStockPage(props) {
                                         <Switch
                                             checked={aktif}
                                             onChange={setAktif}
-                                            className={`${
-                                                aktif
-                                                    ? "bg-teal-900"
-                                                    : "bg-teal-700"
-                                            }
+                                            className={`${aktif
+                                                ? "bg-teal-900"
+                                                : "bg-teal-700"
+                                                }
           relative inline-flex h-[24px] w-[64px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                                         >
                                             <span className="sr-only">
@@ -469,11 +583,10 @@ export default function MasterStockPage(props) {
                                             </span>
                                             <span
                                                 aria-hidden="true"
-                                                className={`${
-                                                    aktif
-                                                        ? "translate-x-9"
-                                                        : "translate-x-0"
-                                                }
+                                                className={`${aktif
+                                                    ? "translate-x-9"
+                                                    : "translate-x-0"
+                                                    }
             pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
                                             />
                                         </Switch>
@@ -494,11 +607,10 @@ export default function MasterStockPage(props) {
                                         <Switch
                                             checked={bkp}
                                             onChange={setBkp}
-                                            className={`${
-                                                bkp
-                                                    ? "bg-teal-900"
-                                                    : "bg-teal-700"
-                                            }
+                                            className={`${bkp
+                                                ? "bg-teal-900"
+                                                : "bg-teal-700"
+                                                }
           relative inline-flex h-[24px] w-[64px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                                         >
                                             <span className="sr-only">
@@ -506,11 +618,10 @@ export default function MasterStockPage(props) {
                                             </span>
                                             <span
                                                 aria-hidden="true"
-                                                className={`${
-                                                    bkp
-                                                        ? "translate-x-9"
-                                                        : "translate-x-0"
-                                                }
+                                                className={`${bkp
+                                                    ? "translate-x-9"
+                                                    : "translate-x-0"
+                                                    }
             pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
                                             />
                                         </Switch>
@@ -565,6 +676,10 @@ export default function MasterStockPage(props) {
                                                                     value={
                                                                         dataForm.hbeli
                                                                     }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -580,6 +695,10 @@ export default function MasterStockPage(props) {
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.haver
+                                                                    }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
                                                                     }
                                                                 />
                                                             </div>
@@ -598,6 +717,10 @@ export default function MasterStockPage(props) {
                                                                     value={
                                                                         dataForm.margin
                                                                     }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -614,6 +737,10 @@ export default function MasterStockPage(props) {
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.hjual
+                                                                    }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
                                                                     }
                                                                 />
                                                             </div>
@@ -632,6 +759,10 @@ export default function MasterStockPage(props) {
                                                                     value={
                                                                         dataForm.marging
                                                                     }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -648,6 +779,10 @@ export default function MasterStockPage(props) {
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.hjualg
+                                                                    }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
                                                                     }
                                                                 />
                                                             </div>
@@ -666,6 +801,10 @@ export default function MasterStockPage(props) {
                                                                     value={
                                                                         dataForm.marginm
                                                                     }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -682,6 +821,10 @@ export default function MasterStockPage(props) {
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.hjualm
+                                                                    }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
                                                                     }
                                                                 />
                                                             </div>
@@ -702,6 +845,10 @@ export default function MasterStockPage(props) {
                                                                     value={
                                                                         dataForm.hjualk1
                                                                     }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
+                                                                    }
                                                                 />
                                                             </div>
                                                             <div className="flex flex-row items-center gap-2">
@@ -718,6 +865,10 @@ export default function MasterStockPage(props) {
                                                                     className="input input-bordered input-xs"
                                                                     value={
                                                                         dataForm.hjualk2
+                                                                    }
+                                                                    onChange={(e) => {
+                                                                        inputHandle(e)
+                                                                    }
                                                                     }
                                                                 />
                                                             </div>
@@ -830,8 +981,8 @@ export default function MasterStockPage(props) {
                                                                             <td>
                                                                                 {
                                                                                     d
-                                                                                        .gudang
-                                                                                        .ket
+                                                                                        ?.gudang
+                                                                                        ?.ket
                                                                                 }
                                                                             </td>
                                                                             <td>
