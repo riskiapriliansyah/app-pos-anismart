@@ -352,7 +352,8 @@ export default function MasterStockPage(props) {
             ltax: bkp,
         }
         await axios.post(route("masterStock.store"), data).then((res) => {
-            Swal.fire("Berhasil disimpan", err.response.data.message, "success");
+            Swal.fire("Berhasil disimpan", "Berhasil Disimpan", "success");
+            batal()
         }).catch((err) => {
             if (err.response.status === 404) {
                 Swal.fire("Gagal", err.response.data.message, "error");
