@@ -48,6 +48,17 @@ export default function MasterStockPage(props) {
         hbest: "",
     });
 
+    const [dataFormTsatuan, setDataFormTsatuan] = useState({
+        bara1: "",
+        satuan: "",
+        qty: "",
+        hjual: "",
+        hjualg: "",
+        hjualm: "",
+        hjualk1: "",
+        hjualk2: "",
+    });
+
     const [tsatuan, setTsatuan] = useState([]);
     const [tbara, setTbara] = useState([]);
     const [deps, setDeps] = useState([]);
@@ -259,6 +270,11 @@ export default function MasterStockPage(props) {
         xForceRender()
     }
 
+    const inputHandleTsatuan = (e) => {
+        dataFormTsatuan[e.target.name] = e.target.value
+        xForceRender()
+    }
+
     const baru = () => {
         setDataForm({
             bara: "",
@@ -324,6 +340,17 @@ export default function MasterStockPage(props) {
             dbest1: "",
             hbest: "",
         });
+
+        setDataFormTsatuan({
+            bara1: "",
+            satuan: "",
+            qty: "",
+            hjual: "",
+            hjualg: "",
+            hjualm: "",
+            hjualk1: "",
+            hjualk2: "",
+        })
         setTsatuan([]);
         setTbara([]);
         setIsEnabled(true);
@@ -352,6 +379,27 @@ export default function MasterStockPage(props) {
             ltax: bkp,
         }
         await axios.post(route("masterStock.store"), data).then((res) => {
+            Swal.fire("Berhasil disimpan", "Berhasil Disimpan", "success");
+            batal()
+        }).catch((err) => {
+            if (err.response.status === 404) {
+                Swal.fire("Gagal", err.response.data.message, "error");
+            }
+        })
+    }
+
+    const storeTsatuanStock = async () => {
+        const data = {
+            bara: dataForm.bara,
+            bara1: dataFormTsatuan.bara1,
+            hjual: dataFormTsatuan.hjual,
+            satuan: dataFormTsatuan.satuan,
+            hjualg: dataFormTsatuan.hjualg,
+            hjualm: dataFormTsatuan.hjualm,
+            hjualk1: dataFormTsatuan.hjualk1,
+            hjualk2: dataFormTsatuan.hjualk2,
+        }
+        await axios.post(route("masterStock.tsatuan.store"), data).then((res) => {
             Swal.fire("Berhasil disimpan", "Berhasil Disimpan", "success");
             batal()
         }).catch((err) => {
@@ -1029,6 +1077,14 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="bara1"
+                                                                value={
+                                                                    dataFormTsatuan.bara1
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="flex flex-row items-center gap-3">
@@ -1041,6 +1097,14 @@ export default function MasterStockPage(props) {
                                                             <select
                                                                 type="text"
                                                                 className="select select-bordered select-xs text-8pt"
+                                                                name="satuan"
+                                                                value={
+                                                                    dataFormTsatuan.satuan
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             >
                                                                 <option value="">
                                                                     Pilih
@@ -1073,6 +1137,14 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="qty"
+                                                                value={
+                                                                    dataFormTsatuan.qty
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="flex flex-row items-center gap-3">
@@ -1085,6 +1157,14 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="hjual"
+                                                                value={
+                                                                    dataFormTsatuan.hjual
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="flex flex-row items-center gap-3">
@@ -1097,6 +1177,14 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="hjualg"
+                                                                value={
+                                                                    dataFormTsatuan.hjualg
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="flex flex-row items-center gap-3">
@@ -1109,6 +1197,14 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="hjualm"
+                                                                value={
+                                                                    dataFormTsatuan.hjualm
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="flex flex-row items-center gap-3">
@@ -1121,6 +1217,14 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="hjualk1"
+                                                                value={
+                                                                    dataFormTsatuan.hjualk1
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="flex flex-row items-center gap-3">
@@ -1133,11 +1237,19 @@ export default function MasterStockPage(props) {
                                                             <input
                                                                 type="text"
                                                                 className="input input-bordered input-xs text-8pt"
+                                                                name="hjualk2"
+                                                                value={
+                                                                    dataFormTsatuan.hjualk2
+                                                                }
+                                                                onChange={(e) => {
+                                                                    inputHandleTsatuan(e)
+                                                                }
+                                                                }
                                                             />
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-row items-center gap-1">
-                                                        <button className="btn btn-xs text-[7pt] btn-primary">
+                                                        <button className="btn btn-xs text-[7pt] btn-primary" onClick={storeTsatuanStock}>
                                                             Simpan
                                                         </button>
                                                         <button className="btn btn-xs text-[7pt] btn-error">

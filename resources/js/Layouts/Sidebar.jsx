@@ -62,9 +62,8 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${
-                            openSubMenuWebsite ? "hidden" : ""
-                        } transition duration-200 ease-in-out space-y-2 bg-base-100`}
+                        className={`${openSubMenuWebsite ? "hidden" : ""
+                            } transition duration-200 ease-in-out space-y-2 bg-base-100`}
                     >
                         <li>
                             <Link
@@ -179,9 +178,8 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${
-                            openSubMenuTransaksi ? "hidden" : ""
-                        } duration-300 space-y-2 bg-base-100`}
+                        className={`${openSubMenuTransaksi ? "hidden" : ""
+                            } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <button
@@ -213,11 +211,10 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPembelian ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPembelian ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
-                                <li>
+                                {/* <li>
                                     <Link
                                         href="/transaksi/pembelian/pr"
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
@@ -232,7 +229,7 @@ export default function Sidebar(props) {
                                     >
                                         Purchase Order (PO)
                                     </Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/beli"
@@ -279,9 +276,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuLainLain ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuLainLain ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -331,9 +327,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPelunasanHutang ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPelunasanHutang ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -400,9 +395,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPenjualan ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPenjualan ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -454,9 +448,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPembayaranPiutang ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPembayaranPiutang ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -531,9 +524,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPenyesuaianStock ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPenyesuaianStock ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -622,9 +614,8 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${
-                            openSubMenuWebsite ? "hidden" : ""
-                        } duration-300 space-y-2 bg-base-100`}
+                        className={`${openSubMenuWebsite ? "hidden" : ""
+                            } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <Link
@@ -739,9 +730,8 @@ export default function Sidebar(props) {
                     </button>
                     <ul
                         id="dropdown-example"
-                        className={`${
-                            openSubMenuTransaksi ? "hidden" : ""
-                        } duration-300 space-y-2 bg-base-100`}
+                        className={`${openSubMenuTransaksi ? "hidden" : ""
+                            } duration-300 space-y-2 bg-base-100`}
                     >
                         <li>
                             <button
@@ -773,11 +763,10 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPembelian ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPembelian ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
-                                <li>
+                                {/* <li>
                                     <Link
                                         href="/transaksi/pembelian/pr/approve"
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
@@ -800,7 +789,7 @@ export default function Sidebar(props) {
                                     >
                                         Purchase Order (PO)
                                     </Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link
                                         href="/transaksi/pembelian/beli"
@@ -847,9 +836,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuLainLain ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuLainLain ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -899,9 +887,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPelunasanHutang ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPelunasanHutang ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -968,9 +955,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPenjualan ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPenjualan ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -1022,9 +1008,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPembayaranPiutang ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPembayaranPiutang ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -1063,7 +1048,7 @@ export default function Sidebar(props) {
                         <div className="divider"></div>
                         <li>
                             <Link
-                                href= {route('transaksi.penjualan.transferBarang')}
+                                href={route('transaksi.penjualan.transferBarang')}
                                 className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Transfer Barang
@@ -1099,9 +1084,8 @@ export default function Sidebar(props) {
                             </button>
                             <ul
                                 id="dropdown-example"
-                                className={`${
-                                    openSubMenuPenyesuaianStock ? "hidden" : ""
-                                } duration-300 py-2 space-y-2`}
+                                className={`${openSubMenuPenyesuaianStock ? "hidden" : ""
+                                    } duration-300 py-2 space-y-2`}
                             >
                                 <li>
                                     <Link

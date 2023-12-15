@@ -60,10 +60,17 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
 
     Route::get("/master-stock", [BackendController::class, 'masterStock'])->name('masterStock');
     Route::post("/master-stock", [BackendController::class, 'storeStock'])->name('masterStock.store');
+    Route::post("/master-stock/tsatuan", [BackendController::class, 'storeTsatuanStock'])->name('masterStock.tsatuan.store');
     Route::get("/getStockByBara", [BackendController::class, 'getStockByBara'])->name('getStockByBara');
+
     Route::get("/supplier", [BackendController::class, 'supplier'])->name('supplier');
+    Route::post("/supplier", [BackendController::class, 'supplierStore'])->name('supplier.store');
+
     Route::get("/langganan", [BackendController::class, 'langganan'])->name('langganan');
+    Route::post("/langganan", [BackendController::class, 'langgananStore'])->name('langganan.store');
+
     Route::get("/formula-paket", [BackendController::class, 'formulaPaket'])->name('formulaPaket');
+
     Route::get("/best-buy", [BackendController::class, 'bestBuy'])->name('bestBuy');
 
     // =============================Transaksi===============

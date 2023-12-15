@@ -37,11 +37,11 @@ export default function BeliPage(props) {
                                     className="input input-bordered input-sm w-full text-xs my-2"
                                     placeholder="Search by Nota Beli"
                                     value={nota}
-                                    // onKeyPress={(e) => getPrSearch(e)}
+                                // onKeyPress={(e) => getPrSearch(e)}
                                 />
                             </div>
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-gray-100 text-sm">
                                     <tr>
                                         <th>Tanggal</th>
                                         <th>Nilai</th>
@@ -68,19 +68,19 @@ export default function BeliPage(props) {
                                                             "transaksi.pembelian.beli.show",
                                                             d.nota
                                                         )}
-                                                        className="btn btn-primary bg-blue-700 text-base-100 btn-xs btn-square"
+                                                        className="btn btn-primary bg-blue-700 text-base-100 btn-sm btn-square"
                                                         title="Show"
                                                     >
                                                         <AiFillEye />
                                                     </Link>
                                                     {d.status_beli === "0" && (
-                                                            <Link
-                                                                href=""
-                                                                className="btn btn-warning btn-xs text-[7pt]"
-                                                            >
-                                                                Buat Beli
-                                                            </Link>
-                                                        )}
+                                                        <Link
+                                                            href=""
+                                                            className="btn btn-warning btn-sm"
+                                                        >
+                                                            Buat Beli
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

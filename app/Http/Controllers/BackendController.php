@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Cust;
 use App\Models\Dep;
 use App\Models\Div;
 use App\Models\Gudang;
@@ -245,39 +246,44 @@ class BackendController extends BaseController
     {
         try {
             DB::beginTransaction();
-            $stock = new Stock;
-            $stock->bara = $request->bara;
-            $stock->bara1 = $request->bara1;
-            $stock->nama = $request->nama;
-            $stock->dep = $request->dep;
-            $stock->sdep = $request->sdep;
-            $stock->satuan = $request->satuan;
-            $stock->kode = $request->kode;
-            $stock->hbeli = $request->hbeli;
-            $stock->haver = $request->haver;
-            $stock->hjual = $request->hjual;
-            $stock->margin = $request->margin;
-            $stock->hjualg = $request->hjualg;
-            $stock->marging = $request->marging;
-            $stock->hjualm = $request->hjualm;
-            $stock->marginm = $request->marginm;
-            $stock->smin = 0;
-            $stock->smax = 0;
-            $stock->aktif = $request->aktif;
-            $stock->konsi = "F";
-            $stock->tetap = "T";
-            $stock->saldo = 0;
-            $stock->gambar = "-";
-            $stock->stock = "T";
-            $stock->tglp = Carbon::now(+8);
-            $stock->ltax = $request->ltax;
-            $stock->qorder = 0;
-            $stock->hjualk1 = $request->hjualk1;
-            $stock->hjualk2 = $request->hjualk2;
-            $stock->timbang = "F";
-            $stock->uharga = "F";
-            $stock->lvoc = "F";
-            $stock->save();
+            $stock = Stock::where("bara", $request->bara)->first();
+            if (!isset($stock)) {
+                $stock = new Stock;
+                $stock->bara = $request->bara;
+                $stock->bara1 = $request->bara1;
+                $stock->nama = $request->nama;
+                $stock->dep = $request->dep;
+                $stock->sdep = $request->sdep;
+                $stock->satuan = $request->satuan;
+                $stock->kode = $request->kode;
+                $stock->hbeli = $request->hbeli;
+                $stock->haver = $request->haver;
+                $stock->hjual = $request->hjual;
+                $stock->margin = $request->margin;
+                $stock->hjualg = $request->hjualg;
+                $stock->marging = $request->marging;
+                $stock->hjualm = $request->hjualm;
+                $stock->marginm = $request->marginm;
+                $stock->smin = 0;
+                $stock->smax = 0;
+                $stock->aktif = $request->aktif;
+                $stock->konsi = "F";
+                $stock->tetap = "T";
+                $stock->saldo = 0;
+                $stock->gambar = "-";
+                $stock->stock = "T";
+                $stock->tglp = Carbon::now(+8);
+                $stock->ltax = $request->ltax;
+                $stock->qorder = 0;
+                $stock->hjualk1 = $request->hjualk1;
+                $stock->hjualk2 = $request->hjualk2;
+                $stock->timbang = "F";
+                $stock->uharga = "F";
+                $stock->lvoc = "F";
+                $stock->save();
+            } else {
+                return $this->sendError("Data Gagal Disimpan", "Barang sudah ada");
+            }
 
             $tbara = Tbara::where("bara", $request->bara)->first();
             if (!isset($tbara)) {
@@ -309,6 +315,34 @@ class BackendController extends BaseController
             return $this->sendError("Data Gagal Disimpan", $ex->getMessage());
         }
     }
+
+    public function storeTsatuanStock(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $tsatuan = Tsatuan::where("bara1", $request->bara1)->first();
+            if (!isset($tsatuan)) {
+                $tsatuan = new Tsatuan;
+                $tsatuan->bara = $request->bara;
+                $tsatuan->satuan = $request->satuan;
+                $tsatuan->qty = "1";
+                $tsatuan->hjual = $request->hjual;
+                $tsatuan->hjualg = $request->hjualg;
+                $tsatuan->hjualm = $request->hjualm;
+                $tsatuan->hjualk1 = $request->hjualk1;
+                $tsatuan->hjualk2 = $request->hjualk2;
+                $tsatuan->bara1 = $request->bara1;
+                $tsatuan->save();
+            }
+
+            DB::commit();
+            return $this->sendResponse($tsatuan, "Data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("Data Gagal Disimpan", $ex->getMessage());
+        }
+    }
+
     public function getStockByBara(Request $request)
     {
         $data = Stock::where("bara", $request->bara)->with(['tsatuan', 'tbara' => function ($q) {
@@ -327,12 +361,90 @@ class BackendController extends BaseController
         ]);
     }
 
+    public function supplierStore(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $supplier = Supp::where("kode", $request->kode)->first();
+            if (!isset($supplier)) {
+                $supplier = new Supp;
+                $supplier->kode = $request->kode;
+                $supplier->nama = $request->nama;
+                $supplier->alamat = $request->alamat;
+                $supplier->telp = $request->telp;
+                $supplier->fax = $request->fax;
+                $supplier->email = $request->email;
+                $supplier->kontak = $request->kontak;
+                $supplier->area = $request->area;
+                $supplier->kdue = $request->kdue;
+                $supplier->kdisc = $request->kdisc;
+                $supplier->awal = 0;
+                $supplier->masuk = 0;
+                $supplier->retur = 0;
+                $supplier->keluar = 0;
+                $supplier->debet = 0;
+                $supplier->kredit = 0;
+                $supplier->giro = 0;
+                $supplier->save();
+            } else {
+                return $this->sendError("Kode Supplier sudah dipakai", "Kode supplier sudah dipakai");
+            }
+
+            DB::commit();
+            return $this->sendResponse($supplier, "Data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("Data Gagal Disimpan", $ex->getMessage());
+        }
+    }
+
     public function langganan()
     {
         $datas = Sdep::paginate(10);
+        $area = Area::all();
+        $cust = Cust::paginate(15);
         return Inertia::render("Backend/Xfile/Langganan", [
-            "datas" => $datas
+            "datas" => $datas,
+            "area" => $area,
+            "cust" => $cust
         ]);
+    }
+
+    public function langgananStore(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $langganan = Cust::where("kode", $request->kode)->first();
+            if (!isset($langganan)) {
+                $langganan = new Cust;
+                $langganan->kode = $request->kode;
+                $langganan->nama = $request->nama;
+                $langganan->alamat = $request->alamat;
+                $langganan->telp = $request->telp;
+                $langganan->fax = $request->fax;
+                $langganan->email = $request->email;
+                $langganan->area = $request->area;
+                $langganan->disc = $request->disc;
+                $langganan->dlahir = $request->dlahir;
+                $langganan->plafon = 0;
+                $langganan->awal = 0;
+                $langganan->masuk = 0;
+                $langganan->keluar = 0;
+                $langganan->tpoint = 0;
+                $langganan->tambil = 0;
+                $langganan->giro = 0;
+                $langganan->jh = $request->jenisHarga;
+                $langganan->save();
+            } else {
+                return $this->sendError("error", "Kode langganan sudah dipakai");
+            }
+
+            DB::commit();
+            return $this->sendResponse($langganan, "Data berhasil disimpan");
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return $this->sendError("Data Gagal Disimpan", $ex->getMessage());
+        }
     }
 
     public function formulaPaket()
