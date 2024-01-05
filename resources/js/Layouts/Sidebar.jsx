@@ -131,14 +131,14 @@ export default function Sidebar(props) {
                             </Link>
                         </li>
                         <div className="divider"></div>
-                        <li>
+                        {/* <li>
                             <Link
                                 href="/formula-paket"
                                 className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Formula Paket
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link
                                 href="/best-buy"

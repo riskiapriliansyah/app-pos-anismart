@@ -73,7 +73,7 @@ export default function GudangPage(props) {
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <button
-                            className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-xs"
+                            className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-sm"
                             onClick={() => window.my_modal_1.showModal()}
                         >
                             Tambah Data
@@ -90,15 +90,15 @@ export default function GudangPage(props) {
                                 <tbody>
                                     {props.datas.data.map((d, index) => (
                                         <tr>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.lok}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.ket}
                                             </td>
                                             <td>
                                                 <button
-                                                    className="btn btn-warning btn-xs text-xs"
+                                                    className="btn btn-warning btn-sm text-sm"
                                                     onClick={() => {
                                                         window.my_modal_1_edit.showModal();
                                                         editHandle(d);

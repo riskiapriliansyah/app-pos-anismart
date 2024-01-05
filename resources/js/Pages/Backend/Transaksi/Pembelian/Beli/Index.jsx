@@ -26,7 +26,7 @@ export default function BeliPage(props) {
                     <div className="card-body">
                         <Link
                             href="/transaksi/pembelian/beli/tambah"
-                            className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-xs"
+                            className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-sm"
                         >
                             Buat Pembelian
                         </Link>
@@ -34,7 +34,7 @@ export default function BeliPage(props) {
                             <div className="form-group">
                                 <input
                                     type="text"
-                                    className="input input-bordered input-sm w-full text-xs my-2"
+                                    className="input input-bordered input-sm w-full text-sm my-2"
                                     placeholder="Search by Nota Beli"
                                     value={nota}
                                 // onKeyPress={(e) => getPrSearch(e)}

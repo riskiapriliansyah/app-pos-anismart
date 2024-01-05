@@ -13,6 +13,7 @@ use App\Models\Sdep;
 use App\Models\Sisj;
 use App\Models\Stock;
 use App\Models\Supp;
+use App\Models\Tsatuan;
 use Illuminate\Http\Request;
 
 class ApiController extends BaseController
