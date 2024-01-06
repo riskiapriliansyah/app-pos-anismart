@@ -1,3 +1,4 @@
+import Loading from "@/Components/Loading";
 import MasterAdmin from "@/Layouts/MasterAdmin";
 import { Tab } from "@headlessui/react";
 import axios from "axios";
@@ -13,6 +14,8 @@ export default function BestBuyPage(props) {
     const [searchBy, setSearchBy] = useState("bara");
     const [dataStock, setDataStock] = useState([]);
     const [kodeSearch, setKodeSearch] = useState("");
+    const [bara, setBara] = useState("");
+    const [bara1, setBara1] = useState("");
     const [namaBarang, setNamaBarang] = useState("");
     const [hjual, setHjual] = useState("");
     const [periodeAwal, setPeriodeAwal] = useState("");
@@ -24,6 +27,7 @@ export default function BestBuyPage(props) {
     const [dataSupplier, setDataSupplier] = useState([])
     const [dataDepartemen, setDataDepartemen] = useState([])
     const getStock = async () => {
+        setIsLoading(true)
         setKodeSearch("");
         const data = {
             searchBy: "*",
@@ -39,9 +43,11 @@ export default function BestBuyPage(props) {
                     Swal.fire("Gagal", err.response.data.message, "error");
                 }
             });
+        setIsLoading(false)
     };
 
     const getStockSearch = async (x) => {
+        setIsLoading(true)
         const data = {
             searchBy: searchBy,
             kode: x,
@@ -56,9 +62,11 @@ export default function BestBuyPage(props) {
                     Swal.fire("Gagal", err.response.data.message, "error");
                 }
             });
+        setIsLoading(false)
     };
 
     const getStockByBara = async (bara) => {
+        setIsLoading(true)
         setKodeSearch("");
         const data = {
             bara: bara,
@@ -66,8 +74,11 @@ export default function BestBuyPage(props) {
         await axios
             .get(route("getStockByBara", data))
             .then((res) => {
+                setBara(res.data.data.bara)
+                setBara1(res.data.data.bara1)
                 setNamaBarang(res.data.data.nama)
                 setHjual(res.data.data.hjual)
+                setIsLoading(false)
                 xForceRender();
             })
             .catch((err) => {
@@ -75,6 +86,7 @@ export default function BestBuyPage(props) {
                     Swal.fire("Gagal", err.response.data.message, "error");
                 }
             });
+        setIsLoading(false)
     };
 
     let [categories] = useState({
@@ -130,6 +142,7 @@ export default function BestBuyPage(props) {
 
     return (
         <>
+            {isLoading && <Loading />}
             <MasterAdmin title={"Best Buy"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
@@ -156,6 +169,7 @@ export default function BestBuyPage(props) {
                                     )}
                                 </Tab.List>
                                 <Tab.Panels className="mt-2">
+                                    {/* Tab Item */}
                                     <Tab.Panel>
                                         <div className="card bg-base-200 mb-2">
                                             <div className="card-body">
@@ -239,6 +253,7 @@ export default function BestBuyPage(props) {
                                         </div>
 
                                     </Tab.Panel>
+                                    {/* Tab Departemen */}
                                     <Tab.Panel>
                                         <div className="card bg-base-200 mb-2">
                                             <div className="card-body">
@@ -306,6 +321,7 @@ export default function BestBuyPage(props) {
                                             <button className="btn btn-error bg-rose-600 text-gray-200 btn-sm">Batal</button>
                                         </div>
                                     </Tab.Panel>
+                                    {/* Tab Supplier */}
                                     <Tab.Panel>
                                         <div className="card bg-base-200 mb-2">
                                             <div className="card-body">
@@ -379,7 +395,7 @@ export default function BestBuyPage(props) {
                 <dialog id="my_modal_1_stock" className="modal">
                     <form
                         method="dialog"
-                        className="modal-box"
+                        className="modal-box w-11/12 max-w-5xl"
                         id="journal-scroll"
                     >
                         <h3 className="font-bold text-sm">Master Stock</h3>
@@ -408,7 +424,7 @@ export default function BestBuyPage(props) {
                                     }}
                                 />
                             </div>
-                            <table className="table table-xs">
+                            <table className="table table-sm">
                                 <thead className="bg-sky-800 text-gray-100 text-[7pt]">
                                     <tr>
                                         <th>#</th>

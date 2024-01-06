@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('best_buys', function (Blueprint $table) {
             $table->id();
+            $table->string("bara", 50);
+            $table->string("bara1", 50);
+            $table->float("hbest", 20, 2);
+            $table->float("dbest", 20, 2);
+            $table->float("dbest1", 20, 2);
+            $table->date("best1");
+            $table->date("best2");
             $table->timestamps();
         });
     }

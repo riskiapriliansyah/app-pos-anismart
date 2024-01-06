@@ -1,8 +1,17 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\BestBuyController;
+use App\Http\Controllers\DepController;
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\LanggananController;
+use App\Http\Controllers\MasterStockController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\SdepController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,40 +47,40 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/admin/dashboard", [BackendController::class, "dashboard"])->name("admin.dashboard");
 
     // =====================FILE====================================================
-    Route::get("/dep", [BackendController::class, 'dep'])->name('dep');
-    Route::post("/dep", [BackendController::class, 'storeDep'])->name('dep.store');
-    Route::post("/dep/update", [BackendController::class, 'updateDep'])->name('dep.update');
+    Route::get("/dep", [DepController::class, 'dep'])->name('dep');
+    Route::post("/dep", [DepController::class, 'storeDep'])->name('dep.store');
+    Route::post("/dep/update", [DepController::class, 'updateDep'])->name('dep.update');
 
-    Route::get("/sdep", [BackendController::class, 'sdep'])->name('sdep');
-    Route::post("/sdep", [BackendController::class, 'storeSdep'])->name('sdep.store');
-    Route::post("/sdep/update", [BackendController::class, 'updateSdep'])->name('sdep.update');
+    Route::get("/sdep", [SdepController::class, 'sdep'])->name('sdep');
+    Route::post("/sdep", [SdepController::class, 'storeSdep'])->name('sdep.store');
+    Route::post("/sdep/update", [SdepController::class, 'updateSdep'])->name('sdep.update');
 
-    Route::get("/area", [BackendController::class, 'area'])->name('area');
-    Route::post("/area", [BackendController::class, 'storeArea'])->name('area.store');
-    Route::post("/area/update", [BackendController::class, 'updateArea'])->name('area.update');
+    Route::get("/area", [AreaController::class, 'area'])->name('area');
+    Route::post("/area", [AreaController::class, 'storeArea'])->name('area.store');
+    Route::post("/area/update", [AreaController::class, 'updateArea'])->name('area.update');
 
-    Route::get("/gudang", [BackendController::class, 'gudang'])->name('gudang');
-    Route::post("/gudang", [BackendController::class, 'storeGudang'])->name('gudang.store');
-    Route::post("/gudang/update", [BackendController::class, 'updateGudang'])->name('gudang.update');
+    Route::get("/gudang", [GudangController::class, 'gudang'])->name('gudang');
+    Route::post("/gudang", [GudangController::class, 'storeGudang'])->name('gudang.store');
+    Route::post("/gudang/update", [GudangController::class, 'updateGudang'])->name('gudang.update');
 
-    Route::get("/satuan", [BackendController::class, 'satuan'])->name('satuan');
-    Route::post("/satuan", [BackendController::class, 'storeSatuan'])->name('satuan.store');
-    Route::post("/satuan/update", [BackendController::class, 'updateSatuan'])->name('satuan.update');
+    Route::get("/satuan", [SatuanController::class, 'satuan'])->name('satuan');
+    Route::post("/satuan", [SatuanController::class, 'storeSatuan'])->name('satuan.store');
+    Route::post("/satuan/update", [SatuanController::class, 'updateSatuan'])->name('satuan.update');
 
-    Route::get("/master-stock", [BackendController::class, 'masterStock'])->name('masterStock');
-    Route::post("/master-stock", [BackendController::class, 'storeStock'])->name('masterStock.store');
-    Route::post("/master-stock/tsatuan", [BackendController::class, 'storeTsatuanStock'])->name('masterStock.tsatuan.store');
-    Route::get("/getStockByBara", [BackendController::class, 'getStockByBara'])->name('getStockByBara');
+    Route::get("/master-stock", [MasterStockController::class, 'masterStock'])->name('masterStock');
+    Route::post("/master-stock", [MasterStockController::class, 'storeStock'])->name('masterStock.store');
+    Route::post("/master-stock/tsatuan", [MasterStockController::class, 'storeTsatuanStock'])->name('masterStock.tsatuan.store');
+    Route::get("/getStockByBara", [MasterStockController::class, 'getStockByBara'])->name('getStockByBara');
 
-    Route::get("/supplier", [BackendController::class, 'supplier'])->name('supplier');
-    Route::post("/supplier", [BackendController::class, 'supplierStore'])->name('supplier.store');
+    Route::get("/supplier", [SupplierController::class, 'supplier'])->name('supplier');
+    Route::post("/supplier", [SupplierController::class, 'supplierStore'])->name('supplier.store');
 
-    Route::get("/langganan", [BackendController::class, 'langganan'])->name('langganan');
-    Route::post("/langganan", [BackendController::class, 'langgananStore'])->name('langganan.store');
+    Route::get("/langganan", [LanggananController::class, 'langganan'])->name('langganan');
+    Route::post("/langganan", [LanggananController::class, 'langgananStore'])->name('langganan.store');
 
     Route::get("/formula-paket", [BackendController::class, 'formulaPaket'])->name('formulaPaket');
 
-    Route::get("/best-buy", [BackendController::class, 'bestBuy'])->name('bestBuy');
+    Route::get("/best-buy", [BestBuyController::class, 'bestBuy'])->name('bestBuy');
 
     // =============================Transaksi===============
     Route::get("/transaksi/pembelian/pr", [TransaksiController::class, "purchaseRequest"])->name("transaksi.pembelian.pr");
