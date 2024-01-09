@@ -2,7 +2,8 @@ import Loading from "@/Components/Loading";
 import MasterAdmin from "@/Layouts/MasterAdmin";
 import { Tab } from "@headlessui/react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Select from "react-tailwindcss-select";
 import Swal from "sweetalert2";
 
 function classNames(...classes) {
@@ -18,14 +19,27 @@ export default function BestBuyPage(props) {
     const [bara1, setBara1] = useState("");
     const [namaBarang, setNamaBarang] = useState("");
     const [hjual, setHjual] = useState("");
-    const [periodeAwal, setPeriodeAwal] = useState("");
-    const [periodeAkhir, setPeriodeAkhir] = useState("");
-    const [disc1, setDisc1] = useState("");
-    const [disc2, setDisc2] = useState("");
-    const [hbest, setHbest] = useState("");
+
+    const [periodeAwalItem, setPeriodeAwalItem] = useState("");
+    const [periodeAkhirItem, setPeriodeAkhirItem] = useState("");
+    const [disc1Item, setDisc1Item] = useState("");
+    const [disc2Item, setDisc2Item] = useState("");
+    const [hbestItem, setHbestItem] = useState("");
+
+    const [periodeAwalDep, setPeriodeAwalDep] = useState("");
+    const [periodeAkhirDep, setPeriodeAkhirDep] = useState("");
+    const [disc1Dep, setDisc1Dep] = useState("");
+    const [disc2Dep, setDisc2Dep] = useState("");
+    const [hbestDep, setHbestDep] = useState("");
+    const [deps, setDeps] = useState([])
+    const [dep, setDep] = useState("")
+    const [sdeps, setSdeps] = useState([])
+    const [sdep, setSdep] = useState("")
+
     const [dataItem, setDataItem] = useState([])
     const [dataSupplier, setDataSupplier] = useState([])
     const [dataDepartemen, setDataDepartemen] = useState([])
+
     const getStock = async () => {
         setIsLoading(true)
         setKodeSearch("");
@@ -140,6 +154,80 @@ export default function BestBuyPage(props) {
         ],
     });
 
+    const getSdepByDep = async () => {
+        setIsLoading(true)
+        await axios.get(route('getSdepByDep')).then((res) => {
+            const customHeadings = res.data.data.map((item) => ({
+                value: item.kode,
+                label: item.ket,
+            }));
+            setSdeps(customHeadings);
+        }).catch((err) => {
+            if (err.response.status === 404) {
+                Swal.fire("Gagal", err.response.data.message, "error");
+            }
+        })
+        setIsLoading(false)
+    }
+
+    const handleChangeDepVal = (value) => {
+        setDep(value);
+        getSdepByDep(value.value);
+    };
+    const handleChangeSDepVal = (value) => {
+        setSdep(value);
+    };
+
+    useEffect(() => {
+        getBestBuyItem();
+
+        const customHeadings = props.deps.map((item) => ({
+            value: item.kode,
+            label: item.ket,
+        }));
+        setDeps(customHeadings);
+    }, [])
+
+    const getBestBuyItem = async () => {
+        setIsLoading(true)
+        await axios
+            .get(route("getBestBuyItem"))
+            .then((res) => {
+                setDataItem(res.data.data)
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+        setIsLoading(false)
+    }
+
+    const storeBestBuyItem = async () => {
+        setIsLoading(true)
+        const data = {
+            bara: bara,
+            bara1: bara1,
+            hbest: hbestItem,
+            dbest: disc1Item,
+            dbest1: disc2Item,
+            best1: periodeAwalItem,
+            best2: periodeAkhirItem,
+        };
+        await axios
+            .post(route("storeBestBuyItem"), data)
+            .then((res) => {
+                getBestBuyItem()
+                Swal.fire("Sukses", "Best buy berhasil disimpan", "success");
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+        setIsLoading(false)
+    }
+
     return (
         <>
             {isLoading && <Loading />}
@@ -196,25 +284,25 @@ export default function BestBuyPage(props) {
                                                     <div className="grid grid-cols-2 gap-2">
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Periode Awal</label>
-                                                            <input type="date" className="input input-bordered input-sm w-full" value={periodeAwal} onChange={(e) => { setPeriodeAwal(e.target.value) }} />
+                                                            <input type="date" className="input input-bordered input-sm w-full" value={periodeAwalItem} onChange={(e) => { setPeriodeAwalItem(e.target.value) }} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Periode Akhir</label>
-                                                            <input type="date" className="input input-bordered input-sm w-full" value={periodeAkhir} onChange={(e) => { setPeriodeAkhir(e.target.value) }} />
+                                                            <input type="date" className="input input-bordered input-sm w-full" value={periodeAkhirItem} onChange={(e) => { setPeriodeAkhirItem(e.target.value) }} />
                                                         </div>
                                                     </div>
                                                     <div className="grid grid-cols-3 gap-2">
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Disc.Best Buy #1</label>
-                                                            <input type="number" className="input input-bordered input-sm w-full" value={disc1} onChange={(e) => { setDisc1(e.target.value) }} />
+                                                            <input type="number" className="input input-bordered input-sm w-full" value={disc1Item} onChange={(e) => { setDisc1Item(e.target.value) }} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Disc.Best Buy #1</label>
-                                                            <input type="number" className="input input-bordered input-sm w-full" value={disc2} onChange={(e) => { setDisc2(e.target.value) }} />
+                                                            <input type="number" className="input input-bordered input-sm w-full" value={disc2Item} onChange={(e) => { setDisc2Item(e.target.value) }} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Harga Best Buy</label>
-                                                            <input type="number" className="input input-bordered input-sm w-full" value={hbest} onChange={(e) => { setHbest(e.target.value) }} />
+                                                            <input type="number" className="input input-bordered input-sm w-full" value={hbestItem} onChange={(e) => { setHbestItem(e.target.value) }} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,9 +324,15 @@ export default function BestBuyPage(props) {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {dataItem.map((d, index) => (
+                                                            {dataItem?.map((d, index) => (
                                                                 <tr>
-                                                                    <td>{index + 1}</td>
+                                                                    <td>{d.bara}</td>
+                                                                    <td>{d.stock.nama}</td>
+                                                                    <td>{d.dbest}</td>
+                                                                    <td>{d.dbest1}</td>
+                                                                    <td>{d.hbest}</td>
+                                                                    <td>{d.best1}</td>
+                                                                    <td>{d.best2}</td>
                                                                 </tr>
                                                             ))}
                                                         </tbody>
@@ -248,7 +342,7 @@ export default function BestBuyPage(props) {
                                         </div>
 
                                         <div className="flex flex-auto gap-1 float-right">
-                                            <button className="btn btn-primary btn-sm">Simpan</button>
+                                            <button className="btn btn-primary btn-sm" onClick={storeBestBuyItem}>Simpan</button>
                                             <button className="btn btn-error bg-rose-600 text-gray-200 btn-sm">Batal</button>
                                         </div>
 
@@ -260,11 +354,21 @@ export default function BestBuyPage(props) {
                                                 <div className="overflow-x-auto">
                                                     <div className="form-group">
                                                         <label htmlFor="" className="label label-text hover:bg-gray-200 cursor-pointer font-bold">Departemen</label>
-                                                        <input type="text" className="input input-bordered input-sm w-full" />
+                                                        <Select
+                                                            value={dep}
+                                                            onChange={handleChangeDepVal}
+                                                            options={deps}
+                                                            isSearchable={true}
+                                                        />
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="" className="label label-text hover:bg-gray-200 cursor-pointer font-bold">Sub Departemen</label>
-                                                        <input type="text" className="input input-bordered input-sm w-full" />
+                                                        <Select
+                                                            value={sdep}
+                                                            onChange={handleChangeSDepVal}
+                                                            options={sdeps}
+                                                            isSearchable={true}
+                                                        />
                                                     </div>
                                                     <div className="grid grid-cols-2 gap-2">
                                                         <div className="form-group">

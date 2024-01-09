@@ -81,6 +81,9 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/formula-paket", [BackendController::class, 'formulaPaket'])->name('formulaPaket');
 
     Route::get("/best-buy", [BestBuyController::class, 'bestBuy'])->name('bestBuy');
+    Route::get("/best-buy/item", [BestBuyController::class, "getBestBuyItem"])->name("getBestBuyItem");
+    Route::post("/best-buy/store/item", [BestBuyController::class, 'storeBestBuyItem'])->name('storeBestBuyItem');
+    Route::get("/best-buy/get/sdepBydep", [BestBuyController::class, 'getSdepByDep'])->name("getSdepByDep");
 
     // =============================Transaksi===============
     Route::get("/transaksi/pembelian/pr", [TransaksiController::class, "purchaseRequest"])->name("transaksi.pembelian.pr");

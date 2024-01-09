@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "react-icons": "^4.10.1",
+        "react-tailwindcss-select": "^1.8.5",
         "react-to-print": "^2.14.13",
         "sweetalert2": "^11.7.23"
     }
