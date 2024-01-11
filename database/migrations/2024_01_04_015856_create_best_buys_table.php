@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float("dbest1", 20, 2);
             $table->date("best1");
             $table->date("best2");
+            $table->string("tipe", 1)->nullable();
             $table->timestamps();
         });
     }

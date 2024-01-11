@@ -156,7 +156,10 @@ export default function BestBuyPage(props) {
 
     const getSdepByDep = async () => {
         setIsLoading(true)
-        await axios.get(route('getSdepByDep')).then((res) => {
+        const data = {
+            "dep": dep
+        }
+        await axios.get(route('getSdepByDep'), data).then((res) => {
             const customHeadings = res.data.data.map((item) => ({
                 value: item.kode,
                 label: item.ket,

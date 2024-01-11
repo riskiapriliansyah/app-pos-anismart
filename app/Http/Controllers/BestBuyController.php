@@ -17,10 +17,10 @@ class BestBuyController extends BaseController
 {
     public function bestBuy()
     {
-        $datas = Sdep::paginate(10);
+        // $datas = Sdep::paginate(10);
         $deps = Dep::all();
         return Inertia::render("Backend/Xfile/BestBuy", [
-            "datas" => $datas,
+            // "datas" => $datas,
             "deps" => $deps
         ]);
     }
@@ -52,6 +52,7 @@ class BestBuyController extends BaseController
             $best->dbest1 = $request->dbest1;
             $best->best1 = $request->best1;
             $best->best2 = $request->best2;
+            $best->tipe = "1";
             $best->save();
 
             $stock->hbest = $request->hbest;
