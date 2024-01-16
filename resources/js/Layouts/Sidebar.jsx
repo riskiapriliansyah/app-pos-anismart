@@ -248,7 +248,7 @@ export default function Sidebar(props) {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        {/* <li>
                             <button
                                 type="button"
                                 className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
@@ -296,8 +296,8 @@ export default function Sidebar(props) {
                                     </Link>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <button
                                 type="button"
                                 className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
@@ -355,15 +355,15 @@ export default function Sidebar(props) {
                                     </Link>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <Link
                                 href="/dep"
                                 className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Giro Keluar
                             </Link>
-                        </li>
+                        </li> */}
                         <div className="divider"></div>
                         <li>
                             <button
@@ -418,7 +418,7 @@ export default function Sidebar(props) {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        {/* <li>
                             <button
                                 type="button"
                                 className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
@@ -476,15 +476,15 @@ export default function Sidebar(props) {
                                     </Link>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <Link
                                 href="/sdep"
                                 className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Giro Masuk
                             </Link>
-                        </li>
+                        </li> */}
                         <div className="divider"></div>
                         <li>
                             <Link
@@ -529,7 +529,7 @@ export default function Sidebar(props) {
                             >
                                 <li>
                                     <Link
-                                        href="/admin/media/gallery"
+                                        href={route("transaksi.penyesuaianStock.samplingOpname")}
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Sampling Opname

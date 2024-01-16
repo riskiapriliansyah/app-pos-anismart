@@ -1,9 +1,9 @@
 import MasterAdmin from "@/Layouts/MasterAdmin";
 
-export default function DashboardPage(props) {
+export default function TotalOpnamePage(props) {
     return (
         <>
-            <MasterAdmin title={"Dashboard"}>
+            <MasterAdmin title={"Sampling Opname"}>
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
 

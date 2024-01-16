@@ -40,6 +40,11 @@ export default function BestBuyPage(props) {
     const [dataSupplier, setDataSupplier] = useState([])
     const [dataDepartemen, setDataDepartemen] = useState([])
 
+    const [forceRender, setForceRender] = useState(false);
+    const xForceRender = () => {
+        setForceRender(!forceRender);
+    };
+
     const getStock = async () => {
         setIsLoading(true)
         setKodeSearch("");
@@ -154,17 +159,18 @@ export default function BestBuyPage(props) {
         ],
     });
 
-    const getSdepByDep = async () => {
+    const getSdepByDep = async (val) => {
         setIsLoading(true)
         const data = {
-            "dep": dep
+            "dep": val
         }
-        await axios.get(route('getSdepByDep'), data).then((res) => {
+        await axios.get(route('getSdepByDep', data)).then((res) => {
             const customHeadings = res.data.data.map((item) => ({
                 value: item.kode,
                 label: item.ket,
             }));
             setSdeps(customHeadings);
+            xForceRender()
         }).catch((err) => {
             if (err.response.status === 404) {
                 Swal.fire("Gagal", err.response.data.message, "error");
@@ -219,6 +225,30 @@ export default function BestBuyPage(props) {
         };
         await axios
             .post(route("storeBestBuyItem"), data)
+            .then((res) => {
+                getBestBuyItem()
+                Swal.fire("Sukses", "Best buy berhasil disimpan", "success");
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+        setIsLoading(false)
+    }
+
+    const storeBestBuyDep = async () => {
+        setIsLoading(true)
+        const data = {
+            dep: dep,
+            sdep: sdep,
+            dbest: disc1Dep,
+            dbest1: disc2Dep,
+            best1: periodeAwalDep,
+            best2: periodeAkhirDep,
+        };
+        await axios
+            .post(route("storeBestBuyDep"), data)
             .then((res) => {
                 getBestBuyItem()
                 Swal.fire("Sukses", "Best buy berhasil disimpan", "success");
@@ -376,21 +406,21 @@ export default function BestBuyPage(props) {
                                                     <div className="grid grid-cols-2 gap-2">
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Periode Awal</label>
-                                                            <input type="date" className="input input-bordered input-sm w-full" />
+                                                            <input type="date" className="input input-bordered input-sm w-full" value={periodeAwalDep} onChange={(e) => { setPeriodeAwalDep(e.target.value) }} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Periode Akhir</label>
-                                                            <input type="date" className="input input-bordered input-sm w-full" />
+                                                            <input type="date" className="input input-bordered input-sm w-full" value={periodeAkhirDep} onChange={(e) => { setPeriodeAkhirDep(e.target.value) }} />
                                                         </div>
                                                     </div>
                                                     <div className="grid grid-cols-2 gap-2">
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Disc.Best Buy #1</label>
-                                                            <input type="number" className="input input-bordered input-sm w-full" />
+                                                            <input type="number" className="input input-bordered input-sm w-full" value={disc1Dep} onChange={(e) => { setDisc1Dep(e.target.value) }} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="" className="label label-text">Disc.Best Buy #2</label>
-                                                            <input type="number" className="input input-bordered input-sm w-full" />
+                                                            <input type="number" className="input input-bordered input-sm w-full" value={disc2Dep} onChange={(e) => { setDisc2Dep(e.target.value) }} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -424,7 +454,7 @@ export default function BestBuyPage(props) {
                                         </div>
 
                                         <div className="flex flex-auto gap-1 float-right">
-                                            <button className="btn btn-primary btn-sm">Simpan</button>
+                                            <button className="btn btn-primary btn-sm" onClick={storeBestBuyDep}>Simpan</button>
                                             <button className="btn btn-error bg-rose-600 text-gray-200 btn-sm">Batal</button>
                                         </div>
                                     </Tab.Panel>
@@ -532,7 +562,7 @@ export default function BestBuyPage(props) {
                                 />
                             </div>
                             <table className="table table-sm">
-                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                                <thead className="bg-sky-800 text-gray-100 text-sm">
                                     <tr>
                                         <th>#</th>
                                         <th>Kode Stock</th>
@@ -550,7 +580,7 @@ export default function BestBuyPage(props) {
                                             <td>{d.nama}</td>
                                             <td>
                                                 <button
-                                                    className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
+                                                    className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-sm"
                                                     onClick={() =>
                                                         getStockByBara(d.bara)
                                                     }

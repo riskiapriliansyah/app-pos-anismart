@@ -1,0 +1,23 @@
+.table-container {
+    overflow-x: auto;
+    max-height: 700px;
+}
+
+.table-sticky table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-sticky th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table-sticky th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}

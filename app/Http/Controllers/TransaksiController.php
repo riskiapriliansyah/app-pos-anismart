@@ -230,202 +230,6 @@ class TransaksiController extends BaseController
         }
     }
 
-    public function pembelian()
-    {
-        $datas = Beli::with(['supplier', "user"])->latest()->paginate(10);
-        return Inertia::render("Backend/Transaksi/Pembelian/Beli/Index", [
-            "datas" => $datas,
-        ]);
-    }
-
-    public function pembelianShow($nota)
-    {
-        $data = Beli::where("nota", $nota)->with(['supplier' => function ($q) {
-            $q->with(['area_supp']);
-        }, 'tbeli'])->first();
-        return Inertia::render("Backend/Transaksi/Pembelian/Beli/Show", [
-            "data" => $data,
-        ]);
-    }
-
-    public function pembelianAdd()
-    {
-        return Inertia::render("Backend/Transaksi/Pembelian/Beli/Add");
-    }
-
-    public function pembelianStore(Request $request)
-    {
-        $header = $request->header;
-        $body = $request->body;
-        try {
-            DB::beginTransaction();
-            $beli = new Beli;
-            $beli->nota = $header['nota'];
-            $beli->tgl = $header['tglBeli'];
-            $beli->jatuh = $header['tglJatuh'];
-            $beli->kode = $header['kode'];
-            $beli->lok = $header['lok'];
-            $beli->ket = $header['ket'];
-            $beli->nilai = $header['nilai'];
-            $beli->disc = $header['disc'];
-            $beli->ndisc = $header['ndisc'];
-            $beli->pph = $header['pph'];
-            $beli->npph = $header['npph'];
-            $beli->netto = $header['netto'];
-            $beli->bayar = $header['bayar'];
-            $beli->lunas = $header['lunas'];
-            $beli->nota_po = $header['nota_po'];
-            $beli->tgll = $header['tgll'];
-            $beli->tunai = $header['tunai'];
-            $beli->created_by = Auth::user()->userid;
-            $beli->save();
-
-            foreach ($body as $b) {
-                $tbeli = new Tbeli;
-                $tbeli->nota = $beli->nota;
-                $tbeli->tgl = $beli->tgl;
-                $tbeli->bara = $b['bara'];
-                $tbeli->bara1 = $b['bara1'];
-                $tbeli->qty = $b['qty'];
-                $tbeli->harga = $b['hbeli'];
-                $tbeli->disc = $b['disc'];
-                $tbeli->ndisc = $b['ndisc'];
-                $tbeli->total = $b['total'];
-                $tbeli->nama = $b['nama'];
-                $tbeli->satuan = $b['satuan'];
-                $tbeli->zqty = $b['qty'];
-                $tbeli->zharga = $b['hbeli'];
-                $tbeli->zsatuan = $b['satuan'];
-                $tbeli->save();
-
-                $kbara = new Kbara;
-                $kbara->nota = $beli->nota;
-                $kbara->tgl = $beli->tgl;
-                $kbara->bara = $tbeli->bara;
-                $kbara->bara1 = $tbeli->bara1;
-                $kbara->qty = $tbeli->qty;
-                $kbara->lok = $beli->lok;
-                $kbara->tipe = "B";
-                $kbara->kode = $beli->kode;
-                $kbara->zqty = $tbeli->zqty;
-                $kbara->sat = $tbeli->satuan;
-                $kbara->ntag = $tbeli->zqty * 1;
-                $kbara->save();
-            }
-
-            $po = Po::where("nota", $header['nota_po'])->first();
-            $po->status_beli = 1;
-            $po->save();
-
-            DB::commit();
-
-            $data = [
-                "beli" => $beli,
-                "tbeli" => $tbeli,
-            ];
-
-            return $this->sendResponse($data, "data berhasil disimpan");
-        } catch (Exception $ex) {
-            DB::rollBack();
-            return $this->sendError("Data gagal disimpan", $ex->getMessage());
-        }
-    }
-
-    public function returPembelian()
-    {
-        $datas = Rbeli::with(['supplier', "user"])->latest()->paginate(10);
-        return Inertia::render("Backend/Transaksi/Pembelian/Retur/Index", [
-            "datas" => $datas,
-        ]);
-    }
-
-    public function returPembelianShow($nota)
-    {
-        $data = Rbeli::where("nota", $nota)->with(['supplier', 'rtbeli'])->first();
-        return Inertia::render("Backend/Transaksi/Pembelian/Retur/Show", [
-            "data" => $data,
-        ]);
-    }
-
-    public function returPembelianAdd()
-    {
-        return Inertia::render("Backend/Transaksi/Pembelian/Retur/Add");
-    }
-
-    public function returPembelianStore(Request $request)
-    {
-        $header = $request->header;
-        $body = $request->body;
-        try {
-            DB::beginTransaction();
-            $sisj = Sisj::first();
-
-            $rbeli = new Rbeli;
-            $rbeli->nota = "RB-" . date("Ymd") . "-" . $sisj->rbeli + 1;;
-            $rbeli->tgl = $header['tgl'];
-            $rbeli->kode = $header['kode'];
-            $rbeli->lok = $header['lok'];
-            $rbeli->ket = $header['ket'];
-            $rbeli->nilai = $header['nilai'];
-            $rbeli->disc = $header['disc'];
-            $rbeli->ndisc = $header['ndisc'];
-            $rbeli->pph = $header['pph'];
-            $rbeli->npph = $header['npph'];
-            $rbeli->netto = $header['netto'];
-            $rbeli->notar = $header['notar'];
-            $rbeli->created_by = Auth::user()->userid;
-            $rbeli->save();
-
-            foreach ($body as $b) {
-                $rtbeli = new Rtbeli;
-                $rtbeli->nota = $rbeli->nota;
-                $rtbeli->tgl = $rbeli->tgl;
-                $rtbeli->bara = $b['bara'];
-                $rtbeli->bara1 = $b['bara1'];
-                $rtbeli->qty = $b['qty'];
-                $rtbeli->harga = $b['hbeli'];
-                $rtbeli->disc = $b['disc'];
-                $rtbeli->ndisc = $b['ndisc'];
-                $rtbeli->total = $b['total'];
-                $rtbeli->nama = $b['nama'];
-                $rtbeli->satuan = $b['satuan'];
-                $rtbeli->zqty = $b['qty'];
-                $rtbeli->zharga = $b['hbeli'];
-                $rtbeli->zsatuan = $b['satuan'];
-                $rtbeli->save();
-
-                $kbara = new Kbara;
-                $kbara->nota = $rbeli->nota;
-                $kbara->tgl = $rbeli->tgl;
-                $kbara->bara = $rtbeli->bara;
-                $kbara->bara1 = $rtbeli->bara1;
-                $kbara->qty = $rtbeli->qty;
-                $kbara->lok = $rbeli->lok;
-                $kbara->tipe = "R";
-                $kbara->kode = $rbeli->kode;
-                $kbara->zqty = $rtbeli->zqty;
-                $kbara->sat = $rtbeli->satuan;
-                $kbara->ntag = $rtbeli->zqty * -1;
-                $kbara->save();
-            }
-
-            $sisj->rbeli = $sisj->rbeli + 1;
-            $sisj->save();
-
-            DB::commit();
-
-            $data = [
-                "rbeli" => $rbeli,
-                "rtbeli" => $rtbeli,
-            ];
-
-            return $this->sendResponse($data, "data berhasil disimpan");
-        } catch (Exception $ex) {
-            DB::rollBack();
-            return $this->sendError("Data gagal disimpan", $ex->getMessage());
-        }
-    }
-
     public function penjualanNota()
     {
         $datas = Gjual::with(['cust', "user"])->latest()->paginate(10);
@@ -682,7 +486,7 @@ class TransaksiController extends BaseController
                 $tpindah->zsatuan = $b['satuan'];
                 $tpindah->save();
 
-                if($pindah->dari){
+                if ($pindah->dari) {
                     $kbara = new Kbara;
                     $kbara->nota = $pindah->nota;
                     $kbara->tgl = $pindah->tgl;
@@ -698,7 +502,7 @@ class TransaksiController extends BaseController
                     $kbara->save();
                 }
 
-                if($pindah->ke){
+                if ($pindah->ke) {
                     $kbara = new Kbara;
                     $kbara->nota = $pindah->nota;
                     $kbara->tgl = $pindah->tgl;

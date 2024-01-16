@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string("bara", 50);
             $table->string("bara1", 50);
-            $table->float("hbest", 20, 2);
-            $table->float("dbest", 20, 2);
-            $table->float("dbest1", 20, 2);
+            $table->float("hbest", 20, 2)->default(0);
+            $table->float("dbest", 20, 2)->default(0);
+            $table->float("dbest1", 20, 2)->default(0);
             $table->date("best1");
             $table->date("best2");
             $table->string("tipe", 1)->nullable();

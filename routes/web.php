@@ -8,7 +8,10 @@ use App\Http\Controllers\DepController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\MasterStockController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReturPembelianController;
+use App\Http\Controllers\SamplingOpnameController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\SdepController;
 use App\Http\Controllers\SupplierController;
@@ -84,6 +87,7 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/best-buy/item", [BestBuyController::class, "getBestBuyItem"])->name("getBestBuyItem");
     Route::post("/best-buy/store/item", [BestBuyController::class, 'storeBestBuyItem'])->name('storeBestBuyItem');
     Route::get("/best-buy/get/sdepBydep", [BestBuyController::class, 'getSdepByDep'])->name("getSdepByDep");
+    Route::post("/best-buy/store/departemen", [BestBuyController::class, 'storeBestBuyDep'])->name('storeBestBuyDep');
 
     // =============================Transaksi===============
     Route::get("/transaksi/pembelian/pr", [TransaksiController::class, "purchaseRequest"])->name("transaksi.pembelian.pr");
@@ -96,15 +100,15 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::post("/transaksi/pembelian/po/tambah", [TransaksiController::class, "purchaseOrderStore"])->name("transaksi.pembelian.po.store");
     Route::get("/transaksi/pembelian/po/show/{nota}", [TransaksiController::class, "purchaseOrderShow"])->name("transaksi.pembelian.po.show");
 
-    Route::get("/transaksi/pembelian/beli", [TransaksiController::class, "pembelian"])->name("transaksi.pembelian.beli");
-    Route::get("/transaksi/pembelian/beli/tambah", [TransaksiController::class, "pembelianAdd"])->name("transaksi.pembelian.beli.add");
-    Route::post("/transaksi/pembelian/beli/tambah", [TransaksiController::class, "pembelianStore"])->name("transaksi.pembelian.beli.store");
-    Route::get("/transaksi/pembelian/beli/show/{nota}", [TransaksiController::class, "pembelianShow"])->name("transaksi.pembelian.beli.show");
+    Route::get("/transaksi/pembelian/beli", [PembelianController::class, "pembelian"])->name("transaksi.pembelian.beli");
+    Route::get("/transaksi/pembelian/beli/tambah", [PembelianController::class, "pembelianAdd"])->name("transaksi.pembelian.beli.add");
+    Route::post("/transaksi/pembelian/beli/tambah", [PembelianController::class, "pembelianStore"])->name("transaksi.pembelian.beli.store");
+    Route::get("/transaksi/pembelian/beli/show/{nota}", [PembelianController::class, "pembelianShow"])->name("transaksi.pembelian.beli.show");
 
-    Route::get("/transaksi/pembelian/retur", [TransaksiController::class, "returPembelian"])->name("transaksi.pembelian.returPembelian");
-    Route::get("/transaksi/pembelian/retur/tambah", [TransaksiController::class, "returPembelianAdd"])->name("transaksi.pembelian.retur.add");
-    Route::post("/transaksi/pembelian/retur/tambah", [TransaksiController::class, "returPembelianStore"])->name("transaksi.pembelian.retur.store");
-    Route::get("/transaksi/pembelian/retur/show/{nota}", [TransaksiController::class, "returPembelianShow"])->name("transaksi.pembelian.retur.show");
+    Route::get("/transaksi/pembelian/retur", [ReturPembelianController::class, "returPembelian"])->name("transaksi.pembelian.returPembelian");
+    Route::get("/transaksi/pembelian/retur/tambah", [ReturPembelianController::class, "returPembelianAdd"])->name("transaksi.pembelian.retur.add");
+    Route::post("/transaksi/pembelian/retur/tambah", [ReturPembelianController::class, "returPembelianStore"])->name("transaksi.pembelian.retur.store");
+    Route::get("/transaksi/pembelian/retur/show/{nota}", [ReturPembelianController::class, "returPembelianShow"])->name("transaksi.pembelian.retur.show");
 
     Route::get("/transaksi/penjualan/penjualan-nota", [TransaksiController::class, "penjualanNota"])->name("transaksi.penjualan.penjualanNota");
     Route::get("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaAdd"])->name("transaksi.penjualan.penjualanNota.add");
@@ -120,4 +124,6 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/transaksi/transfer-barang/tambah", [TransaksiController::class, "transferBarangAdd"])->name("transaksi.penjualan.transferBarang.add");
     Route::post("/transaksi/transfer-barang/tambah", [TransaksiController::class, "transferBarangStore"])->name("transaksi.penjualan.transferBarang.store");
     Route::get("/transaksi/transfer-barang/show/{nota}", [TransaksiController::class, "transferBarangShow"])->name("transaksi.penjualan.transferBarang.show");
+
+    Route::get("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "index"])->name("transaksi.penyesuaianStock.samplingOpname");
 });
