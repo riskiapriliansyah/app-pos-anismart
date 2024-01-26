@@ -15,6 +15,7 @@ use App\Models\Rjl;
 use App\Models\Rtbeli;
 use App\Models\Rtjl;
 use App\Models\Sisj;
+use App\Models\Tbara;
 use App\Models\Tbeli;
 use App\Models\Tpindah;
 use App\Models\Tpo;
@@ -305,6 +306,22 @@ class TransaksiController extends BaseController
                 $gtjual->zsatuan = $b['satuan'];
                 $gtjual->save();
 
+                $tbara = Tbara::where("bara", $b['bara'])->first();
+                if (isset($tbara)) {
+                    $tbara->keluar = $tbara->keluar + $b['zqty'];
+                    $tbara->save();
+                } else {
+                    $tbara = new Tbara;
+                    $tbara->bara = $b['bara'];
+                    $tbara->lok = $header['lok'];
+                    $tbara->awal = 0;
+                    $tbara->masuk = 0;
+                    $tbara->keluar = $b['zqty'];
+                    $tbara->saldo = 0;
+                    $tbara->opname = 0;
+                    $tbara->save();
+                }
+
                 $kbara = new Kbara;
                 $kbara->nota = $gjual->nota;
                 $kbara->tgl = $gjual->tgl;
@@ -399,6 +416,22 @@ class TransaksiController extends BaseController
                 $rtbeli->zharga = $b['hbeli'];
                 $rtbeli->zsatuan = $b['satuan'];
                 $rtbeli->save();
+
+                $tbara = Tbara::where("bara", $b['bara'])->first();
+                if (isset($tbara)) {
+                    $tbara->masuk = $tbara->masuk + $b['zqty'];
+                    $tbara->save();
+                } else {
+                    $tbara = new Tbara;
+                    $tbara->bara = $b['bara'];
+                    $tbara->lok = $header['lok'];
+                    $tbara->awal = 0;
+                    $tbara->masuk = $b['zqty'];
+                    $tbara->keluar = 0;
+                    $tbara->saldo = 0;
+                    $tbara->opname = 0;
+                    $tbara->save();
+                }
 
                 $kbara = new Kbara;
                 $kbara->nota = $rbeli->nota;

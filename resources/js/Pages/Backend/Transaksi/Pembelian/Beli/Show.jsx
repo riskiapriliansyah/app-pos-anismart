@@ -183,7 +183,7 @@ export default function BeliShowPage(props) {
                                     {props.data.tbeli.map((d, index) => (
                                         <tr>
                                             <td className="text-[7pt]">
-                                                {d.bara1}
+                                                {d.bara}
                                             </td>
                                             <td className="text-[7pt]">
                                                 {d.nama}

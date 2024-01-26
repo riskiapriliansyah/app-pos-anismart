@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class ApiTransaksiController extends BaseController
 {
-    public function getNotaBaru()
+    public function getNotaBaru(Request $request)
     {
-        $drawer = Drawer::where("userid", "kasir")->first();
+        $drawer = Drawer::where("userid", $request->userid)->where("tgl", date('ymd', strtotime(Carbon::now(+8))))->first();
         if (isset($drawer)) {
             $nota = Notaj::where("tgl", date("Y-m-d"))->first();
             if (isset($nota)) {
@@ -30,7 +30,6 @@ class ApiTransaksiController extends BaseController
                 return $this->sendResponse($xNota, "nota");
             }
         } else {
-            
             return $this->sendResponse("", "Kasir belum buka kas awal");
         }
     }

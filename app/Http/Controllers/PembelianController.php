@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Beli;
 use App\Models\Kbara;
 use App\Models\Po;
+use App\Models\Tbara;
 use App\Models\Tbeli;
 use Exception;
 use Illuminate\Http\Request;
@@ -77,10 +78,26 @@ class PembelianController extends BaseController
                 $tbeli->total = $b['total'];
                 $tbeli->nama = $b['nama'];
                 $tbeli->satuan = $b['satuan'];
-                $tbeli->zqty = $b['qty'];
+                $tbeli->zqty = $b['zqty'];
                 $tbeli->zharga = $b['hbeli'];
                 $tbeli->zsatuan = $b['satuan'];
                 $tbeli->save();
+
+                $tbara = Tbara::where("bara", $b['bara'])->first();
+                if (isset($tbara)) {
+                    $tbara->masuk = $tbara->masuk + $b['zqty'];
+                    $tbara->save();
+                } else {
+                    $tbara = new Tbara;
+                    $tbara->bara = $b['bara'];
+                    $tbara->lok = $header['lok'];
+                    $tbara->awal = 0;
+                    $tbara->masuk = $b['zqty'];
+                    $tbara->keluar = 0;
+                    $tbara->saldo = 0;
+                    $tbara->opname = 0;
+                    $tbara->save();
+                }
 
                 $kbara = new Kbara;
                 $kbara->nota = $beli->nota;

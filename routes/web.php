@@ -6,6 +6,7 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BestBuyController;
 use App\Http\Controllers\DepController;
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\MasterStockController;
 use App\Http\Controllers\PembelianController;
@@ -126,4 +127,5 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/transaksi/transfer-barang/show/{nota}", [TransaksiController::class, "transferBarangShow"])->name("transaksi.penjualan.transferBarang.show");
 
     Route::get("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "index"])->name("transaksi.penyesuaianStock.samplingOpname");
+    Route::post("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "store"])->name("transaksi.penyesuaianStock.samplingOpname.store");
 });

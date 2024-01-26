@@ -4,6 +4,14 @@ import { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import { BiTrash } from "react-icons/bi";
 export default function SamplingOpnamePage(props) {
+    const today = new Date();
+    const xtanggal =
+        today.getFullYear() +
+        "-" +
+        ("0" + (today.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + today.getDate()).slice(-2);
+
     const [isLoading, setIsLoading] = useState(false)
     const [searchBy, setSearchBy] = useState("bara");
     const [dataStock, setDataStock] = useState([]);
@@ -14,6 +22,8 @@ export default function SamplingOpnamePage(props) {
     const [satuan, setSatuan] = useState("")
     const [fisik, setFisik] = useState("")
     const [dataTb, setDataTb] = useState([])
+    const [lok, setLok] = useState("")
+    const [tanggal, setTanggal] = useState(xtanggal)
 
     const fisikRef = useRef(null)
 
@@ -128,6 +138,29 @@ export default function SamplingOpnamePage(props) {
         setSatuan("")
     }
 
+    const store = async () => {
+        const header = {
+            lok: lok,
+            tgl: tanggal,
+        }
+        const body = dataTb
+        const data = {
+            header: header,
+            body: body
+        }
+
+        await axios
+            .post(route("transaksi.penyesuaianStock.samplingOpname.store"), data)
+            .then((res) => {
+
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+    }
+
     return (
         <>
             <MasterAdmin title={"Sampling Opname"}>
@@ -136,7 +169,7 @@ export default function SamplingOpnamePage(props) {
                         <div className="grid grid-cols-2 gap-2">
                             <div className="form-control">
                                 <label htmlFor="" className="label label-text">Gudang</label>
-                                <select name="gudang" id="gudang" className="select select select-bordered select-sm">
+                                <select name="gudang" id="gudang" className="select select select-bordered select-sm" value={lok} onChange={(e) => setLok(e.target.value)}>
                                     <option value="">Pilih</option>
                                     {props.gudang.map((d, index) => (
                                         <option value={d.lok}>{d.ket}</option>
@@ -145,7 +178,7 @@ export default function SamplingOpnamePage(props) {
                             </div>
                             <div className="form-control">
                                 <label htmlFor="" className="label label-text">Tanggal</label>
-                                <input type="text" className="input input-bordered input-sm" />
+                                <input type="date" className="input input-bordered input-sm" value={tanggal} readOnly />
                             </div>
                             <div className="form-control">
                                 <label
@@ -203,7 +236,7 @@ export default function SamplingOpnamePage(props) {
                             </table>
                         </div>
                         <div className="flex flex-row gap-1 justify-center">
-                            <button className="btn btn-primary btn-sm">Posting</button>
+                            <button className="btn btn-primary btn-sm" onClick={store}>Posting</button>
                             <button className="btn btn-error bg-rose-600 btn-sm text-gray-100" onClick={batal}>Batal</button>
                         </div>
                     </div>

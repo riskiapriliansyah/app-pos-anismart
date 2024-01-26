@@ -15,6 +15,7 @@ use App\Models\Stock;
 use App\Models\Supp;
 use App\Models\Tsatuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends BaseController
 {
@@ -39,26 +40,26 @@ class ApiController extends BaseController
     public function getStock(Request $request)
     {
         if ($request->searchBy == "*") {
-            $datas = Stock::take(10)->get();
+            $datas = DB::select("select a.bara, b.bara1, a.nama, a.hbeli, b.qty, b.satuan, b.hjual, b.hjualg, b.hjualm, b.hjualk1, b.hjualk2, b.best1, b.best2, b.hbest, b.dbest, b.dbest1 from stocks a INNER JOIN tsatuans b on a.bara = b.bara LIMIT 10");
             return $this->sendResponse($datas, "data stock");
         }
         if ($request->searchBy == "nama") {
-            $datas = Stock::where("nama", "LIKE", "%{$request->kode}%")->take(10)->get();
+            $datas = DB::select("select a.bara, b.bara1, a.nama, a.hbeli, b.qty, b.satuan, b.hjual, b.hjualg, b.hjualm, b.hjualk1, b.hjualk2, b.best1, b.best2, b.hbest, b.dbest, b.dbest1 from stocks a INNER JOIN tsatuans b on a.bara = b.bara WHERE a.nama LIKE ('%$request->kode%') LIMIT 10");
             return $this->sendResponse($datas, "data stock");
         }
         if ($request->searchBy == "bara1") {
-            $datas = Stock::where("bara1", "LIKE", "%{$request->kode}%")->take(10)->get();
+            $datas = DB::select("select a.bara, b.bara1, a.nama, a.hbeli, b.qty, b.satuan, b.hjual, b.hjualg, b.hjualm, b.hjualk1, b.hjualk2, b.best1, b.best2, b.hbest, b.dbest, b.dbest1 from stocks a INNER JOIN tsatuans b on a.bara = b.bara WHERE b.bara1 LIKE ('%$request->kode%') LIMIT 10");
             return $this->sendResponse($datas, "data stock");
         }
         if ($request->searchBy == "bara") {
-            $datas = Stock::where("bara", "LIKE", "%{$request->kode}%")->take(10)->get();
+            $datas = DB::select("select a.bara, b.bara1, a.nama, a.hbeli, b.qty, b.satuan, b.hjual, b.hjualg, b.hjualm, b.hjualk1, b.hjualk2, b.best1, b.best2, b.hbest, b.dbest, b.dbest1 from stocks a INNER JOIN tsatuans b on a.bara = b.bara WHERE b.bara LIKE ('%$request->kode%') LIMIT 10");
             return $this->sendResponse($datas, "data stock");
         }
     }
 
     public function getStockByBara(Request $request)
     {
-        $datas = Stock::where("bara1", $request->kode)->first();
+        $datas = DB::select("select a.bara, b.bara1, a.nama, a.hbeli, b.qty, b.satuan, b.hjual, b.hjualg, b.hjualm, b.hjualk1, b.hjualk2, b.best1, b.best2, b.hbest, b.dbest, b.dbest1,a.lvoc from stocks a INNER JOIN tsatuans b on a.bara = b.bara WHERE b.bara1 = '$request->kode'");
         return $this->sendResponse($datas, "data stock");
     }
 

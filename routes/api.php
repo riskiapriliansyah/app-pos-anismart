@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ApiTransaksiController;
+use App\Http\Controllers\KasirController;
 use App\Models\AuthApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,9 +40,15 @@ Route::get("getKartuStock", [ApiController::class, 'getKartuStock'])->name('api.
 // ============Transaksi API
 Route::get("getNotaBaru", [ApiTransaksiController::class, "getNotaBaru"])->name("api.getNotaBaru");
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'auth'], function ($router) {
-    Route::post('login', [AuthApiController::class, "login"]);
-    Route::post('logout', [AuthApiController::class, "logout"]);
-    Route::post('refresh', [AuthApiController::class, "refresh"]);
-    Route::post('me', [AuthApiController::class, "me"]);
-});
+// Route::group(['middleware' => 'auth:api', 'prefix' => 'auth'], function ($router) {
+//     Route::post('login', [AuthApiController::class, "login"]);
+//     Route::post('logout', [AuthApiController::class, "logout"]);
+//     Route::post('refresh', [AuthApiController::class, "refresh"]);
+//     Route::post('me', [AuthApiController::class, "me"]);
+// });
+Route::post("postLoginKasir", [KasirController::class, 'postLoginKasir'])->name("kasir.login");
+Route::post("storeKasAwal", [KasirController::class, 'storeKasAwal'])->name("api.storeKasAwal");
+Route::get("getUserKasir", [KasirController::class, "getUserKasir"])->name("api.getUserKasir");
+Route::get("getUserKasirByUserId", [KasirController::class, "getUserKasirByUserId"])->name("api.getUserKasirByUserId");
+Route::get("getDrawer", [KasirController::class, "getDrawer"])->name("api.getDrawer");
+Route::post("storeKoreksi", [KasirController::class, "storeKoreksi"])->name("api.storeKoreksi");
