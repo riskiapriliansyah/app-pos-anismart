@@ -52,3 +52,4 @@ Route::get("getUserKasir", [KasirController::class, "getUserKasir"])->name("api.
 Route::get("getUserKasirByUserId", [KasirController::class, "getUserKasirByUserId"])->name("api.getUserKasirByUserId");
 Route::get("getDrawer", [KasirController::class, "getDrawer"])->name("api.getDrawer");
 Route::post("storeKoreksi", [KasirController::class, "storeKoreksi"])->name("api.storeKoreksi");
+Route::post("storePenjualanKasir", [KasirController::class, "storePenjualanKasir"])->name("api.storePenjualanKasir");

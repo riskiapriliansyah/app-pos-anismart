@@ -8,6 +8,7 @@ use App\Models\Kbara;
 use App\Models\Koreksi;
 use App\Models\Loginlog;
 use App\Models\Sisj;
+use App\Models\Stock;
 use App\Models\Tbara;
 use App\Models\Tbill;
 use App\Models\User;
@@ -184,10 +185,11 @@ class KasirController extends BaseController
                 $tbill->total = $b['total'];
                 $tbill->hargae = $b['hargae'];
                 $tbill->totale = $b['totale'];
-                $tbill->bkp = $b['bkp'];
+                $tbill->bkp = "F";
                 $tbill->lvoid = $b['lvoid'];
+                $tbill->lvoc = "T";
                 $tbill->disc1 = $b['disc1'];
-                $tbill->bbh = $b['bbh'];
+                $tbill->bbh = "F";
                 $tbill->save();
 
                 $tbara = Tbara::where("bara", $tbill->bara)->first();
