@@ -53,3 +53,11 @@ Route::get("getUserKasirByUserId", [KasirController::class, "getUserKasirByUserI
 Route::get("getDrawer", [KasirController::class, "getDrawer"])->name("api.getDrawer");
 Route::post("storeKoreksi", [KasirController::class, "storeKoreksi"])->name("api.storeKoreksi");
 Route::post("storePenjualanKasir", [KasirController::class, "storePenjualanKasir"])->name("api.storePenjualanKasir");
+Route::post("storePenjualanKasirVoid", [KasirController::class, "storePenjualanKasirVoid"])->name("api.storePenjualanKasirVoid");
+Route::post("storePending", [KasirController::class, "storePending"])->name("api.storePending");
+Route::get("getPendingBill", [KasirController::class, "getPendingBill"])->name("api.getPendingBill");
+Route::get("getPendingByNota", [KasirController::class, "getPendingByNota"])->name("api.getPendingByNota");
+Route::get("getBillByNota", [KasirController::class, "getBillByNota"])->name("api.getBillByNota");
+Route::get("getBillByUserId", [KasirController::class, "getBillByUserId"])->name("api.getBillByUserId");
+Route::get("getDataTutupKasir", [KasirController::class, "getDataTutupKasir"])->name("api.getDataTutupKasir");
+Route::get("updateDrawerByUserid", [KasirController::class, "updateDrawerByUserid"])->name("api.updateDrawerByUserid");
