@@ -26,7 +26,7 @@ export default function ReturBeliPage(props) {
                     <div className="card-body">
                         <Link
                             href="/transaksi/pembelian/retur/tambah"
-                            className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-xs"
+                            className="btn btn-ghost bg-sky-700 text-gray-100 btn-sm text-sm"
                         >
                             Buat Retur Pembelian
                         </Link>
@@ -34,14 +34,14 @@ export default function ReturBeliPage(props) {
                             <div className="form-group">
                                 <input
                                     type="text"
-                                    className="input input-bordered input-sm w-full text-xs my-2"
+                                    className="input input-bordered input-sm w-full text-sm my-2"
                                     placeholder="Search by Nota Beli"
                                     value={nota}
-                                    // onKeyPress={(e) => getPrSearch(e)}
+                                // onKeyPress={(e) => getPrSearch(e)}
                                 />
                             </div>
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-gray-100 text-sm">
                                     <tr>
                                         <th>Tanggal</th>
                                         <th>Nilai</th>
@@ -68,7 +68,7 @@ export default function ReturBeliPage(props) {
                                                             "transaksi.pembelian.retur.show",
                                                             d.nota
                                                         )}
-                                                        className="btn btn-primary bg-blue-700 text-base-100 btn-xs btn-square"
+                                                        className="btn btn-primary bg-blue-700 text-base-100 btn-sm btn-square"
                                                         title="Show"
                                                     >
                                                         <AiFillEye />
@@ -76,7 +76,7 @@ export default function ReturBeliPage(props) {
                                                     {d.status_beli === "0" && (
                                                         <Link
                                                             href=""
-                                                            className="btn btn-warning btn-xs text-[7pt]"
+                                                            className="btn btn-warning btn-sm text-sm"
                                                         >
                                                             Buat Beli
                                                         </Link>

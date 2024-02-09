@@ -23,7 +23,7 @@ export default function PenjualanNotaAddPage(props) {
     const [dataTb, setDataTb] = useState([]);
     const [dataStock, setDataStock] = useState([]);
     const [dataSupplier, setDataSupplier] = useState([]);
-    const [searchBy, setSearchBy] = useState("bara1");
+    const [searchBy, setSearchBy] = useState("bara");
     const [kodeSearch, setKodeSearch] = useState("");
     const [kodeSuppSearch, setKodeSuppSearch] = useState("");
     const [kodeSupp, setKodeSupp] = useState("");
@@ -198,6 +198,8 @@ export default function PenjualanNotaAddPage(props) {
                     nama: data.nama,
                     satuan: data.satuan,
                     qty: 1,
+                    zqty: data.qty,
+                    xzqty: data.qty,
                     hjual: data.hjual,
                     disc: 0,
                     disc1: 0,
@@ -335,34 +337,33 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Nomor Faktur
                                 </label>
                                 <input
                                     type="text"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={"BARU"}
                                     readOnly
-                                    // onChange={(e) => setNota(e.target.value)}
                                 />
                             </div>
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Gudang
                                 </label>
                                 <div className="flex flex-row gap-1">
                                     <input
                                         type="text"
-                                        className="input input-bordered input-xs text-xs w-full"
+                                        className="input input-bordered input-sm text-sm w-full"
                                         value={namaGudang}
                                         readOnly
                                     />
                                     <button
-                                        className="btn btn-warning btn-xs btn-square"
+                                        className="btn btn-warning btn-sm btn-square"
                                         onClick={() => {
                                             window.my_modal_1_gudang.showModal();
                                             getGudang();
@@ -375,19 +376,19 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Langganan
                                 </label>
                                 <div className="flex flex-row gap-1">
                                     <input
                                         type="text"
-                                        className="input input-bordered input-xs text-xs w-full"
+                                        className="input input-bordered input-sm text-sm w-full"
                                         value={namaSupp}
                                         readOnly
                                     />
                                     <button
-                                        className="btn btn-warning btn-xs btn-square"
+                                        className="btn btn-warning btn-sm btn-square"
                                         onClick={() => {
                                             window.my_modal_1_cust.showModal();
                                             getCust();
@@ -402,13 +403,13 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Tanggal
                                 </label>
                                 <input
                                     type="date"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={tglBeli}
                                     onChange={(e) => {
                                         settglBeli(e.target.value);
@@ -419,13 +420,13 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Jt.Tempo
                                 </label>
                                 <input
                                     type="date"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={tglJatuh}
                                     onChange={(e) => {
                                         setTglJatuh(e.target.value);
@@ -436,13 +437,13 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Keterangan
                                 </label>
                                 <input
                                     type="text"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={ket}
                                     onChange={(e) => setKet(e.target.value)}
                                 />
@@ -450,12 +451,12 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Status
                                 </label>
                                 <select
-                                    className="select select-bordered select-xs text-[7pt] w-full"
+                                    className="select select-bordered select-sm text-sm w-full"
                                     value={status}
                                     onChange={(e) => setStatus(e.target.value)}
                                 >
@@ -467,7 +468,7 @@ export default function PenjualanNotaAddPage(props) {
                         </div>
                         <div className="flex flex-row items-center">
                             <button
-                                className="btn btn-primary btn-xs text-[8pt] text-gray-100"
+                                className="btn btn-primary btn-sm text-sm text-gray-100"
                                 onClick={storeData}
                             >
                                 SIMPAN
@@ -475,8 +476,8 @@ export default function PenjualanNotaAddPage(props) {
                         </div>
 
                         <div className="overflow-x-auto">
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-[7pt] text-gray-200">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-sm text-gray-200">
                                     <tr>
                                         <th>Kode Stock</th>
                                         <th>Nama Barang</th>
@@ -492,20 +493,22 @@ export default function PenjualanNotaAddPage(props) {
                                 <tbody>
                                     {dataTb.map((d, index) => (
                                         <tr>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.bara1}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.nama}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 <input
                                                     type="text"
-                                                    className="input input-bordered input-xs text-xs w-14"
+                                                    className="input input-bordered input-sm text-sm w-14"
                                                     value={d.qty}
                                                     onChange={(e) => {
                                                         dataTb[index].qty =
                                                             e.target.value;
+                                                        dataTb[index].zqty =
+                                                            e.target.value * dataTb[index].xzqty;
                                                         setDataTb(dataTb);
                                                         xForceRender();
                                                         hitungTotalDataTb(
@@ -517,13 +520,13 @@ export default function PenjualanNotaAddPage(props) {
                                                     }
                                                 />
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.satuan}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 <input
                                                     type="text"
-                                                    className="input input-bordered input-xs text-xs w-24"
+                                                    className="input input-bordered input-sm text-sm w-24"
                                                     value={d.hjual}
                                                     onChange={(e) => {
                                                         dataTb[index].hjual =
@@ -539,10 +542,10 @@ export default function PenjualanNotaAddPage(props) {
                                                     }
                                                 />
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 <input
                                                     type="text"
-                                                    className="input input-bordered input-xs text-xs w-14"
+                                                    className="input input-bordered input-sm text-sm w-14"
                                                     value={d.disc}
                                                     onChange={(e) => {
                                                         dataTb[index].disc =
@@ -558,10 +561,10 @@ export default function PenjualanNotaAddPage(props) {
                                                     }
                                                 />
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 <input
                                                     type="text"
-                                                    className="input input-bordered input-xs text-xs w-14"
+                                                    className="input input-bordered input-sm text-sm w-14"
                                                     value={d.disc1}
                                                     onChange={(e) => {
                                                         dataTb[index].disc1 =
@@ -577,12 +580,12 @@ export default function PenjualanNotaAddPage(props) {
                                                     }
                                                 />
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.total.toLocaleString("id")}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 <button
-                                                    className="btn btn-error text-gray-100 btn-xs bg-rose-700"
+                                                    className="btn btn-error text-gray-100 btn-sm bg-rose-700"
                                                     onClick={() =>
                                                         deleteItem(index)
                                                     }
@@ -597,7 +600,7 @@ export default function PenjualanNotaAddPage(props) {
                                             <div className="flex flex-row gap-1">
                                                 <input
                                                     type="text"
-                                                    className="input input-bordered input-xs text-xs"
+                                                    className="input input-bordered input-sm text-sm"
                                                     value={barcode}
                                                     onChange={(e) =>
                                                         setBarcode(
@@ -609,7 +612,7 @@ export default function PenjualanNotaAddPage(props) {
                                                     }}
                                                 />
                                                 <button
-                                                    className="btn btn-warning btn-xs btn-square"
+                                                    className="btn btn-warning btn-sm btn-square"
                                                     onClick={() => {
                                                         window.my_modal_1_stock.showModal();
                                                         getStock();
@@ -633,7 +636,7 @@ export default function PenjualanNotaAddPage(props) {
                                             Disc:{" "}
                                             <input
                                                 type="text"
-                                                className="w-12 input input-bordered input-xs text-xs text-center"
+                                                className="w-12 input input-bordered input-sm text-sm text-center"
                                                 value={disc}
                                                 onChange={(e) => {
                                                     setDisc(e.target.value);
@@ -650,7 +653,7 @@ export default function PenjualanNotaAddPage(props) {
                                             PPN:{" "}
                                             <input
                                                 type="text"
-                                                className="w-12 input input-bordered input-xs text-xs text-center"
+                                                className="w-12 input input-bordered input-sm text-sm text-center"
                                                 value={ppn}
                                                 onChange={(e) => {
                                                     setPpn(e.target.value);
@@ -677,7 +680,7 @@ export default function PenjualanNotaAddPage(props) {
                                         <td colSpan={2}>
                                             <input
                                                 type="text"
-                                                className="w-32 input input-bordered input-xs text-xs text-center"
+                                                className="w-32 input input-bordered input-sm text-sm text-center"
                                                 value={jbayar}
                                                 onChange={(e) => {
                                                     setJbayar(e.target.value);
@@ -703,25 +706,26 @@ export default function PenjualanNotaAddPage(props) {
                 <dialog id="my_modal_1_stock" className="modal">
                     <form
                         method="dialog"
-                        className="modal-box"
+                        className="modal-box w-11/12 max-w-5xl"
                         id="journal-scroll"
                     >
                         <h3 className="font-bold text-sm">Master Stock</h3>
                         <div className="py-4">
                             <div className="my-2 items-center flex flex-row gap-2">
                                 <select
-                                    className="select select-bordered select-xs text-xs"
+                                    className="select select-bordered select-sm text-sm"
                                     value={searchBy}
                                     onChange={(e) =>
                                         setSearchBy(e.target.value)
                                     }
                                 >
+                                    <option value="bara">Kode Stock</option>
                                     <option value="bara1">Barcode</option>
                                     <option value="nama">Nama</option>
                                 </select>
                                 <input
                                     type="text"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={kodeSearch}
                                     onChange={(e) => {
                                         setKodeSearch(e.target.value);
@@ -731,12 +735,14 @@ export default function PenjualanNotaAddPage(props) {
                                     }}
                                 />
                             </div>
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-gray-100 text-sm">
                                     <tr>
                                         <th>#</th>
                                         <th>Kode Stock</th>
+                                        <th>Barcode</th>
                                         <th>Nama</th>
+                                        <th>Satuan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -744,11 +750,13 @@ export default function PenjualanNotaAddPage(props) {
                                     {dataStock.map((d, index) => (
                                         <tr>
                                             <td>{index + 1}</td>
+                                            <td>{d.bara}</td>
                                             <td>{d.bara1}</td>
                                             <td>{d.nama}</td>
+                                            <td>{d.satuan}</td>
                                             <td>
                                                 <button
-                                                    className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
+                                                    className="btn btn-accent bg-green-700 btn-sm text-gray-100 text-sm"
                                                     onClick={() => {
                                                         addDataTb(d);
                                                     }}
@@ -779,7 +787,7 @@ export default function PenjualanNotaAddPage(props) {
                             <div className="my-2 items-center flex flex-row gap-2">
                                 <input
                                     type="text"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={kodeSuppSearch}
                                     onChange={(e) => {
                                         setKodeSuppSearch(e.target.value);
@@ -789,8 +797,8 @@ export default function PenjualanNotaAddPage(props) {
                                     }}
                                 />
                             </div>
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-gray-100 text-sm">
                                     <tr>
                                         <th>#</th>
                                         <th>Kode</th>
@@ -806,7 +814,7 @@ export default function PenjualanNotaAddPage(props) {
                                             <td>{d.nama}</td>
                                             <td>
                                                 <button
-                                                    className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
+                                                    className="btn btn-accent bg-green-700 btn-sm text-gray-100 text-sm"
                                                     onClick={() => {
                                                         setKodeSupp(d.kode);
                                                         setNamaSupp(d.nama);
@@ -835,8 +843,8 @@ export default function PenjualanNotaAddPage(props) {
                     >
                         <h3 className="font-bold text-sm">Gudang</h3>
                         <div className="py-4">
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-gray-100 text-[7pt]">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-gray-100 text-sm">
                                     <tr>
                                         <th>#</th>
                                         <th>Lok</th>
@@ -852,7 +860,7 @@ export default function PenjualanNotaAddPage(props) {
                                             <td>{d.ket}</td>
                                             <td>
                                                 <button
-                                                    className="btn btn-accent bg-green-700 btn-xs text-gray-100 text-[7pt]"
+                                                    className="btn btn-accent bg-green-700 btn-sm text-gray-100 text-sm"
                                                     onClick={() => {
                                                         setLok(d.lok);
                                                         setNamaGudang(d.ket);

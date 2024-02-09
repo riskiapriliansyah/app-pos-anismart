@@ -28,13 +28,13 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Nomor Faktur
                                 </label>
                                 <input
                                     type="text"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={props.data.nota}
                                     readOnly
                                 />
@@ -42,14 +42,14 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Gudang
                                 </label>
                                 <div className="flex flex-row gap-1">
                                     <input
                                         type="text"
-                                        className="input input-bordered input-xs text-xs w-full"
+                                        className="input input-bordered input-sm text-sm w-full"
                                         value={props.data.lok}
                                         readOnly
                                     />
@@ -58,14 +58,14 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Nota PO
                                 </label>
                                 <div className="flex flex-row gap-1">
                                     <input
                                         type="text"
-                                        className="input input-bordered input-xs text-xs w-full"
+                                        className="input input-bordered input-sm text-sm w-full"
                                         value={props.data.nota_po}
                                         readOnly
                                     />
@@ -74,14 +74,14 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Supplier
                                 </label>
                                 <div className="flex flex-row gap-1">
                                     <input
                                         type="text"
-                                        className="input input-bordered input-xs text-xs w-full"
+                                        className="input input-bordered input-sm text-sm w-full"
                                         value={props.data.supplier.nama}
                                         readOnly
                                     />
@@ -90,13 +90,13 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Tanggal
                                 </label>
                                 <input
                                     type="date"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={props.data.tgl}
                                     readOnly
                                 />
@@ -104,13 +104,13 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Jt.Tempo
                                 </label>
                                 <input
                                     type="date"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={props.data.jatuh}
                                     readOnly
                                 />
@@ -120,13 +120,13 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Keterangan
                                 </label>
                                 <input
                                     type="text"
-                                    className="input input-bordered input-xs text-xs w-full"
+                                    className="input input-bordered input-sm text-sm w-full"
                                     value={props.data.ket}
                                     readOnly
                                 />
@@ -134,12 +134,12 @@ export default function BeliShowPage(props) {
                             <div className="form-group">
                                 <label
                                     htmlFor=""
-                                    className="label label-text text-[7pt] -mb-2.5"
+                                    className="label label-text text-sm -mb-2.5"
                                 >
                                     Status
                                 </label>
                                 <select
-                                    className="select select-bordered select-xs text-[7pt] w-full"
+                                    className="select select-bordered select-sm text-sm w-full"
                                     value={props.data.lunas}
                                 >
                                     <option value="">Pilih</option>
@@ -167,8 +167,8 @@ export default function BeliShowPage(props) {
                         </div>
 
                         <div className="overflow-x-auto">
-                            <table className="table table-xs">
-                                <thead className="bg-sky-800 text-[7pt] text-gray-200">
+                            <table className="table table-sm">
+                                <thead className="bg-sky-800 text-sm text-gray-200">
                                     <tr>
                                         <th>Kode Stock</th>
                                         <th>Nama Barang</th>
@@ -182,25 +182,25 @@ export default function BeliShowPage(props) {
                                 <tbody>
                                     {props.data.tbeli.map((d, index) => (
                                         <tr>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.bara}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.nama}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.qty}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.satuan}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.harga.toLocaleString("id")}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.disc}
                                             </td>
-                                            <td className="text-[7pt]">
+                                            <td className="text-sm">
                                                 {d.total.toLocaleString("id")}
                                             </td>
                                         </tr>
@@ -221,7 +221,7 @@ export default function BeliShowPage(props) {
                                             Disc:{" "}
                                             <input
                                                 type="text"
-                                                className="w-12 input input-bordered input-xs text-xs text-center"
+                                                className="w-12 input input-bordered input-sm text-sm text-center"
                                                 value={props.data.disc}
                                                 readOnly
                                             />
@@ -238,7 +238,7 @@ export default function BeliShowPage(props) {
                                             PPN:{" "}
                                             <input
                                                 type="text"
-                                                className="w-12 input input-bordered input-xs text-xs text-center"
+                                                className="w-12 input input-bordered input-sm text-sm text-center"
                                                 value={props.data.pph}
                                                 readOnly
                                             />

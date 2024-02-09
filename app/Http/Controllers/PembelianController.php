@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Beli;
 use App\Models\Kbara;
 use App\Models\Po;
+use App\Models\Stock;
 use App\Models\Tbara;
 use App\Models\Tbeli;
 use Exception;
@@ -83,9 +84,17 @@ class PembelianController extends BaseController
                 $tbeli->zsatuan = $b['satuan'];
                 $tbeli->save();
 
+                $stock = Stock::where("bara", $b['bara'])->first();
+                $stock->hbeli = $b['hbeli'] / $b['xzqty'];
+                $stock->haver = $b['hbeli'] / $b['xzqty'];
+                $stock->kode = $header['kode'];
+                $stock->save();
+
+
                 $tbara = Tbara::where("bara", $b['bara'])->first();
                 if (isset($tbara)) {
                     $tbara->masuk = $tbara->masuk + $b['zqty'];
+                    $tbara->saldo = $tbara->awal + $tbara->masuk - $tbara->keluar;
                     $tbara->save();
                 } else {
                     $tbara = new Tbara;
@@ -94,7 +103,7 @@ class PembelianController extends BaseController
                     $tbara->awal = 0;
                     $tbara->masuk = $b['zqty'];
                     $tbara->keluar = 0;
-                    $tbara->saldo = 0;
+                    $tbara->saldo = $tbara->awal + $tbara->masuk - $tbara->keluar;
                     $tbara->opname = 0;
                     $tbara->save();
                 }

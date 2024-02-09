@@ -197,6 +197,7 @@ export default function BeliAddPage(props) {
                     satuan: data.satuan,
                     qty: 1,
                     zqty: data.qty,
+                    xzqty: data.qty,
                     hbeli: data.hbeli * data.qty,
                     disc: 0,
                     ndisc: 0,
@@ -222,31 +223,31 @@ export default function BeliAddPage(props) {
         }
     };
 
-    const addDataTbFromPo = (data) => {
-        setDataTb([]);
-        setSubTotal(0);
-        setNdisc(0);
-        setDisc(0);
-        setNppn(0);
-        setPpn(0);
-        setTotal(0);
-        data.map((d, index) => {
-            setDataTb((isi) => [
-                ...isi,
-                {
-                    bara: d.bara,
-                    bara1: d.bara1,
-                    nama: d.nama,
-                    satuan: d.satuan,
-                    qty: d.qty,
-                    hbeli: d.harga,
-                    disc: d.disc,
-                    ndisc: d.ndisc,
-                    total: d.qty * d.harga,
-                },
-            ]);
-        });
-    };
+    // const addDataTbFromPo = (data) => {
+    //     setDataTb([]);
+    //     setSubTotal(0);
+    //     setNdisc(0);
+    //     setDisc(0);
+    //     setNppn(0);
+    //     setPpn(0);
+    //     setTotal(0);
+    //     data.map((d, index) => {
+    //         setDataTb((isi) => [
+    //             ...isi,
+    //             {
+    //                 bara: d.bara,
+    //                 bara1: d.bara1,
+    //                 nama: d.nama,
+    //                 satuan: d.satuan,
+    //                 qty: d.qty,
+    //                 hbeli: d.harga,
+    //                 disc: d.disc,
+    //                 ndisc: d.ndisc,
+    //                 total: d.qty * d.harga,
+    //             },
+    //         ]);
+    //     });
+    // };
 
     const deleteItem = (i) => {
         dataTb.splice(i, 1);
@@ -546,6 +547,8 @@ export default function BeliAddPage(props) {
                                                     onChange={(e) => {
                                                         dataTb[index].qty =
                                                             e.target.value;
+                                                        dataTb[index].zqty =
+                                                            e.target.value * dataTb[index].xzqty;
                                                         setDataTb(dataTb);
                                                         xForceRender();
                                                         hitungTotalDataTb(

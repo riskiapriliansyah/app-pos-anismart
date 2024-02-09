@@ -10,13 +10,16 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\MasterStockController;
 use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturPembelianController;
+use App\Http\Controllers\ReturPenjualanController;
 use App\Http\Controllers\SamplingOpnameController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\SdepController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransferBarangController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -111,20 +114,20 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::post("/transaksi/pembelian/retur/tambah", [ReturPembelianController::class, "returPembelianStore"])->name("transaksi.pembelian.retur.store");
     Route::get("/transaksi/pembelian/retur/show/{nota}", [ReturPembelianController::class, "returPembelianShow"])->name("transaksi.pembelian.retur.show");
 
-    Route::get("/transaksi/penjualan/penjualan-nota", [TransaksiController::class, "penjualanNota"])->name("transaksi.penjualan.penjualanNota");
-    Route::get("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaAdd"])->name("transaksi.penjualan.penjualanNota.add");
-    Route::post("/transaksi/penjualan/penjualan-nota/tambah", [TransaksiController::class, "penjualanNotaStore"])->name("transaksi.penjualan.penjualanNota.store");
-    Route::get("/transaksi/penjualan/penjualan-nota/show/{nota}", [TransaksiController::class, "penjualanNotaShow"])->name("transaksi.penjualan.penjualanNota.show");
+    Route::get("/transaksi/penjualan/penjualan-nota", [PenjualanController::class, "penjualanNota"])->name("transaksi.penjualan.penjualanNota");
+    Route::get("/transaksi/penjualan/penjualan-nota/tambah", [PenjualanController::class, "penjualanNotaAdd"])->name("transaksi.penjualan.penjualanNota.add");
+    Route::post("/transaksi/penjualan/penjualan-nota/tambah", [PenjualanController::class, "penjualanNotaStore"])->name("transaksi.penjualan.penjualanNota.store");
+    Route::get("/transaksi/penjualan/penjualan-nota/show/{nota}", [PenjualanController::class, "penjualanNotaShow"])->name("transaksi.penjualan.penjualanNota.show");
 
-    Route::get("/transaksi/penjualan/retur-penjualan", [TransaksiController::class, "returPenjualanNota"])->name("transaksi.penjualan.returPenjualanNota");
-    Route::get("/transaksi/penjualan/retur-penjualan/tambah", [TransaksiController::class, "returPenjualanNotaAdd"])->name("transaksi.penjualan.returPenjualanNota.add");
-    Route::post("/transaksi/penjualan/retur-penjualan/tambah", [TransaksiController::class, "returPenjualanNotaStore"])->name("transaksi.penjualan.returPenjualanNota.store");
-    Route::get("/transaksi/penjualan/retur-penjualan/show/{nota}", [TransaksiController::class, "returPenjualanNotaShow"])->name("transaksi.penjualan.returPenjualanNota.show");
+    Route::get("/transaksi/penjualan/retur-penjualan", [ReturPenjualanController::class, "returPenjualanNota"])->name("transaksi.penjualan.returPenjualanNota");
+    Route::get("/transaksi/penjualan/retur-penjualan/tambah", [ReturPenjualanController::class, "returPenjualanNotaAdd"])->name("transaksi.penjualan.returPenjualanNota.add");
+    Route::post("/transaksi/penjualan/retur-penjualan/tambah", [ReturPenjualanController::class, "returPenjualanNotaStore"])->name("transaksi.penjualan.returPenjualanNota.store");
+    Route::get("/transaksi/penjualan/retur-penjualan/show/{nota}", [ReturPenjualanController::class, "returPenjualanNotaShow"])->name("transaksi.penjualan.returPenjualanNota.show");
 
-    Route::get("/transaksi/transfer-barang", [TransaksiController::class, "transferBarang"])->name("transaksi.penjualan.transferBarang");
-    Route::get("/transaksi/transfer-barang/tambah", [TransaksiController::class, "transferBarangAdd"])->name("transaksi.penjualan.transferBarang.add");
-    Route::post("/transaksi/transfer-barang/tambah", [TransaksiController::class, "transferBarangStore"])->name("transaksi.penjualan.transferBarang.store");
-    Route::get("/transaksi/transfer-barang/show/{nota}", [TransaksiController::class, "transferBarangShow"])->name("transaksi.penjualan.transferBarang.show");
+    Route::get("/transaksi/transfer-barang", [TransferBarangController::class, "transferBarang"])->name("transaksi.penjualan.transferBarang");
+    Route::get("/transaksi/transfer-barang/tambah", [TransferBarangController::class, "transferBarangAdd"])->name("transaksi.penjualan.transferBarang.add");
+    Route::post("/transaksi/transfer-barang/tambah", [TransferBarangController::class, "transferBarangStore"])->name("transaksi.penjualan.transferBarang.store");
+    Route::get("/transaksi/transfer-barang/show/{nota}", [TransferBarangController::class, "transferBarangShow"])->name("transaksi.penjualan.transferBarang.show");
 
     Route::get("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "index"])->name("transaksi.penyesuaianStock.samplingOpname");
     Route::post("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "store"])->name("transaksi.penyesuaianStock.samplingOpname.store");

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kbara;
-use App\Models\Rbeli;
-use App\Models\Rtbeli;
+use App\Models\Rjl;
+use App\Models\Rtjl;
 use App\Models\Sisj;
 use App\Models\Tbara;
 use Exception;
@@ -13,30 +13,30 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-class ReturPembelianController extends BaseController
+class ReturPenjualanController extends BaseController
 {
-    public function returPembelian()
+    public function returPenjualanNota()
     {
-        $datas = Rbeli::with(['supplier', "user"])->latest()->paginate(10);
-        return Inertia::render("Backend/Transaksi/Pembelian/Retur/Index", [
+        $datas = Rjl::with(['cust', "user"])->latest()->paginate(10);
+        return Inertia::render("Backend/Transaksi/Penjualan/ReturPenjualan/Index", [
             "datas" => $datas,
         ]);
     }
 
-    public function returPembelianShow($nota)
+    public function returPenjualanNotaShow($nota)
     {
-        $data = Rbeli::where("nota", $nota)->with(['supplier', 'rtbeli'])->first();
-        return Inertia::render("Backend/Transaksi/Pembelian/Retur/Show", [
+        $data = Rjl::where("nota", $nota)->with(['cust', 'rtjl', 'user'])->first();
+        return Inertia::render("Backend/Transaksi/Penjualan/ReturPenjualan/Show", [
             "data" => $data,
         ]);
     }
 
-    public function returPembelianAdd()
+    public function returPenjualanNotaAdd()
     {
-        return Inertia::render("Backend/Transaksi/Pembelian/Retur/Add");
+        return Inertia::render("Backend/Transaksi/Penjualan/ReturPenjualan/Add");
     }
 
-    public function returPembelianStore(Request $request)
+    public function returPenjualanNotaStore(Request $request)
     {
         $header = $request->header;
         $body = $request->body;
@@ -44,7 +44,7 @@ class ReturPembelianController extends BaseController
             DB::beginTransaction();
             $sisj = Sisj::first();
 
-            $rbeli = new Rbeli;
+            $rbeli = new Rjl;
             $rbeli->nota = "RB-" . date("Ymd") . "-" . $sisj->rbeli + 1;;
             $rbeli->tgl = $header['tgl'];
             $rbeli->kode = $header['kode'];
@@ -56,31 +56,32 @@ class ReturPembelianController extends BaseController
             $rbeli->pph = $header['pph'];
             $rbeli->npph = $header['npph'];
             $rbeli->netto = $header['netto'];
+            // $rbeli->notar = $header['notar'];
             $rbeli->notar = "-";
             $rbeli->created_by = Auth::user()->userid;
             $rbeli->save();
 
             foreach ($body as $b) {
-                $rtbeli = new Rtbeli;
+                $rtbeli = new Rtjl;
                 $rtbeli->nota = $rbeli->nota;
                 $rtbeli->tgl = $rbeli->tgl;
                 $rtbeli->bara = $b['bara'];
                 $rtbeli->bara1 = $b['bara1'];
                 $rtbeli->qty = $b['qty'];
-                $rtbeli->harga = $b['hbeli'];
+                $rtbeli->harga = $b['hjual'];
                 $rtbeli->disc = $b['disc'];
                 $rtbeli->ndisc = $b['ndisc'];
                 $rtbeli->total = $b['total'];
                 $rtbeli->nama = $b['nama'];
                 $rtbeli->satuan = $b['satuan'];
                 $rtbeli->zqty = $b['zqty'];
-                $rtbeli->zharga = $b['hbeli'];
+                $rtbeli->zharga = $b['hjual'];
                 $rtbeli->zsatuan = $b['satuan'];
                 $rtbeli->save();
 
                 $tbara = Tbara::where("bara", $b['bara'])->first();
                 if (isset($tbara)) {
-                    $tbara->keluar = $tbara->keluar + $b['zqty'];
+                    $tbara->masuk = $tbara->masuk + $b['zqty'];
                     $tbara->saldo = $tbara->awal + $tbara->masuk - $tbara->keluar;
                     $tbara->save();
                 } else {
@@ -88,8 +89,8 @@ class ReturPembelianController extends BaseController
                     $tbara->bara = $b['bara'];
                     $tbara->lok = $header['lok'];
                     $tbara->awal = 0;
-                    $tbara->masuk = 0;
-                    $tbara->keluar = $b['zqty'];
+                    $tbara->masuk = $b['zqty'];
+                    $tbara->keluar = 0;
                     $tbara->saldo = $tbara->awal + $tbara->masuk - $tbara->keluar;
                     $tbara->opname = 0;
                     $tbara->save();
@@ -102,11 +103,11 @@ class ReturPembelianController extends BaseController
                 $kbara->bara1 = $rtbeli->bara1;
                 $kbara->qty = $rtbeli->qty;
                 $kbara->lok = $rbeli->lok;
-                $kbara->tipe = "R";
+                $kbara->tipe = "C";
                 $kbara->kode = $rbeli->kode;
                 $kbara->zqty = $rtbeli->zqty;
                 $kbara->sat = $rtbeli->satuan;
-                $kbara->ntag = $rtbeli->zqty * -1;
+                $kbara->ntag = $rtbeli->zqty * 1;
                 $kbara->save();
             }
 
