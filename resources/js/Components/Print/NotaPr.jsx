@@ -3,7 +3,7 @@ import React from "react";
 import "../../../css/print.css";
 
 export class NotaPrToPrint extends React.PureComponent {
-  render() {
+    render() {
         const data = this.props.data
         return (
             <section className="px-5 py-2">
@@ -38,28 +38,28 @@ export class NotaPrToPrint extends React.PureComponent {
                             </tr>
                         </thead>
                         <tbody className="text-sm">
-                          {data.tpr.map((d,index) => (
-                            <tr>
-                                <td className="text-center">{index+1}</td>
-                                <td>{d.bara1}</td>
-                                <td>{d.nama}</td>
-                                <td className="text-center">{d.satuan}</td>
-                                <td className="text-center">{d.qtys}</td>
-                                <td className="text-center">{d.qtyj}</td>
-                            </tr>
-                          ))}
+                            {data.tpr.map((d, index) => (
+                                <tr>
+                                    <td className="text-center">{index + 1}</td>
+                                    <td>{d.bara}</td>
+                                    <td>{d.nama}</td>
+                                    <td className="text-center">{d.satuan}</td>
+                                    <td className="text-center">{d.qtys}</td>
+                                    <td className="text-center">{d.qtyj}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-between mt-10">
                         <div>
-                          <div className="flex flex-row gap-4">
-                            <div className="w-64">
-                              <p>Dibuat Oleh,</p>
+                            <div className="flex flex-row gap-4">
+                                <div className="w-64">
+                                    <p>Dibuat Oleh,</p>
+                                </div>
+                                <div>
+                                    <p>Disetujui,</p>
+                                </div>
                             </div>
-                            <div>
-                              <p>Disetujui,</p>
-                            </div>
-                          </div>
                         </div>
                         <div>
                             {/* <table className="text-md">

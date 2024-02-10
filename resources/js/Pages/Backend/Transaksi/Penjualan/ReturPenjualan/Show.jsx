@@ -151,7 +151,7 @@ export default function ReturPenjualanShowPage(props) {
                                     {props.data.rtjl.map((d, index) => (
                                         <tr>
                                             <td className="text-[7pt]">
-                                                {d.bara1}
+                                                {d.bara}
                                             </td>
                                             <td className="text-[7pt]">
                                                 {d.nama}

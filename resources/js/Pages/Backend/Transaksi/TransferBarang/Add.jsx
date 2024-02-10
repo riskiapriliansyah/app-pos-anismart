@@ -82,7 +82,12 @@ export default function TransferBarangAddPage(props) {
                 .get(route("api.getStockByBara", data))
                 .then((res) => {
                     if (res.data.data) {
-                        addDataTb(res.data.data);
+                        if (res.data.data.length > 0) {
+                            addDataTb(res.data.data[0]);
+                        } else {
+                            window.my_modal_1_stock.showModal();
+                            getStock();
+                        }
                     } else {
                         window.my_modal_1_stock.showModal();
                         getStock();
@@ -169,7 +174,7 @@ export default function TransferBarangAddPage(props) {
                     hbeli: data.hbeli,
                     disc: 0,
                     ndisc: 0,
-                    total: data.hbeli,
+                    total: data.hbeli * data.qty,
                 },
             ]);
             xForceRender();

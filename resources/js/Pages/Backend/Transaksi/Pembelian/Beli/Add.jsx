@@ -79,7 +79,12 @@ export default function BeliAddPage(props) {
                 .get(route("api.getStockByBara", data))
                 .then((res) => {
                     if (res.data.data) {
-                        addDataTb(res.data.data);
+                        if (res.data.data.length > 0) {
+                            addDataTb(res.data.data[0]);
+                        } else {
+                            window.my_modal_1_stock.showModal();
+                            getStock();
+                        }
                     } else {
                         window.my_modal_1_stock.showModal();
                         getStock();

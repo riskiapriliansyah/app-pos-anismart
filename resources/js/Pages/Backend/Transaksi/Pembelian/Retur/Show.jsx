@@ -151,7 +151,7 @@ export default function ReturBeliShowPage(props) {
                                     {props.data.rtbeli.map((d, index) => (
                                         <tr>
                                             <td className="text-[7pt]">
-                                                {d.bara1}
+                                                {d.bara}
                                             </td>
                                             <td className="text-[7pt]">
                                                 {d.nama}

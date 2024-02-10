@@ -21,6 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "react-data-table-component": "^7.6.2",
         "react-icons": "^4.10.1",
         "react-tailwindcss-select": "^1.8.5",
         "react-to-print": "^2.14.13",

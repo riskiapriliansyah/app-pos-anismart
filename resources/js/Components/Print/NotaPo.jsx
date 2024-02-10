@@ -3,7 +3,7 @@ import React from "react";
 import "../../../css/print.css";
 
 export class NotaPoToPrint extends React.PureComponent {
-  render() {
+    render() {
         const data = this.props.data
         return (
             <section className="px-5 py-2">
@@ -40,29 +40,29 @@ export class NotaPoToPrint extends React.PureComponent {
                             </tr>
                         </thead>
                         <tbody className="text-sm">
-                          {data.tpo.map((d,index) => (
-                            <tr>
-                                <td className="text-center">{index+1}</td>
-                                <td>{d.bara1}</td>
-                                <td>{d.nama}</td>
-                                <td className="text-center">{d.satuan}</td>
-                                <td>{d.harga.toLocaleString("id")}</td>
-                                <td className="text-center">{d.disc}</td>
-                                <td>{d.total.toLocaleString("id")}</td>
-                            </tr>
-                          ))}
+                            {data.tpo.map((d, index) => (
+                                <tr>
+                                    <td className="text-center">{index + 1}</td>
+                                    <td>{d.bara}</td>
+                                    <td>{d.nama}</td>
+                                    <td className="text-center">{d.satuan}</td>
+                                    <td>{d.harga.toLocaleString("id")}</td>
+                                    <td className="text-center">{d.disc}</td>
+                                    <td>{d.total.toLocaleString("id")}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-between">
                         <div className="mt-10">
-                          <div className="flex flex-row gap-4">
-                            <div className="w-64">
-                              <p>Dibuat Oleh,</p>
+                            <div className="flex flex-row gap-4">
+                                <div className="w-64">
+                                    <p>Dibuat Oleh,</p>
+                                </div>
+                                <div>
+                                    <p>Disetujui,</p>
+                                </div>
                             </div>
-                            <div>
-                              <p>Disetujui,</p>
-                            </div>
-                          </div>
                         </div>
                         <div>
                             <table className="text-md">

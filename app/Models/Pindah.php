@@ -21,4 +21,8 @@ class Pindah extends Model
     {
         return $this->belongsTo(User::class, "created_by", "userid");
     }
+    public function tpindah()
+    {
+        return $this->hasMany(Tpindah::class, "nota", "nota");
+    }
 }

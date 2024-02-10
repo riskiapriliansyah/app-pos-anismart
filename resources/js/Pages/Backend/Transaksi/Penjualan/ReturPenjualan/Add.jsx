@@ -79,7 +79,12 @@ export default function ReturPenjualanAddPage(props) {
                 .get(route("api.getStockByBara", data))
                 .then((res) => {
                     if (res.data.data) {
-                        addDataTb(res.data.data);
+                        if (res.data.data.length > 0) {
+                            addDataTb(res.data.data[0]);
+                        } else {
+                            window.my_modal_1_stock.showModal();
+                            getStock();
+                        }
                     } else {
                         window.my_modal_1_stock.showModal();
                         getStock();
@@ -498,7 +503,7 @@ export default function ReturPenjualanAddPage(props) {
                                     {dataTb.map((d, index) => (
                                         <tr>
                                             <td className="text-sm">
-                                                {d.bara1}
+                                                {d.bara}
                                             </td>
                                             <td className="text-sm">
                                                 {d.nama}

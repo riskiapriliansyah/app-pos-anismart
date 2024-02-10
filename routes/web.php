@@ -8,6 +8,8 @@ use App\Http\Controllers\DepController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LanggananController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ManajemenUserController;
 use App\Http\Controllers\MasterStockController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PenjualanController;
@@ -131,4 +133,16 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
 
     Route::get("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "index"])->name("transaksi.penyesuaianStock.samplingOpname");
     Route::post("/transaksi/penyesuaian-stock/sampling-opname", [SamplingOpnameController::class, "store"])->name("transaksi.penyesuaianStock.samplingOpname.store");
+
+    Route::get("/setting/manajemen-user", [ManajemenUserController::class, "index"])->name("setting.manajemenUser.index");
+    Route::post("/setting/manajemen-user", [ManajemenUserController::class, "store"])->name("setting.manajemenUser.store");
+    Route::post("/setting/manajemen-user/update", [ManajemenUserController::class, "update"])->name("setting.manajemenUser.update");
+
+    Route::get("/laporan/stock/daftar-stock", [LaporanController::class, 'daftarStockIndex'])->name("laporan.stock.daftarStock");
+    Route::get("/laporan/stock/kartu-stock", [LaporanController::class, 'kartuStockIndex'])->name("laporan.stock.kartuStock");
+    Route::get("/laporan/stock/daftar-stock/tarik-data", [LaporanController::class, 'getDaftarStock'])->name("laporan.stock.getDaftarStock");
+    Route::get("/laporan/stock/kartu-stock/tarik-data", [LaporanController::class, 'getKartuStock'])->name("laporan.stock.getKartuStock");
+
+    Route::get("/laporan/pembelian", [LaporanController::class, 'pembelianIndex'])->name("laporan.pembelian.index");
+    Route::get("/laporan/pembelian/tarik-data", [LaporanController::class, 'getLaporanPembelian'])->name("laporan.pembelian.getLaporanPembelian");
 });

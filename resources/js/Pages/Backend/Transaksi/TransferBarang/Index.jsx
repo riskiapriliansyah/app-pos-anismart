@@ -63,7 +63,7 @@ export default function TransferBarangPage(props) {
                                                 <div className="flex flex-row gap-1">
                                                     <Link
                                                         href={route(
-                                                            "transaksi.penjualan.penjualanNota.show",
+                                                            "transaksi.penjualan.transferBarang.show",
                                                             d.nota
                                                         )}
                                                         className="btn btn-primary bg-blue-700 text-base-100 btn-sm btn-square"
@@ -71,14 +71,6 @@ export default function TransferBarangPage(props) {
                                                     >
                                                         <AiFillEye />
                                                     </Link>
-                                                    {d.status_beli === "0" && (
-                                                        <Link
-                                                            href=""
-                                                            className="btn btn-warning btn-sm text-sm"
-                                                        >
-                                                            Buat Beli
-                                                        </Link>
-                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

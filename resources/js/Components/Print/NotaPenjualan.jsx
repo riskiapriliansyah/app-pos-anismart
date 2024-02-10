@@ -3,16 +3,16 @@ import React from "react";
 import "../../../css/print.css";
 
 export class NotaPenjualanToPrint extends React.PureComponent {
-  render() {
+    render() {
         const data = this.props.data
         const today = new Date();
         console.log(today)
         const tanggal =
-        today.getFullYear() +
-        "-" +
-        ("0" + (today.getMonth() + 1)).slice(-2) +
-        "-" +
-        ("0" + today.getDate()).slice(-2);
+            today.getFullYear() +
+            "-" +
+            ("0" + (today.getMonth() + 1)).slice(-2) +
+            "-" +
+            ("0" + today.getDate()).slice(-2);
 
         return (
             <section className="px-5 py-2">
@@ -49,30 +49,30 @@ export class NotaPenjualanToPrint extends React.PureComponent {
                             </tr>
                         </thead>
                         <tbody className="text-sm">
-                          {data.gtjual.map((d,index) => (
-                            <tr>
-                                <td className="text-center">{index+1}</td>
-                                <td>{d.bara1}</td>
-                                <td>{d.nama}</td>
-                                <td className="text-center">{d.satuan}</td>
-                                <td>{d.harga.toLocaleString("id")}</td>
-                                <td className="text-center">{d.disc}</td>
-                                <td className="text-center">{d.disc1}</td>
-                                <td>{d.total.toLocaleString("id")}</td>
-                            </tr>
-                          ))}
+                            {data.gtjual.map((d, index) => (
+                                <tr>
+                                    <td className="text-center">{index + 1}</td>
+                                    <td>{d.bara}</td>
+                                    <td>{d.nama}</td>
+                                    <td className="text-center">{d.satuan}</td>
+                                    <td>{d.harga.toLocaleString("id")}</td>
+                                    <td className="text-center">{d.disc}</td>
+                                    <td className="text-center">{d.disc1}</td>
+                                    <td>{d.total.toLocaleString("id")}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-between">
                         <div className="mt-10">
-                          <div className="flex flex-row gap-4">
-                            <div className="w-64">
-                              <p>Hormat Kami,</p>
+                            <div className="flex flex-row gap-4">
+                                <div className="w-64">
+                                    <p>Hormat Kami,</p>
+                                </div>
+                                <div>
+                                    <p>Diterima Oleh,</p>
+                                </div>
                             </div>
-                            <div>
-                              <p>Diterima Oleh,</p>
-                            </div>
-                          </div>
                         </div>
                         <div>
                             <table className="text-md">

@@ -119,7 +119,7 @@ export default function Topbar({ title, auth }) {
                         </span>
                     </Link>
                 </li>
-                
+
                 <li>
                     <Link
                         href="/admin/management-user"
@@ -295,9 +295,9 @@ export default function Topbar({ title, auth }) {
                             width={150}
                         />
                         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-                            {role === "admin" ? <AdminBar /> : ""}
+                            {/* {role === "admin" ? <AdminBar /> : ""}
                             {role === "relawan" ? <RelawanBar /> : ""}
-                            {role === "verifikator" ? <VerifikatorBar /> : ""}
+                            {role === "verifikator" ? <VerifikatorBar /> : ""} */}
                         </ul>
                     </div>
                 </div>
@@ -305,14 +305,14 @@ export default function Topbar({ title, auth }) {
                     <a className="btn btn-ghost normal-case text-xl">{title}</a>
                 </div>
                 <div className="flex-none gap-2">
-                    <h1 className="lg:block hidden text-[7pt]">Hi, {auth.name}</h1>
+                    <h1 className="lg:block hidden text-[10pt]">Hi, {auth.name}</h1>
                     <div className="dropdown dropdown-end">
                         <label
                             tabIndex={0}
                             className="btn btn-ghost btn-circle avatar"
                         >
                             <div className="w-10 rounded-full">
-                                <img src="/assets/blank.png" />
+                                <img src="/assets/logo-apollo.png" />
                             </div>
                         </label>
                         <ul
