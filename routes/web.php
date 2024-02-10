@@ -141,8 +141,12 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
     Route::get("/laporan/stock/daftar-stock", [LaporanController::class, 'daftarStockIndex'])->name("laporan.stock.daftarStock");
     Route::get("/laporan/stock/kartu-stock", [LaporanController::class, 'kartuStockIndex'])->name("laporan.stock.kartuStock");
     Route::get("/laporan/stock/daftar-stock/tarik-data", [LaporanController::class, 'getDaftarStock'])->name("laporan.stock.getDaftarStock");
-    Route::get("/laporan/stock/kartu-stock/tarik-data", [LaporanController::class, 'getKartuStock'])->name("laporan.stock.getKartuStock");
 
     Route::get("/laporan/pembelian", [LaporanController::class, 'pembelianIndex'])->name("laporan.pembelian.index");
     Route::get("/laporan/pembelian/tarik-data", [LaporanController::class, 'getLaporanPembelian'])->name("laporan.pembelian.getLaporanPembelian");
+
+    Route::get("/laporan/penjualan/penjualan-summary", [LaporanController::class, "laporanPenjualanSummary"])->name("laporan.penjualan.penjualanSummary");
+
+    Route::get("/laporan/penjualan/rekap-penjualan", [LaporanController::class, "laporanRekapPenjualan"])->name("laporan.penjualan.rekapPenjualan");
+    Route::get("/laporan/penjualan/rekap-penjualan/tarik-data", [LaporanController::class, "getLaporanRekapPenjualan"])->name("laporan.penjualan.getLaporanRekapPenjualan");
 });

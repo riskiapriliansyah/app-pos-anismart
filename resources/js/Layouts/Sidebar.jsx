@@ -858,20 +858,20 @@ export default function Sidebar(props) {
                             >
                                 <li>
                                     <Link
-                                        href="/transaksi/penjualan/penjualan-nota"
+                                        href={route("laporan.penjualan.penjualanSummary")}
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
-                                        Penjualan Nota
+                                        Penjualan Summary/Detail
                                     </Link>
                                 </li>
                                 <li>
                                     <Link
                                         href={route(
-                                            "transaksi.penjualan.returPenjualanNota"
+                                            "laporan.penjualan.rekapPenjualan"
                                         )}
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
-                                        Retur Penjualan
+                                        Rekap Penjualan
                                     </Link>
                                 </li>
                             </ul>

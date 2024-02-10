@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Beli;
 use App\Models\Dep;
+use App\Models\Hari;
 use App\Models\Stock;
 use App\Models\Supp;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -60,5 +62,27 @@ class LaporanController extends BaseController
     public function kartuStockIndex()
     {
         return Inertia::render("Backend/Laporan/Stock/KartuStock");
+    }
+
+    public function laporanPenjualanSummary()
+    {
+        $kasirs = User::all();
+        return Inertia::render("Backend/Laporan/Penjualan/PenjualanSummary", [
+            "kasirs" => $kasirs
+        ]);
+    }
+
+    public function laporanRekapPenjualan()
+    {
+        $kasirs = User::all();
+        return Inertia::render("Backend/Laporan/Penjualan/RekapPenjualan", [
+            "kasirs" => $kasirs
+        ]);
+    }
+
+    public function getLaporanRekapPenjualan(Request $request)
+    {
+        $data = Hari::where("userid", $request->userid)->whereBetween("tgl", [$request->tglAwal, $request->tglAkhir])->get();
+        return $this->sendResponse($data, "data rekap penjualan");
     }
 }
