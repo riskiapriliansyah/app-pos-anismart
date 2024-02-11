@@ -41,6 +41,7 @@ export default function LaporanPenjualanRekap(props) {
         setIsLoading(false)
     }
 
+    const sumTotal = dataTb?.reduce((acc, d) => acc + d.nilai, 0);
 
     return (
         <>
@@ -84,8 +85,8 @@ export default function LaporanPenjualanRekap(props) {
                                 <div>
                                     <ReactToPrint
                                         trigger={() => (
-                                            <button className="btn btn-primary btn-sm btn-square text-gray-100">
-                                                <AiFillPrinter />
+                                            <button className="btn btn-primary btn-md btn-square text-gray-100">
+                                                <AiFillPrinter size={25} />
                                             </button>
                                         )}
                                         content={() => componentRef.current}
@@ -114,11 +115,14 @@ export default function LaporanPenjualanRekap(props) {
                                                 <td>{d.nilai.toLocaleString("id")}</td>
                                             </tr>
                                         ))}
+                                        <tr>
+                                            <td colSpan={2} className="text-right font-bold">TOTAL</td>
+                                            <td>{sumTotal.toLocaleString("id")}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </>
                         }
-
                     </div>
                 </div>
             </MasterAdmin>

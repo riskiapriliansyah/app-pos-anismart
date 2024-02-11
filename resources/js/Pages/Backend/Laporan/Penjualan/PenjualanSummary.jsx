@@ -14,14 +14,31 @@ export default function LaporanPenjualanSummary(props) {
     const [kasir, setKasir] = useState("")
     const [tglAwal, setTglAwal] = useState([])
     const [tglAkhir, setTglAkhir] = useState("")
-    const [format, setFormat] = useState("")
     const [dataTb, setDataTb] = useState([])
     const componentRef = useRef();
 
     const getLaporanPenjualanSummary = async () => {
-
+        setIsLoading(true)
+        const data = {
+            userid: kasir,
+            tglAwal: tglAwal,
+            tglAkhir: tglAkhir
+        };
+        await axios
+            .get(route("laporan.penjualan.getLaporanPenjualanSummary", data))
+            .then((res) => {
+                setDataTb(res.data.data);
+            })
+            .catch((err) => {
+                if (err.response.status === 404) {
+                    Swal.fire("Gagal", err.response.data.message, "error");
+                }
+            });
+        setIsLoading(false)
     }
 
+    const totalBruto = dataTb?.reduce((acc, d) => acc + d.bruto, 0);
+    const totalNetto = dataTb?.reduce((acc, d) => acc + d.netto, 0);
 
     return (
         <>
@@ -54,16 +71,6 @@ export default function LaporanPenjualanSummary(props) {
                                     <input type="date" className="input input-bordered input-sm" onChange={(e) => setTglAkhir(e.target.value)} />
                                 </div>
                             </div>
-                            <div className="form-control">
-                                <label htmlFor="" className="label-text">
-                                    Format
-                                </label>
-                                <select name="format" id="format" className="select select-bordered select-sm" onChange={(e) => setFormat(e.target.value)}>
-                                    <option value="">pilih</option>
-                                    <option value="1">Detail</option>
-                                    <option value="2">Summary</option>
-                                </select>
-                            </div>
                         </div>
                         <button className="btn btn-primary btn-sm" onClick={getLaporanPenjualanSummary}>Tampilkan</button>
                     </div>
@@ -71,17 +78,51 @@ export default function LaporanPenjualanSummary(props) {
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         {dataTb.length > 0 &&
-                            <div>
-                                <ReactToPrint
-                                    trigger={() => (
-                                        <button className="btn btn-primary btn-sm btn-square text-gray-100">
-                                            <AiFillPrinter />
-                                        </button>
-                                    )}
-                                    content={() => componentRef.current}
-                                    documentTitle={"Daftar Stock"}
-                                />
-                            </div>
+                            <>
+                                <div>
+                                    <ReactToPrint
+                                        trigger={() => (
+                                            <button className="btn btn-primary btn-sm btn-square text-gray-100">
+                                                <AiFillPrinter />
+                                            </button>
+                                        )}
+                                        content={() => componentRef.current}
+                                        documentTitle={"Daftar Stock"}
+                                    />
+                                </div>
+                                <h1 className="text-xl text-center font-bold">KARTU STOCK</h1>
+                                <h5 className="text-md text-center font-bold">Kasir: {kasir}</h5>
+                                <h5 className="text-md text-center font-bold">Periode: {tglAwal} s/d {tglAkhir}</h5>
+                                <table className="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Kode Stock</th>
+                                            <th>Nama Barang</th>
+                                            <th>Qty</th>
+                                            <th>Bruto</th>
+                                            <th>Netto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {dataTb.map((d, index) => (
+                                            <tr>
+                                                <td>{d.tgl}</td>
+                                                <td>{d.bara}</td>
+                                                <td>{d.stock.nama}</td>
+                                                <td>{d.qty}</td>
+                                                <td>{d.bruto.toLocaleString("id")}</td>
+                                                <td>{d.netto.toLocaleString("id")}</td>
+                                            </tr>
+                                        ))}
+                                        <tr>
+                                            <td colSpan={4} className="font-bold text-right">TOTAL</td>
+                                            <td>{totalBruto.toLocaleString("id")}</td>
+                                            <td>{totalNetto.toLocaleString("id")}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </>
                         }
                         {/* <table className="table table-sm">
                             <thead>

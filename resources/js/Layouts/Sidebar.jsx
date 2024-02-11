@@ -631,7 +631,7 @@ export default function Sidebar(props) {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/transaksi/pembelian/retur"
+                                        href={route("laporan.stock.daftarHarga")}
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Daftar Harga
@@ -639,7 +639,7 @@ export default function Sidebar(props) {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/transaksi/pembelian/retur"
+                                        href={route("laporan.stock.saldoStock")}
                                         className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                                     >
                                         Saldo Stock
@@ -706,122 +706,6 @@ export default function Sidebar(props) {
                                 </li>
                             </ul>
                         </li>
-                        {/* <li>
-                            <button
-                                type="button"
-                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                aria-controls="dropdown-example"
-                                data-collapse-toggle="dropdown-example"
-                                onClick={() =>
-                                    setOpenSubMenuLainLain(!openSubMenuLainLain)
-                                }
-                            >
-                                <span className="flex-1 ml-3 text-left ">
-                                    Lain-Lain
-                                </span>
-                                <svg
-                                    className="w-4 h-4"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clipRule="evenodd"
-                                    ></path>
-                                </svg>
-                            </button>
-                            <ul
-                                id="dropdown-example"
-                                className={`${openSubMenuLainLain ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
-                            >
-                                <li>
-                                    <Link
-                                        href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                    >
-                                        Kredit Nota
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                    >
-                                        Debet Nota
-                                    </Link>
-                                </li>
-                            </ul>
-                        </li> */}
-                        {/* <li>
-                            <button
-                                type="button"
-                                className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                aria-controls="dropdown-example"
-                                data-collapse-toggle="dropdown-example"
-                                onClick={() =>
-                                    setOpenSubMenuPelunasanHutang(
-                                        !openSubMenuPelunasanHutang
-                                    )
-                                }
-                            >
-                                <span className="flex-1 ml-3 text-left ">
-                                    Pelunasan Hutang
-                                </span>
-                                <svg
-                                    className="w-4 h-4"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clipRule="evenodd"
-                                    ></path>
-                                </svg>
-                            </button>
-                            <ul
-                                id="dropdown-example"
-                                className={`${openSubMenuPelunasanHutang ? "hidden" : ""
-                                    } duration-300 py-2 space-y-2`}
-                            >
-                                <li>
-                                    <Link
-                                        href="/admin/media/gallery"
-                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                    >
-                                        Tanpa Faktur
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                    >
-                                        Banyak Faktur
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/admin/media/document"
-                                        className="flex items-center p-2 pl-16 w-full text-sm text-gray-700 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                                    >
-                                        Seluruh Faktur
-                                    </Link>
-                                </li>
-                            </ul>
-                        </li> */}
-                        {/* <li>
-                            <Link
-                                href="/dep"
-                                className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
-                            >
-                                Giro Keluar
-                            </Link>
-                        </li> */}
                         <div className="divider"></div>
                         <li>
                             <button

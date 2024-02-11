@@ -140,12 +140,17 @@ Route::group(['middleware' => ['auth:web', 'checkRole:super_admin,admin']], func
 
     Route::get("/laporan/stock/daftar-stock", [LaporanController::class, 'daftarStockIndex'])->name("laporan.stock.daftarStock");
     Route::get("/laporan/stock/kartu-stock", [LaporanController::class, 'kartuStockIndex'])->name("laporan.stock.kartuStock");
+    Route::get("/laporan/stock/saldo-stock", [LaporanController::class, 'saldoStockIndex'])->name("laporan.stock.saldoStock");
+    Route::get("/laporan/stock/saldo-stock/tarik-data", [LaporanController::class, 'getSaldoStock'])->name("laporan.stock.getSaldoStock");
+    Route::get("/laporan/stock/daftar-harga", [LaporanController::class, 'daftarHargaIndex'])->name("laporan.stock.daftarHarga");
+
     Route::get("/laporan/stock/daftar-stock/tarik-data", [LaporanController::class, 'getDaftarStock'])->name("laporan.stock.getDaftarStock");
 
     Route::get("/laporan/pembelian", [LaporanController::class, 'pembelianIndex'])->name("laporan.pembelian.index");
     Route::get("/laporan/pembelian/tarik-data", [LaporanController::class, 'getLaporanPembelian'])->name("laporan.pembelian.getLaporanPembelian");
 
     Route::get("/laporan/penjualan/penjualan-summary", [LaporanController::class, "laporanPenjualanSummary"])->name("laporan.penjualan.penjualanSummary");
+    Route::get("/laporan/penjualan/penjualan-summary/tarik-data", [LaporanController::class, "getLaporanPenjualanSummary"])->name("laporan.penjualan.getLaporanPenjualanSummary");
 
     Route::get("/laporan/penjualan/rekap-penjualan", [LaporanController::class, "laporanRekapPenjualan"])->name("laporan.penjualan.rekapPenjualan");
     Route::get("/laporan/penjualan/rekap-penjualan/tarik-data", [LaporanController::class, "getLaporanRekapPenjualan"])->name("laporan.penjualan.getLaporanRekapPenjualan");
