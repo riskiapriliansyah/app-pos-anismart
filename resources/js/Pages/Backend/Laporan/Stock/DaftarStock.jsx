@@ -161,17 +161,26 @@ export default function DaftarStockPage(props) {
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         {dataTb.length > 0 &&
-                            <div>
-                                <ReactToPrint
-                                    trigger={() => (
-                                        <button className="btn btn-primary btn-sm btn-square text-gray-100">
-                                            <AiFillPrinter />
-                                        </button>
-                                    )}
-                                    content={() => componentRef.current}
-                                    documentTitle={"Daftar Stock"}
+                            <>
+                                <div>
+                                    <ReactToPrint
+                                        trigger={() => (
+                                            <button className="btn btn-primary btn-sm btn-square text-gray-100">
+                                                <AiFillPrinter />
+                                            </button>
+                                        )}
+                                        content={() => componentRef.current}
+                                        documentTitle={"Daftar Stock"}
+                                    />
+                                </div>
+                                <h1 className="text-xl text-center font-bold">SALDO STOCK</h1>
+                                <DataTable
+                                    columns={columns}
+                                    data={dataTb}
+                                    pagination
+
                                 />
-                            </div>
+                            </>
                         }
                         {/* <table className="table table-sm">
                             <thead>
@@ -195,13 +204,8 @@ export default function DaftarStockPage(props) {
                                 ))}
                             </tbody>
                         </table> */}
-                        {/* <DataTable columns={columns} data={data} progressPending={loading} pagination paginationServer paginationTotalRows={totalRows} onChangeRowsPerPage={handlePerRowsChange} onChangePage={handlePageChange} />; */}
-                        <DataTable
-                            columns={columns}
-                            data={dataTb}
-                            pagination
 
-                        />
+
                     </div>
                 </div>
             </MasterAdmin>

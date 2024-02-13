@@ -10,31 +10,31 @@ export default function DashboardPage(props) {
                 <div className="card bg-base-100 mb-2">
                     <div className="card-body">
                         <div className="grid grid-cols-3 gap-1">
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href="/master-stock" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <MdOutlineWarehouse size={20} />
                                 <span>
                                     Master Stock
                                 </span>
                             </Link>
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href="/supplier" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <FaUsers size={20} />
                                 <span>
                                     Supplier
                                 </span>
                             </Link>
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href="/langganan" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <FaUsers size={20} />
                                 <span>
                                     Langganan
                                 </span>
                             </Link>
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href="/transaksi/pembelian/beli" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <FaCartArrowDown size={20} />
                                 <span>
                                     Pembelian
                                 </span>
                             </Link>
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href="/transaksi/penjualan/penjualan-nota" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <FaMoneyBillWave size={20} />
                                 <span>
                                     Penjualan
@@ -46,13 +46,15 @@ export default function DashboardPage(props) {
                                     Transfer Barang
                                 </span>
                             </Link>
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href="/transaksi/pembelian/retur" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <FaSignOutAlt size={20} />
                                 <span>
                                     Retur Pembelian
                                 </span>
                             </Link>
-                            <Link href="" className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
+                            <Link href={route(
+                                "transaksi.penjualan.returPenjualanNota"
+                            )} className="btn btn-ghost bg-blue-900 text-gray-200 hover:text-gray-800">
                                 <FaSignOutAlt size={20} />
                                 <span>
                                     Retur Penjualan
