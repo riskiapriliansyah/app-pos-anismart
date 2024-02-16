@@ -74,7 +74,40 @@ class MasterStockController extends BaseController
                 $stock->lvoc = "F";
                 $stock->save();
             } else {
-                return $this->sendError("Data Gagal Disimpan", "Barang sudah ada");
+                $stock->bara = $request->bara;
+                $stock->bara1 = $request->bara1;
+                $stock->nama = $request->nama;
+                $stock->dep = $request->dep;
+                $stock->sdep = $request->sdep;
+                $stock->satuan = $request->satuan;
+                $stock->kode = $request->kode;
+                $stock->hbeli = $request->hbeli;
+                $stock->haver = $request->haver;
+                $stock->hjual = $request->hjual;
+                $stock->margin = $request->margin;
+                $stock->hjualg = $request->hjualg;
+                $stock->marging = $request->marging;
+                $stock->hjualm = $request->hjualm;
+                $stock->marginm = $request->marginm;
+                $stock->smin = 0;
+                $stock->smax = 0;
+                $stock->aktif = $request->aktif;
+                $stock->konsi = "F";
+                $stock->tetap = "T";
+                $stock->saldo = 0;
+                $stock->gambar = "-";
+                $stock->stock = "T";
+                $stock->tglp = Carbon::now(+8);
+                $stock->ltax = $request->ltax;
+                $stock->qorder = 0;
+                $stock->hjualk1 = $request->hjualk1;
+                $stock->hjualk2 = $request->hjualk2;
+                $stock->timbang = "F";
+                $stock->uharga = "F";
+                $stock->lvoc = "F";
+                $stock->save();
+                DB::commit();
+                return $this->sendResponse($stock, "Data Berhasil Diupdate");
             }
 
             $tbara = Tbara::where("bara", $request->bara)->first();

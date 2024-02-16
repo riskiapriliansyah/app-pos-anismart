@@ -43,7 +43,7 @@ export default function LaporanPenjualanSummary(props) {
     return (
         <>
             {isLoading && <Loading />}
-            <MasterAdmin title={"Laporan Pembelian"}>
+            <MasterAdmin title={"Laporan Penjualan Summary"}>
                 {/* <div className="hidden">
                     <LaporanDaftarStockToPrint ref={componentRef} data={dataTb} />
                 </div> */}
@@ -87,10 +87,10 @@ export default function LaporanPenjualanSummary(props) {
                                             </button>
                                         )}
                                         content={() => componentRef.current}
-                                        documentTitle={"Daftar Stock"}
+                                        documentTitle={"Laporan Penjualan Summary"}
                                     />
                                 </div>
-                                <h1 className="text-xl text-center font-bold">KARTU STOCK</h1>
+                                <h1 className="text-xl text-center font-bold">Laporan Penjualan Summary</h1>
                                 <h5 className="text-md text-center font-bold">Kasir: {kasir}</h5>
                                 <h5 className="text-md text-center font-bold">Periode: {tglAwal} s/d {tglAkhir}</h5>
                                 <table className="table table-sm">

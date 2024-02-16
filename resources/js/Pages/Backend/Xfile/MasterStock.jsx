@@ -603,6 +603,7 @@ export default function MasterStockPage(props) {
                                         }
                                     >
                                         <option value="">Pilih</option>
+                                        <option value="-">Non Supplier</option>
                                         {props.supp.map((d, index) => (
                                             <option value={d.kode}>
                                                 {d.nama}

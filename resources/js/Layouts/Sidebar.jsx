@@ -655,7 +655,7 @@ export default function Sidebar(props) {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        {/* <li>
                             <button
                                 type="button"
                                 className="flex items-center p-2 pl-11  w-full text-sm text-gray-600 text-gray-300 transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
@@ -705,7 +705,7 @@ export default function Sidebar(props) {
                                     </Link>
                                 </li>
                             </ul>
-                        </li>
+                        </li> */}
                         <div className="divider"></div>
                         <li>
                             <button
@@ -827,7 +827,7 @@ export default function Sidebar(props) {
                                 Giro Masuk
                             </Link>
                         </li> */}
-                        <div className="divider"></div>
+                        {/* <div className="divider"></div>
                         <li>
                             <Link
                                 href={route('transaksi.penjualan.transferBarang')}
@@ -886,15 +886,15 @@ export default function Sidebar(props) {
                                     </Link>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <Link
                                 href="/gudang"
                                 className="flex items-center p-2 pl-14 w-full text-sm text-gray-600 text-gray-300 rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-gray-800"
                             >
                                 Paket
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
                 </li>
                 <li>
